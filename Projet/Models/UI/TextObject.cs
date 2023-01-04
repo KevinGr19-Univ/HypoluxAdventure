@@ -14,12 +14,14 @@ namespace HypoluxAdventure.Models.UI
         private SpriteFont _font;
         private string _text;
         public Vector2 Position;
+        public Color Color;
 
-        public TextObject(SpriteFont font, string text, Vector2 position)
+        public TextObject(SpriteFont font, string text, Vector2 position, Color? color = null)
         {
             _font = font;
             _text = text;
             Position = position;
+            Color = color ?? Color.White;
         }
 
         public void Draw(SpriteBatch spriteBatch)
