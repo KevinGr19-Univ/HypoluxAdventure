@@ -32,7 +32,7 @@ namespace HypoluxAdventure.Screens
         public override void Update(GameTime gameTime)
         {
             _textList[0] = new TextObject(_titleFont, "Crédits : ", startpoint);
-            _textList[1] = new TextObject(_normalFont, "Jeu créé par Mathieu 'HazelSoul' ROSTAING, Kévin 'FrancePVP' GRANDJEAN, Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT", startpoint.Y+);
+            //_textList[1] = new TextObject(_normalFont, "Jeu créé par Mathieu 'HazelSoul' ROSTAING, Kévin 'FrancePVP' GRANDJEAN, Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT");
         }
 
         public override void Draw(GameTime gameTime)
