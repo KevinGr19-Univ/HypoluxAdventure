@@ -65,7 +65,7 @@ namespace HypoluxAdventure.Models.UI
 
         public override void Update()
         {
-            float targetScale = _trigger ? 0.7f : (float)gameManager.Player.Health / gameManager.Player.MaxHealth;
+            float targetScale = (float)gameManager.Player.Health / gameManager.Player.MaxHealth;
             _healthScale = MathUtils.Damp(_healthScale, targetScale, 0.4f,Time.DeltaTime);
         }
     }
