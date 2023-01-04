@@ -47,7 +47,7 @@ namespace HypoluxAdventure
             Camera = new Camera();
             UICanvas = new SpriteBatch(GraphicsDevice);
 
-            LoadCredit();
+            LoadWorld();
         }
 
         protected override void Update(GameTime gameTime)
