@@ -3,19 +3,20 @@ using HypoluxAdventure.Managers;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace HypoluxAdventure.Models.UI
 {
     internal class HealthBar : GameObject
     {
+        private static Color HEALTH_LOW = Color.Black;
+        private static float HEALTH_THRESHOLD_LOW = 0f;
 
-        private static Color HEALTH_LOW = Color.Red;
-        private static float HEALTH_THRESHOLD_LOW = 0.2f;
+        private static Color HEALTH_MIDDLE = Color.Red;
+        private static float HEALTH_THRESHOLD_MIDDLE = 0.2f;
 
-        private static Color HEALTH_MIDDLE = Color.Yellow;
-        private static float HEALTH_THRESHOLD_MIDDLE = 0.5f;
-
-        private static Color HEALTH_HIGH = Color.Green;
+        private static Color HEALTH_HIGH = Color.Crimson;
         private static float HEALTH_THRESHOLD_HIGH = 0.8f;
 
 
@@ -32,6 +33,8 @@ namespace HypoluxAdventure.Models.UI
             _origin = new Vector2(0, 1f);
 
         }
+
+        private bool _trigger = false;
 
         public override void Draw()
         {
@@ -57,8 +60,12 @@ namespace HypoluxAdventure.Models.UI
 
         public override void Update()
         {
-            float targetScale = (float)gameManager.Player.Health / gameManager.Player.MaxHealth;
-            _healthScale = MathUtils.Damp(_healthScale, targetScale, 1f, Time.DeltaTime);
+            if (Inputs.IsKeyPressed(Keys.A)) _trigger = !_trigger;
+
+            float targetScale = _trigger ? 0f : (float)gameManager.Player.Health / gameManager.Player.MaxHealth;
+
+            if (Math.Abs(targetScale - _healthScale) > 0.01f) _healthScale = MathUtils.Damp(_healthScale, targetScale, 0.4f, Time.DeltaTime);
+            else _healthScale = targetScale;
         }
     }
 }
