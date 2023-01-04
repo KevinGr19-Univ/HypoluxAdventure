@@ -12,40 +12,73 @@ using System.Threading.Tasks;
 
 namespace HypoluxAdventure.Screens
 {
-    internal class CreditScreen : GameScreen
+    internal class CreditScreen : AbstractScreen
     {
         private SpriteFont _titleFont;
         private SpriteFont _normalFont;
-        private TextObject _title;
 
         private List<TextObject> _textList = new List<TextObject>();
-        private static Vector2 _startpoint = new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT + 100);
+        private List<TextObject> _textListActif = new List<TextObject>(0);
+        private List<float> _timeList = new List<float>(); 
+        private static Vector2 _startpoint = new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT + 50);
 
         private float _timer = 0;
-        private const float TIME_BETWEEN_TEXTS = 3;
         private const float MOVE_SPEED = 75;
 
-        public CreditScreen(Game game) : base(game) { }
+        public CreditScreen(Game1 game) : base(game) { }
 
         public override void LoadContent()
         {
-            _titleFont = Content.Load<SpriteFont>("Font/TitleCredit.spritefont");
-            _normalFont = Content.Load<SpriteFont>("Font/CreditFont.spritefont");
+            _titleFont = Content.Load<SpriteFont>("Font/TitleCredit");
+            _normalFont = Content.Load<SpriteFont>("Font/CreditFont");
+
+            AddLines(_titleFont, "Crédits : ");
+            AddLines(_normalFont,
+                "Jeu créé par :",
+                "Mathieu 'HazelSoul' ROSTAING",
+                "Kévin 'FrancePVP' GRANDJEAN",
+                "Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,
+                "Level Design fait par :",
+                "Mathieu 'HazelSoul' ROSTAING",
+                "Kévin 'FrancePVP' GRANDJEAN",
+                "Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,
+                "Direction artistique et graphismes conçuent par :",
+                "Mathieu 'HazelSoul' ROSTAING (Majeure partie)",
+                "Kévin 'FrancePVP' GRANDJEAN",
+                "Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,
+                "Sound design composé par :",
+                "Mathieu 'HazelSoul' ROSTAING",
+                "Kévin 'FrancePVP' GRANDJEAN",
+                "Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,
+                "-... --- -... .. -. ..- ... ",
+                "-.. .-. .- --. --- -. ..- ...");
+
         }
 
         public override void Update(GameTime gameTime)
         {
-            //_textList[0] = new TextObject(_titleFont, "Crédits : ", _startpoint);
-            //_textList[1] = new TextObject(_normalFont, "Jeu créé par :\nMathieu 'HazelSoul' ROSTAING\nKévin 'FrancePVP' GRANDJEAN\nNoa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT", _startpoint2);
-            //_textList[2] = new TextObject(_normalFont, "Level Design fait par :\nMathieu 'HazelSoul' ROSTAING\nKévin 'FrancePVP' GRANDJEAN\nNoa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT", _startpoint3);
-            //_textList[3] = new TextObject(_normalFont, "Direction artistique et graphismes conçuent par:\nMathieu 'HazelSoul' ROSTAING (carry)\nKévin 'FrancePVP' GRANDJEAN\nNoa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT", _startpoint4);
-            //_textList[4] = new TextObject(_normalFont, "Sound Design ")
+            Logger.Debug(_timer);
+            foreach(TextObject line in _textListActif) line.Position.Y -= MOVE_SPEED * Time.DeltaTime;
+
+            if (_textList.Count <= _textListActif.Count) return;
+            _timer -= Time.DeltaTime;
+
+            if (_timer <= 0)
+            {
+                _textListActif.Add(_textList[_textListActif.Count]);
+                //_timer = TIME_BETWEEN_TEXTS;
+            }
+
         }
 
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
+            foreach(TextObject line in _textListActif)
+            {
+                line.Draw(Game.UICanvas);
+            }
+      
         }
 
         public void AddLines(SpriteFont font, params string[] lines)
