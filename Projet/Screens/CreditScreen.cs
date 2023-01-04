@@ -22,6 +22,7 @@ namespace HypoluxAdventure.Screens
         private List<float> _timeList = new List<float>(); 
         private static Vector2 _startpoint = new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT + 50);
 
+        private int _textListStart = 0;
         private float _timer = 0;
         private const float MOVE_SPEED = 75;
 
@@ -56,8 +57,16 @@ namespace HypoluxAdventure.Screens
 
         public override void Update(GameTime gameTime)
         {
-            Logger.Debug(_timer);
-            foreach(TextObject line in _textListActif) line.Position.Y -= MOVE_SPEED * Time.DeltaTime;
+            if(_textListStart < _textListActif.Count)
+            {
+                for (int i = _textListStart; i < _textListActif.Count; i++)
+                {
+                    TextObject line = _textListActif[i];
+
+                    line.Position.Y -= MOVE_SPEED * Time.DeltaTime;
+                    if (line.Position.Y < -100) _textListStart++;
+                }
+            }
 
             if (_textList.Count <= _textListActif.Count) return;
             _timer -= Time.DeltaTime;
@@ -73,9 +82,14 @@ namespace HypoluxAdventure.Screens
         public override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            foreach(TextObject line in _textListActif)
+
+            if (_textListStart < _textListActif.Count)
             {
-                line.Draw(Game.UICanvas);
+                for (int i = _textListStart; i < _textListActif.Count; i++)
+                {
+                    TextObject line = _textListActif[i];
+                    line.Draw(Game.UICanvas);
+                }
             }
       
         }

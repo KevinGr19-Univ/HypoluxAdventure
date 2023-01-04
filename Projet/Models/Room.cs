@@ -9,10 +9,10 @@ namespace HypoluxAdventure.Models
 {
     public enum RoomOpening
     {
-        North,
-        West,
-        South,
-        East
+        North = 1,
+        West = 2,
+        South = 4,
+        East = 8
     }
 
     internal class Room
@@ -29,10 +29,12 @@ namespace HypoluxAdventure.Models
         }
 
         private RoomManager _roomManager;
+        public RoomOpening Openings { get; private set; }
 
         public Room(RoomManager roomManager)
         {
             _roomManager = roomManager;
+            Openings = RoomOpening.North | RoomOpening.West;
         }
 
         public void Update()
