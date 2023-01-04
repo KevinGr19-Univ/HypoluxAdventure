@@ -11,6 +11,12 @@ namespace HypoluxAdventure.Utils
     {
         public static float Lerp(float a, float b, float t) => a * (1 - t) + b * t;
         public static float Damp(float current, float target, float smoothTime, float deltaTime)
-            => Lerp(current, target, (float)Math.Pow(smoothTime, deltaTime));
+            => Lerp(current, target, (float)Math.Pow(deltaTime, smoothTime));
+
+        public static float InverseLerp(float a, float b, float value)
+        {
+            if (a == b) return 1;
+            return (value - a) / (b - a);
+        }
     }
 }
