@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using HypoluxAdventure.Core;
 using HypoluxAdventure.Models;
+using HypoluxAdventure.Models.UI;
 
 namespace HypoluxAdventure.Managers
 {
@@ -21,12 +22,16 @@ namespace HypoluxAdventure.Managers
             _game = game;
         }
 
+        private GameOverlay _gameOverlay; 
+
         public Player Player { get; private set; }
         private Cursor _cursor;
 
         public void LoadContent()
         {
             State = GameState.Play;
+
+            _gameOverlay = new GameOverlay(_game, this);
 
             Player = new Player(_game, this);
             _cursor = new Cursor(_game, this);
@@ -47,6 +52,8 @@ namespace HypoluxAdventure.Managers
             {
                 Player.Update();
                 _cursor.Update();
+
+                _gameOverlay.Update();
             }
         }
 
@@ -56,6 +63,7 @@ namespace HypoluxAdventure.Managers
             {
                 _game.IsMouseVisible = false;
                 _cursor.Draw();
+                _gameOverlay.Draw();
             }
             else
             {
