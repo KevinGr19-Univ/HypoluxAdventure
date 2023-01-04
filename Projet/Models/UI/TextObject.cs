@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using HypoluxAdventure.Managers;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,18 +9,23 @@ using System.Threading.Tasks;
 
 namespace HypoluxAdventure.Models.UI
 {
-    internal class TextObject
+    internal class TextObject 
     {
-        private SpriteFont font;
-        private string text;
-
+        private SpriteFont _font;
+        private string _text;
+        private SpriteBatch _spriteBatch;
         public TextObject(SpriteFont font, string text)
         {
-            this.font = font;
-            this.text = text;
+            _font = font;
+            _text = text;
         }
 
-        public SpriteFont Font { get => font; set => font = value; }
-        public string Text { get => text; set => text = value; }
+        public void Draw()
+        {
+            Vector2 center = _font.MeasureString(_text);
+
+        }
+
+
     }
 }
