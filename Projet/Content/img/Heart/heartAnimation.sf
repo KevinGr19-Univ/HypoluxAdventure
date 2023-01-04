@@ -1,0 +1,19 @@
+{
+  "textureAtlas": {
+    "texture": "P:\\S1_01 Dev\\heart.png",
+    "regionWidth": 13,
+    "regionHeight": 13
+  },
+  "cycles": {
+    "idle": {
+      "frames": [0],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "death": {
+      "frames": [0,1,2,3,4,5,6,7,8,8,9,10,11,11,12,13,14,15,16,17,18,19],
+      "isLooping": false,
+      "frameDuration": 0.0799999759
+    }
+  }
+}

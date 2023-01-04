@@ -10,6 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\..\..\..\.nuget\packages\monogame.extended.animations\3.7.0\lib\netstandard2.0\MonoGame.Extended.Animations.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -38,6 +39,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:img/healthBarDecoration.png
+
+#begin img/Heart/heart.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/Heart/heart.png
 
 #begin img/perso.png
 /importer:TextureImporter
