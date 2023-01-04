@@ -1,4 +1,5 @@
-﻿using HypoluxAdventure.Managers;
+﻿using HypoluxAdventure.Core;
+using HypoluxAdventure.Managers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,10 @@ namespace HypoluxAdventure.Models
 
     internal class Room
     {
+        public const int ROOM_SIZE = 32;
+
+        public bool HasOpening(RoomOpening opening) => (Openings | opening) == Openings;
+
         public static RoomOpening FlipOpening(RoomOpening opening)
         {
             return opening switch
@@ -29,12 +34,21 @@ namespace HypoluxAdventure.Models
         }
 
         private RoomManager _roomManager;
+        private int _roomX, _roomY;
+
         public RoomOpening Openings { get; private set; }
 
-        public Room(RoomManager roomManager)
+        public Room(RoomManager roomManager, int roomX, int roomY)
         {
             _roomManager = roomManager;
+            _roomX = roomX;
+            _roomY = roomY;
             Openings = RoomOpening.North | RoomOpening.West;
+        }
+
+        public void RegisterTiles()
+        {
+            
         }
 
         public void Update()

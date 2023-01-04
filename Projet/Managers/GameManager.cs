@@ -22,7 +22,9 @@ namespace HypoluxAdventure.Managers
             _game = game;
         }
 
-        private GameOverlay _gameOverlay; 
+        private GameOverlay _gameOverlay;
+
+        private RoomManager _roomManager;
 
         public Player Player { get; private set; }
         private Cursor _cursor;
@@ -32,6 +34,8 @@ namespace HypoluxAdventure.Managers
             State = GameState.Play;
 
             _gameOverlay = new GameOverlay(_game, this);
+
+            _roomManager = new RoomManager(_game, this);
 
             Player = new Player(_game, this);
             _cursor = new Cursor(_game, this);
