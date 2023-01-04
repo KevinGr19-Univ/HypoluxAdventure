@@ -77,10 +77,21 @@ namespace HypoluxAdventure
             base.Draw(gameTime);
         }
 
+        private void LoadScreen(AbstractScreen screen)
+        {
+            _screenManager.LoadScreen(screen, _screenTransition);
+        }
+
         public void LoadWorld()
         {
             WorldScreen worldScreen = new WorldScreen(this);
-            _screenManager.LoadScreen(worldScreen, _screenTransition);
+            LoadScreen(worldScreen);
+        }
+
+        public void LoadCredit()
+        {
+            CreditScreen creditScreen = new CreditScreen(this);
+            LoadScreen(creditScreen);
         }
     }
 }

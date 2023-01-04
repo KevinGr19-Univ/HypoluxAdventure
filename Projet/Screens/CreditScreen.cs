@@ -12,25 +12,25 @@ using System.Threading.Tasks;
 
 namespace HypoluxAdventure.Screens
 {
-    internal class CreditScreen : GameScreen
+    internal class CreditScreen : AbstractScreen
     {
         private SpriteFont _titleFont;
         private SpriteFont _normalFont;
 
         private List<TextObject> _textList = new List<TextObject>();
-        private List<TextObject> _textListActif = new List<TextObject>();
-        private static Vector2 _startpoint = new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT + 100);
+        private List<TextObject> _textListActif = new List<TextObject>(0);
+        private List<float> _timeList = new List<float>(); 
+        private static Vector2 _startpoint = new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT + 50);
 
         private float _timer = 0;
-        private const float TIME_BETWEEN_TEXTS = 3;
         private const float MOVE_SPEED = 75;
 
-        public CreditScreen(Game game) : base(game) { }
+        public CreditScreen(Game1 game) : base(game) { }
 
         public override void LoadContent()
         {
-            _titleFont = Content.Load<SpriteFont>("Font/TitleCredit.spritefont");
-            _normalFont = Content.Load<SpriteFont>("Font/CreditFont.spritefont");
+            _titleFont = Content.Load<SpriteFont>("Font/TitleCredit");
+            _normalFont = Content.Load<SpriteFont>("Font/CreditFont");
 
             AddLines(_titleFont, "Crédits : ");
             AddLines(_normalFont,
@@ -57,17 +57,16 @@ namespace HypoluxAdventure.Screens
 
         public override void Update(GameTime gameTime)
         {
-            foreach(TextObject line in _textListActif)
-            {
-                line.Position.Y += MOVE_SPEED * Time.DeltaTime;
-            }
-            if (_textList.Count >= _textListActif.Count) return;
+            Logger.Debug(_timer);
+            foreach(TextObject line in _textListActif) line.Position.Y -= MOVE_SPEED * Time.DeltaTime;
 
+            if (_textList.Count <= _textListActif.Count) return;
             _timer -= Time.DeltaTime;
+
             if (_timer <= 0)
             {
                 _textListActif.Add(_textList[_textListActif.Count]);
-                _timer = TIME_BETWEEN_TEXTS;
+                //_timer = TIME_BETWEEN_TEXTS;
             }
 
         }
@@ -77,7 +76,7 @@ namespace HypoluxAdventure.Screens
             GraphicsDevice.Clear(Color.Black);
             foreach(TextObject line in _textListActif)
             {
-                line.Draw();
+                line.Draw(Game.UICanvas);
             }
       
         }
