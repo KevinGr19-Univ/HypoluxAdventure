@@ -3,11 +3,14 @@ using HypoluxAdventure.Managers;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Sprites;
 
 namespace HypoluxAdventure.Models.UI
 {
     internal class HealthBar : GameObject
     {
+        private Sprite _decoration;
+        private Vector2 _scale;
 
         private static Color HEALTH_LOW = Color.Red;
         private static float HEALTH_THRESHOLD_LOW = 0.2f;
@@ -31,10 +34,14 @@ namespace HypoluxAdventure.Models.UI
             _position = new Vector2(30,Application.SCREEN_HEIGHT-60);
             _origin = new Vector2(0, 1f);
 
+            _decoration = new Sprite(game.Content.Load<Texture2D>("img/healthDecoration"));
+            _decoration.OriginNormalized = Vector2.Zero;
+
         }
 
         public override void Draw()
         {
+
             Color color;
             if (_healthScale < HEALTH_THRESHOLD_LOW)
             {
@@ -52,7 +59,9 @@ namespace HypoluxAdventure.Models.UI
                     color = Color.Lerp(HEALTH_MIDDLE, HEALTH_HIGH, MathUtils.InverseLerp(HEALTH_THRESHOLD_MIDDLE, HEALTH_THRESHOLD_HIGH, _healthScale));
             }
 
+            
             game.UICanvas.Draw(_barTexture, _position, null, color, 0, _origin, new Vector2(_healthScale,1),SpriteEffects.None,0.5f);
+            _decoration.Draw(game.UICanvas,_position,0, Vector2.One);
         }
 
         public override void Update()
