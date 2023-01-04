@@ -3,6 +3,7 @@ using HypoluxAdventure.Managers;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Sprites;
 
 namespace HypoluxAdventure.Models.UI
@@ -10,15 +11,14 @@ namespace HypoluxAdventure.Models.UI
     internal class HealthBar : GameObject
     {
         private Sprite _decoration;
-        private Vector2 _scale;
 
-        private static Color HEALTH_LOW = Color.Red;
-        private static float HEALTH_THRESHOLD_LOW = 0.2f;
+        private static Color HEALTH_LOW = Color.Black;
+        private static float HEALTH_THRESHOLD_LOW = 0f;
 
-        private static Color HEALTH_MIDDLE = Color.Yellow;
-        private static float HEALTH_THRESHOLD_MIDDLE = 0.5f;
+        private static Color HEALTH_MIDDLE = Color.Red;
+        private static float HEALTH_THRESHOLD_MIDDLE = 0.25f;
 
-        private static Color HEALTH_HIGH = Color.Green;
+        private static Color HEALTH_HIGH = Color.Crimson;
         private static float HEALTH_THRESHOLD_HIGH = 0.8f;
 
 
@@ -32,11 +32,10 @@ namespace HypoluxAdventure.Models.UI
         {
             _barTexture = GraphicsUtils.GetRectangleColor(game.GraphicsDevice, 260, 30, Color.White);
             _position = new Vector2(30,Application.SCREEN_HEIGHT-60);
-            _origin = new Vector2(0, 1f);
+            _origin = new Vector2(0, 0);
 
             _decoration = new Sprite(game.Content.Load<Texture2D>("img/healthBarDecoration"));
-            _decoration.OriginNormalized = Vector2.Zero;
-
+            _decoration.OriginNormalized = _origin;
         }
 
         public override void Draw()
@@ -61,13 +60,13 @@ namespace HypoluxAdventure.Models.UI
 
             
             game.UICanvas.Draw(_barTexture, _position, null, color, 0, _origin, new Vector2(_healthScale,1),SpriteEffects.None,0.5f);
-            _decoration.Draw(game.UICanvas,_position,0, Vector2.One);
+            _decoration.Draw(game.UICanvas,_position, 0, Vector2.One);
         }
 
         public override void Update()
         {
-            float targetScale = (float)gameManager.Player.Health / gameManager.Player.MaxHealth;
-            _healthScale = MathUtils.Damp(_healthScale, targetScale, 1f, Time.DeltaTime);
+            float targetScale = _trigger ? 0.7f : (float)gameManager.Player.Health / gameManager.Player.MaxHealth;
+            _healthScale = MathUtils.Damp(_healthScale, targetScale, 0.4f,Time.DeltaTime);
         }
     }
 }
