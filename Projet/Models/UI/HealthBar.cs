@@ -27,17 +27,23 @@ namespace HypoluxAdventure.Models.UI
 
         public HealthBar(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
-            _barTexture = GraphicsUtils.GetRectangleColor(game.GraphicsDevice, 200, 25, Color.White);
-            _position = new Vector2(50,Application.SCREEN_HEIGHT-50);
-            _origin = new Vector2(0, 0.5f);
+            _barTexture = GraphicsUtils.GetRectangleColor(game.GraphicsDevice, 260, 30, Color.White);
+            _position = new Vector2(30,Application.SCREEN_HEIGHT-60);
+            _origin = new Vector2(0, 1f);
 
         }
 
         public override void Draw()
         {
             Color color;
-            if (_healthScale < HEALTH_THRESHOLD_LOW) color = HEALTH_LOW;
-            else if (_healthScale > HEALTH_THRESHOLD_HIGH) color = HEALTH_HIGH;
+            if (_healthScale < HEALTH_THRESHOLD_LOW)
+            {
+                color = HEALTH_LOW;
+            }
+            else if (_healthScale > HEALTH_THRESHOLD_HIGH)
+            {
+                color = HEALTH_HIGH;
+            }
             else
             {
                 if (_healthScale < HEALTH_THRESHOLD_MIDDLE)
