@@ -14,19 +14,19 @@ namespace HypoluxAdventure.Models.UI
         private SpriteFont _font;
         private string _text;
         private SpriteBatch _spriteBatch;
-        private Vector2 _position;
+        public Vector2 Position;
 
         public TextObject(SpriteFont font, string text, Vector2 position)
         {
             _font = font;
             _text = text;
-            _position = position;
+            Position = position;
         }
 
         public void Draw()
         {
             Vector2 measure = _font.MeasureString(_text);
-            _spriteBatch.DrawString(_font, _text, _position - measure*0.5f, Color.White);
+            _spriteBatch.DrawString(_font, _text, Position - measure*0.5f, Color.White);
 
         }
 
