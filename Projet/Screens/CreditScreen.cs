@@ -33,23 +33,23 @@ namespace HypoluxAdventure.Screens
             _normalFont = Content.Load<SpriteFont>("Font/CreditFont");
 
             AddLine(_titleFont, "Crédits : ", 3);
-            AddLine(_normalFont,"Jeu créé par :",2);
+            AddLine(_normalFont,"Jeu créé par :",1);
             AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING",1);
             AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
-            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,1);
-            AddLine(_normalFont,"Level Design fait par :",2);
+            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,2);
+            AddLine(_normalFont,"Level Design fait par :",1);
             AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING",1);
             AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
-            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,1);
-            AddLine(_normalFont,"Direction artistique et graphismes conçuent par :",2);
+            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,2);
+            AddLine(_normalFont,"Direction artistique et graphismes conçuent par :",1);
             AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING (Majeure partie)",1);
             AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
-            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,1);
-            AddLine(_normalFont,"Sound design composé par :",2);
+            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,2);
+            AddLine(_normalFont,"Sound design composé par :",1);
             AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING",1);
             AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
-            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,1);
-            AddLine(_normalFont,"-... --- -... .. -. ..- ... ",2);
+            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,2);
+            AddLine(_normalFont,"-... --- -... .. -. ..- ... ",1);
             AddLine(_normalFont,"-.. .-. .- --. --- -. ..- ...",1);
 
         }
