@@ -34,7 +34,7 @@ namespace HypoluxAdventure.Models.UI
             _position = new Vector2(30,Application.SCREEN_HEIGHT-60);
             _origin = new Vector2(0, 1f);
 
-            _decoration = new Sprite(game.Content.Load<Texture2D>("img/healthDecoration"));
+            _decoration = new Sprite(game.Content.Load<Texture2D>("img/healthBarDecoration"));
             _decoration.OriginNormalized = Vector2.Zero;
 
         }

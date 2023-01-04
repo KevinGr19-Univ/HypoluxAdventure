@@ -32,26 +32,25 @@ namespace HypoluxAdventure.Screens
             _titleFont = Content.Load<SpriteFont>("Font/TitleCredit");
             _normalFont = Content.Load<SpriteFont>("Font/CreditFont");
 
-            AddLines(_titleFont, "Crédits : ");
-            AddLines(_normalFont,
-                "Jeu créé par :",
-                "Mathieu 'HazelSoul' ROSTAING",
-                "Kévin 'FrancePVP' GRANDJEAN",
-                "Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,
-                "Level Design fait par :",
-                "Mathieu 'HazelSoul' ROSTAING",
-                "Kévin 'FrancePVP' GRANDJEAN",
-                "Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,
-                "Direction artistique et graphismes conçuent par :",
-                "Mathieu 'HazelSoul' ROSTAING (Majeure partie)",
-                "Kévin 'FrancePVP' GRANDJEAN",
-                "Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,
-                "Sound design composé par :",
-                "Mathieu 'HazelSoul' ROSTAING",
-                "Kévin 'FrancePVP' GRANDJEAN",
-                "Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,
-                "-... --- -... .. -. ..- ... ",
-                "-.. .-. .- --. --- -. ..- ...");
+            AddLine(_titleFont, "Crédits : ", 3);
+            AddLine(_normalFont,"Jeu créé par :",2);
+            AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING",1);
+            AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
+            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,1);
+            AddLine(_normalFont,"Level Design fait par :",2);
+            AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING",1);
+            AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
+            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,1);
+            AddLine(_normalFont,"Direction artistique et graphismes conçuent par :",2);
+            AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING (Majeure partie)",1);
+            AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
+            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,1);
+            AddLine(_normalFont,"Sound design composé par :",2);
+            AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING",1);
+            AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
+            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,1);
+            AddLine(_normalFont,"-... --- -... .. -. ..- ... ",2);
+            AddLine(_normalFont,"-.. .-. .- --. --- -. ..- ...",1);
 
         }
 
@@ -65,8 +64,8 @@ namespace HypoluxAdventure.Screens
 
             if (_timer <= 0)
             {
+                _timer = _timeList[_textListActif.Count];
                 _textListActif.Add(_textList[_textListActif.Count]);
-                //_timer = TIME_BETWEEN_TEXTS;
             }
 
         }
@@ -81,10 +80,12 @@ namespace HypoluxAdventure.Screens
       
         }
 
-        public void AddLines(SpriteFont font, params string[] lines)
+        public void AddLine(SpriteFont font, string text, float time)
         {
-            foreach (string line in lines) _textList.Add(new TextObject(font, line, _startpoint));
+            _textList.Add(new TextObject(font, text, _startpoint));
+            _timeList.Add(time);
         }
         
     }
 }
+
