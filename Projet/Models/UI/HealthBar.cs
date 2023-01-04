@@ -51,6 +51,9 @@ namespace HypoluxAdventure.Models.UI
             _healthIcon.Play("idle");
 
             GraphicsUtils.SetPixelSize(_healthIcon, HEART_SIZE, HEART_SIZE, ref _healthIconScale);
+
+            _decoration.Depth = 0.6f;
+            _healthIcon.Depth = 0.6f;
         }
 
         public override void Draw()
@@ -74,7 +77,7 @@ namespace HypoluxAdventure.Models.UI
             }
 
             
-            game.UICanvas.Draw(_barTexture, _barPosition, null, color, 0, _origin, new Vector2(_healthScale,1),SpriteEffects.None,0.5f);
+            game.UICanvas.Draw(_barTexture, _barPosition, null, color, 0, _origin, new Vector2(_healthScale, 1), SpriteEffects.None, 0.5f);
             _decoration.Draw(game.UICanvas,_barPosition, 0, Vector2.One);
             _healthIcon.Draw(game.UICanvas, _heartPosition, 0, _healthIconScale);
             

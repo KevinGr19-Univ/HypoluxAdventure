@@ -10,8 +10,16 @@ namespace HypoluxAdventure.Utils
     internal static class MathUtils
     {
         public static float Lerp(float a, float b, float t) => a * (1 - t) + b * t;
-        public static float Damp(float current, float target, float smoothSpeed, float deltaTime)
-            => Lerp(current, target, (float)Math.Pow(deltaTime, smoothSpeed));
+        public static float Damp(float current, float target, float smoothRate, float deltaTime)
+            => Lerp(current, target, (float)Math.Pow(deltaTime, smoothRate));
+
+        public static Vector2 Damp(Vector2 current, Vector2 target, float smoothRate, float deltaTime)
+        {
+            float lerpCoef = (float)Math.Pow(deltaTime, smoothRate);
+            float x = Lerp(current.X, target.X, lerpCoef);
+            float y = Lerp(current.Y, target.Y, lerpCoef);
+            return new Vector2(x, y);
+        }
 
         public static float InverseLerp(float a, float b, float value)
         {

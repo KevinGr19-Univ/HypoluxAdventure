@@ -24,7 +24,8 @@ namespace HypoluxAdventure.Managers
 
         private GameOverlay _gameOverlay;
 
-        private RoomManager _roomManager;
+        public RoomManager RoomManager { get; private set; }
+        private CameraManager _cameraManager;
 
         public Player Player { get; private set; }
         private Cursor _cursor;
@@ -35,10 +36,13 @@ namespace HypoluxAdventure.Managers
 
             _gameOverlay = new GameOverlay(_game, this);
 
-            _roomManager = new RoomManager(_game, this);
+            RoomManager = new RoomManager(_game, this);
+            _cameraManager = new CameraManager(_game, this);
 
             Player = new Player(_game, this);
             _cursor = new Cursor(_game, this);
+
+            _game.Camera.Zoom = 1.5f;
         }
 
         public void Update()
@@ -55,7 +59,10 @@ namespace HypoluxAdventure.Managers
             if(State != GameState.Pause)
             {
                 Player.Update();
+                RoomManager.Update();
+
                 _cursor.Update();
+                _cameraManager.Update();
 
                 _gameOverlay.Update();
             }
@@ -75,6 +82,7 @@ namespace HypoluxAdventure.Managers
             }
 
             Player.Draw();
+            RoomManager.Draw();
         }
 
         public FrameInputs FrameInputs { get; private set; }

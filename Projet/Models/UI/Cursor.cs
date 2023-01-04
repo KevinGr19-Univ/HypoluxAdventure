@@ -22,6 +22,8 @@ namespace HypoluxAdventure.Models
         {
             Sprite = new Sprite(game.Content.Load<Texture2D>("img/targetPointer"));
             GraphicsUtils.SetPixelSize(Sprite, 32, 32, ref _scale);
+
+            Sprite.Depth = 1;
         }
 
         public override void Update()

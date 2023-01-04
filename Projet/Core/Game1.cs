@@ -13,12 +13,18 @@ namespace HypoluxAdventure
     public class Game1 : Game
     {
         public GraphicsDeviceManager Graphics { get; private set; }
-        public SpriteBatch Canvas { get; private set; }
+
+        /// <summary>Canvas for UI elements (text, icons). Not affected by camera</summary>
         public SpriteBatch UICanvas { get; private set; }
+
+        /// <summary>Canvas for world elements.</summary>
+        public SpriteBatch Canvas { get; private set; }
+
+        /// <summary>Canvas for background (images, tiles). Not affected by LayerDepth.</summary>
+        public SpriteBatch BackgroundCanvas { get; private set; }
         public Camera Camera { get; private set; }
 
         private ScreenManager _screenManager;
-        private Transition _screenTransition;
 
         public Game1()
         {
@@ -37,13 +43,14 @@ namespace HypoluxAdventure
             TargetElapsedTime = TimeSpan.FromSeconds(1d / Application.TARGET_FRAMERATE);
 
             _screenManager = new ScreenManager();
-            _screenTransition = new FadeTransition(GraphicsDevice, Color.Black, 1);
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             Canvas = new SpriteBatch(GraphicsDevice);
+            BackgroundCanvas = new SpriteBatch(GraphicsDevice);
+
             Camera = new Camera();
             UICanvas = new SpriteBatch(GraphicsDevice);
 
@@ -67,11 +74,23 @@ namespace HypoluxAdventure
 
             Camera.CalculateMatrix();
 
-            UICanvas.Begin(samplerState: SamplerState.PointWrap);
-            Canvas.Begin(samplerState: SamplerState.PointWrap, transformMatrix: Camera.ViewMatrix);
+            UICanvas.Begin(
+                samplerState: SamplerState.PointWrap,
+                sortMode: SpriteSortMode.FrontToBack);
+
+            Canvas.Begin(
+                samplerState: SamplerState.PointWrap,
+                transformMatrix: Camera.ViewMatrix,
+                sortMode: SpriteSortMode.FrontToBack);
+
+            BackgroundCanvas.Begin(
+                samplerState: SamplerState.PointWrap,
+                transformMatrix: Camera.ViewMatrix,
+                sortMode: SpriteSortMode.Deferred);
 
             _screenManager.Draw(gameTime);
 
+            BackgroundCanvas.End();
             Canvas.End();
             UICanvas.End();
             base.Draw(gameTime);
@@ -79,7 +98,7 @@ namespace HypoluxAdventure
 
         private void LoadScreen(AbstractScreen screen)
         {
-            _screenManager.LoadScreen(screen, _screenTransition);
+            _screenManager.LoadScreen(screen, new FadeTransition(GraphicsDevice, Color.Black, 1));
         }
 
         public void LoadWorld()
