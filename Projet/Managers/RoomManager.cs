@@ -11,8 +11,6 @@ namespace HypoluxAdventure.Managers
     {
         public RoomManager(Game1 game, GameManager gameManager) : base(game, gameManager) { }
 
-        private 
-
         public override void Update()
         {
             
