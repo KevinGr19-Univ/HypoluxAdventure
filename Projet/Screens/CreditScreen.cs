@@ -26,12 +26,38 @@ namespace HypoluxAdventure.Screens
         private float _timer = 0;
         private const float MOVE_SPEED = 75;
 
+        public Button test;
+
         public CreditScreen(Game1 game) : base(game) { }
 
         public override void LoadContent()
         {
             _titleFont = Content.Load<SpriteFont>("Font/TitleCredit");
             _normalFont = Content.Load<SpriteFont>("Font/CreditFont");
+
+            test = new Button(_normalFont, "DONATE TO NOA BECAUSE HE NEED MONEY", Application.ScreenDimensions * 0.5f, Game);
+            test.Scale = new Vector2(2);
+            test.ColorNormal = new ButtonColor()
+            {
+                TextColor = Color.White,
+                BackgroundColor = Color.Red,
+                BorderColor = Color.Purple
+
+            };
+            test.ColorHover = new ButtonColor()
+            {
+                TextColor = Color.RosyBrown,
+                BackgroundColor = Color.RoyalBlue,
+                BorderColor = Color.BlanchedAlmond
+
+            };
+            test.ColorDown = new ButtonColor()
+            {
+                TextColor = Color.Black,
+                BackgroundColor = Color.Tan,
+                BorderColor = Color.AliceBlue
+
+            };
 
             AddLine(_titleFont, "Crédits : ", 3);
             AddLine(_normalFont,"Jeu créé par :",1);
@@ -76,6 +102,7 @@ namespace HypoluxAdventure.Screens
                 _timer = _timeList[_textListActif.Count];
                 _textListActif.Add(_textList[_textListActif.Count]);
             }
+            test.Update();
 
         }
 
@@ -91,6 +118,7 @@ namespace HypoluxAdventure.Screens
                     line.Draw(Game.UICanvas);
                 }
             }
+            test.Draw();
       
         }
 
