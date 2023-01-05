@@ -35,8 +35,13 @@ namespace HypoluxAdventure.Screens
             _titleFont = Content.Load<SpriteFont>("Font/TitleCredit");
             _normalFont = Content.Load<SpriteFont>("Font/CreditFont");
 
-            test = new Button(_normalFont, "DONATE TO NOA BECAUSE HE NEED MONEY", Application.ScreenDimensions * 0.5f, Game);
+            test = new Button(Game, _normalFont, "LEBRON JAMES", Application.ScreenDimensions * 0.5f, () =>
+            {
+                Console.WriteLine("Bonjour");
+            });
             test.Scale = new Vector2(2);
+            test.Border = 2f;
+            test.Depth = 0.9f;
             test.ColorNormal = new ButtonColor()
             {
                 TextColor = Color.White,
@@ -83,6 +88,7 @@ namespace HypoluxAdventure.Screens
 
         public override void Update(GameTime gameTime)
         {
+            test.Update();
             if(_textListStart < _textListActif.Count)
             {
                 for (int i = _textListStart; i < _textListActif.Count; i++)
@@ -102,7 +108,6 @@ namespace HypoluxAdventure.Screens
                 _timer = _timeList[_textListActif.Count];
                 _textListActif.Add(_textList[_textListActif.Count]);
             }
-            test.Update();
 
         }
 
