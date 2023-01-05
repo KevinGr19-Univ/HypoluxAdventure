@@ -23,7 +23,7 @@ namespace HypoluxAdventure.Managers
             RectangleF roomRect = gameManager.RoomManager.CurrentRoom.Rectangle;
             Vector2 targetPos = Vector2.Clamp(gameManager.Player.Position, roomRect.TopLeft + halfCameraDim, roomRect.BottomRight - halfCameraDim);
 
-            game.Camera.Position = DAMP ? MathUtils.Damp(game.Camera.Position, targetPos, 0.6f, Time.RealDeltaTime) : targetPos;
+            game.Camera.Position = DAMP ? MathUtils.Damp(game.Camera.Position, targetPos, 0.7f, Time.RealDeltaTime) : targetPos;
         }
 
         public override void Draw() { }

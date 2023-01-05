@@ -7,6 +7,7 @@ using System;
 using HypoluxAdventure.Core;
 using HypoluxAdventure.Models;
 using HypoluxAdventure.Screens;
+using MonoGame.Extended;
 
 namespace HypoluxAdventure
 {

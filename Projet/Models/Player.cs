@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
 using HypoluxAdventure.Utils;
+using MonoGame.Extended;
 
 namespace HypoluxAdventure.Models
 {
-    internal class Player : LivingEntity
+    internal class Player : Entity
     {
         public override int MaxHealth => 20;
 
@@ -28,13 +29,14 @@ namespace HypoluxAdventure.Models
 
         public override void Update()
         {
+            base.Update();
             _inputs = Controllable ? gameManager.FrameInputs : new FrameInputs();
 
             if (!IsDead)
             {
                 CalculateVelocity();
                 CalculateShootDirection();
-                Position += Velocity * Time.DeltaTime;
+                Move();
 
                 if(Controllable) Sprite.Effect = IsFlipped ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             }
