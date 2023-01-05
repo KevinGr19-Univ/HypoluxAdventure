@@ -16,6 +16,7 @@ namespace HypoluxAdventure.Managers
         private Texture2D _tileset;
 
         public const int MAP_ROOM_SIZE = 6;
+        public const int MAP_HEIGHT = MAP_ROOM_SIZE * Room.ROOM_WIDTH;
         private Room[,] _rooms;
 
         public Room CurrentRoom { get; private set; }

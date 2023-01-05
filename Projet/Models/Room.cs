@@ -1,5 +1,6 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
+using HypoluxAdventure.Models.Monsters;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended;
@@ -68,18 +69,47 @@ namespace HypoluxAdventure.Models
         }
 
         public RectangleF Rectangle { get; private set; }
+        public Vector2 Position => Rectangle.TopLeft;
 
-        // TODO: List of enemies
+        private List<Monster> _monsters = new List<Monster>(0);
+        // TODO: Room projectiles
         // TODO: Chest? or List of chests
+
+        /// <summary>Method called when the room is entered by the player.</summary>
+        public void Load()
+        {
+            _monsters.ForEach((monster) =>
+            {
+                if (monster.IsSlained) return;
+                monster.Spawn();
+            });
+        }
+
+        /// <summary>Method called when the room is left by the player.</summary>
+        public void Unload()
+        {
+
+        }
 
         public void Update(bool transitionOut)
         {
-            
+            if (!transitionOut)
+            {
+                _monsters.ForEach((monster) =>
+                {
+                    if (monster.IsSlained) return;
+                    monster.Update();
+                });
+            }
         }
 
         public void Draw()
         {
-
+            _monsters.ForEach((monster) =>
+            {
+                if (monster.IsSlained) return;
+                monster.Draw();
+            });
         }
         
     }
