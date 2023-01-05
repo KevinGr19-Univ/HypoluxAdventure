@@ -13,7 +13,7 @@ namespace HypoluxAdventure.Screens
 {
     internal class MenuScreen : AbstractScreen
     {
-
+        
 
 
         public MenuScreen(Game1 game) : base(game) {}
