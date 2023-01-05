@@ -1,6 +1,7 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Models;
 using HypoluxAdventure.Models.Item;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,36 @@ namespace HypoluxAdventure.Managers
 {
     internal class ItemManager : GameObject
     {
-        private ItemSlot[] _itemSlotTab;
+        private const int SLOT_SPACING = ItemSlot.SLOT_WIDTH + 15;
+
+        private ItemSlot[] _itemSlots;
         private int _currentSlot;
+        private Vector2 _position;
+
+
 
         public ItemManager(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
             _currentSlot = 0;
+            _position = new Vector2(Application.SCREEN_WIDTH/2,Application.SCREEN_HEIGHT/2);
+            AddItemSlot(0, new ItemSlot(game, gameManager));
+            AddItemSlot(1, new ItemSlot(game, gameManager));
         }
 
         public override void Draw()
         {
-            
+            foreach (ItemSlot itemSlot in _itemSlots) itemSlot.Draw();
         }
 
         public override void Update()
         {
             
+        }
+        
+        private void AddItemSlot(int slot, ItemSlot newItemSlot)
+        {
+            _itemSlots[slot] = newItemSlot;
+            newItemSlot._position = _position + Vector2.UnitX * SLOT_SPACING * slot;
         }
     }
 }
