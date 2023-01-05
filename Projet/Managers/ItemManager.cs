@@ -12,7 +12,7 @@ namespace HypoluxAdventure.Managers
 {
     internal class ItemManager : GameObject
     {
-        private const int SLOT_SPACING = ItemSlot.SLOT_WIDTH + 15;
+        private const int SLOT_SPACING = ItemSlot.SLOT_WIDTH + 20;
 
         private ItemSlot[] _itemSlots;
         private int _currentSlot;
@@ -21,7 +21,7 @@ namespace HypoluxAdventure.Managers
         public ItemManager(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
             _currentSlot = 0;
-            _position = Application.ScreenDimensions * 0.5f;
+            _position = new Vector2(Application.ScreenDimensions.X * 0.85f, Application.ScreenDimensions.Y * 0.9125f);
 
             _itemSlots = new ItemSlot[2];
 
@@ -36,6 +36,7 @@ namespace HypoluxAdventure.Managers
 
         public override void Update()
         {
+            
             
         }
         

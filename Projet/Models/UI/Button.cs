@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MonoGame.Extended;
+using HypoluxAdventure.Utils;
 
 namespace HypoluxAdventure.Models.UI
 {
@@ -16,46 +18,68 @@ namespace HypoluxAdventure.Models.UI
         public Color BorderColor;
         public Color BackgroundColor;
 
-        public Color TextColorHover;
-        public Color BorderColorHover;
-        public Color BackgroundColorHover;
-
-        public Color TextColorDown;
-        public Color BorderColorDown;
-        public Color BackgroundColorDown;
-
     }
 
     internal class Button
     {
+        private Game1 game;
         private TextObject _text;
-        private ButtonColor _color;
-        private Rectangle _rect;
+
+        public ButtonColor ColorNormal;
+        public ButtonColor ColorHover;
+        public ButtonColor ColorDown;
+
+        private RectangleF _rect;
+        private RectangleF _rectBackground;
+        private RectangleF _rectText;
+
         public Vector2 Position;
+        public Vector2 Scale = Vector2.One;
+        public Vector2 Padding;
+
         private bool _hover;
-        
-        public Button(SpriteFont textFont, string text, ButtonColor color, Vector2 position, Vector2 padding, float border)
-        {
-            TextObject buttonText = new TextObject(textFont, text, position);
-            _rect = new Rectangle(0, 0, (int)textFont.MeasureString(text).X, (int)textFont.MeasureString(text).Y);
-            Vector2 halfDim = new Vector2(textFont.MeasureString(text).X / 2, textFont.MeasureString(text).Y / 2);
-            _rect.Offset(-halfDim);
+        private bool _down;
+        private float _border;
+        public float Depth = 0.5f;
+
+        public Button(SpriteFont textFont, string text, Vector2 position, Game1 game)
+        {            
+            _text = new TextObject(textFont, text, position);
+            Position = position;
+            this.game = game;
         }
 
         public void Update()
         {
-            _hover = _rect.Contains(Inputs.MousePosition);
-            if (_hover)
-            {
-                
-            }
+            Vector2 textDimension = _text.Measure();
+            _rectText = new RectangleF(Position - textDimension * 0.5f, textDimension);
             
+            _rectBackground = _rectText;
+            _rectBackground.Inflate(Padding.X, Padding.Y);
+
+            _rect = _rectBackground;
+            _rect.Inflate(_border, _border);
+
+            _hover = _rect.Scale(Scale).Contains(Inputs.MousePosition);
+            _down = _hover && Inputs.IsClickDown(Inputs.MouseButton.Left);
         }
 
         public void Draw()
         {
-            Color textColor, buttonColor, backgroundColor;
+            ButtonColor colorState;
+            if (_down) colorState = ColorDown;
+            else if (_hover) colorState = ColorHover;
+            else colorState = ColorNormal;
 
+            game.UICanvas.FillRectangle(_rect.Scale(Scale), colorState.BorderColor, layerDepth:Depth - 0.02f);
+            game.UICanvas.FillRectangle(_rectBackground.Scale(Scale), colorState.BackgroundColor, layerDepth:Depth - 0.01f);
+
+            _text.Position = Position;
+            _text.Scale = Scale;
+            _text.Depth = Depth;
+            _text.Color = colorState.TextColor;
+
+            _text.Draw(game.UICanvas);
         }
     }
 }
