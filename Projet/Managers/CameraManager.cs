@@ -2,6 +2,7 @@
 using HypoluxAdventure.Models;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using System;
 using System.Collections.Generic;

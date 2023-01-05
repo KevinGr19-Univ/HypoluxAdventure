@@ -41,6 +41,7 @@ namespace HypoluxAdventure.Managers
             _rooms[0, 1] = new Room(this, 0, 1, RoomOpening.West);
 
             CurrentRoom = _rooms[0, 0];
+            //CurrentRoom.GenerateTiles();
         }
 
         public Room GetRoom(int roomX, int roomY)

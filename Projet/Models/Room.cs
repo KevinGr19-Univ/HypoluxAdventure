@@ -113,6 +113,12 @@ namespace HypoluxAdventure.Models
                         36,
                         16
                     );
+
+            for(int row = 0; row < _tiles.GetLength(0); row++)
+            {
+                for (int col = 0; col < _tiles.GetLength(1); col++) Console.Write(_tiles[row, col].ToString().PadRight(3));
+                Console.WriteLine();
+            }
         }
 
         public Room GetNextRoom(RoomOpening opening)
