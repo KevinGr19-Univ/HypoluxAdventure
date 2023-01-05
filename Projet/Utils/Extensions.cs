@@ -23,6 +23,6 @@ namespace HypoluxAdventure.Utils
         }
 
         public static RectangleF Scale(this RectangleF rectangle, Vector2 scale)
-            => new RectangleF(rectangle.TopLeft - rectangle.Size * scale * 0.5f, rectangle.Size * scale);
+            => new RectangleF(rectangle.Center - rectangle.Size * scale * 0.5f, rectangle.Size * scale);
     }
 }
