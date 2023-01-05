@@ -39,14 +39,17 @@ namespace HypoluxAdventure.Models.UI
 
         private bool _hover;
         private bool _down;
-        private float _border;
+        public float Border;
         public float Depth = 0.5f;
 
-        public Button(SpriteFont textFont, string text, Vector2 position, Game1 game)
+        private Action _action;
+
+        public Button(Game1 game, SpriteFont textFont, string text, Vector2 position, Action action)
         {            
             _text = new TextObject(textFont, text, position);
             Position = position;
             this.game = game;
+            this._action = action;
         }
 
         public void Update()
@@ -58,10 +61,12 @@ namespace HypoluxAdventure.Models.UI
             _rectBackground.Inflate(Padding.X, Padding.Y);
 
             _rect = _rectBackground;
-            _rect.Inflate(_border, _border);
+            _rect.Inflate(Border, Border);
 
             _hover = _rect.Scale(Scale).Contains(Inputs.MousePosition);
             _down = _hover && Inputs.IsClickDown(Inputs.MouseButton.Left);
+
+            if (_hover && Inputs.IsClickReleased(Inputs.MouseButton.Left)) _action.Invoke();
         }
 
         public void Draw()
@@ -71,8 +76,8 @@ namespace HypoluxAdventure.Models.UI
             else if (_hover) colorState = ColorHover;
             else colorState = ColorNormal;
 
-            game.UICanvas.FillRectangle(_rect.Scale(Scale), colorState.BorderColor, layerDepth:Depth - 0.02f);
-            game.UICanvas.FillRectangle(_rectBackground.Scale(Scale), colorState.BackgroundColor, layerDepth:Depth - 0.01f);
+            game.UICanvas.FillRectangle(_rect.Scale(Scale), colorState.BorderColor, layerDepth:Depth - 0.002f);
+            game.UICanvas.FillRectangle(_rectBackground.Scale(Scale), colorState.BackgroundColor, layerDepth:Depth - 0.001f);
 
             _text.Position = Position;
             _text.Scale = Scale;
