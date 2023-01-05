@@ -13,41 +13,87 @@ namespace HypoluxAdventure.Managers
 {
     internal class RoomManager : GameObject
     {
-        private Texture2D _tileset;
+        private static Dictionary<int, Rectangle> _tileFrames;
 
-        public const int MAP_ROOM_SIZE = 6;
-        public const int MAP_HEIGHT = MAP_ROOM_SIZE * Room.ROOM_WIDTH;
+        public static bool GetTileFrame(int id, out Rectangle rectangle)
+        {
+            rectangle = new Rectangle();
+            if (!_tileFrames.TryGetValue(id, out Rectangle rect)) return false;
+
+            rectangle = rect;
+            return true;
+        }
+
+        public static void CreateTileFrames()
+        {
+            Rectangle GetRectangle(int tileX)
+                => new Rectangle(tileX * TILESET_TILE_SIZE, 0, TILESET_TILE_SIZE, TILESET_TILE_SIZE);
+
+            _tileFrames = new Dictionary<int, Rectangle>
+            {
+                { 0, GetRectangle(1) },
+                { 1, GetRectangle(0) },
+                { 2, GetRectangle(11) },
+                { 3, GetRectangle(12) },
+                { 4, GetRectangle(13) },
+                { 5, GetRectangle(10) },
+                { 6, GetRectangle(8) },
+                { 7, GetRectangle(9) },
+                { 8, GetRectangle(6) },
+                { 9, GetRectangle(7) },
+                { 10, GetRectangle(3) },
+                { 11, GetRectangle(4) },
+                { 12, GetRectangle(5) },
+                { 13, GetRectangle(2) },
+            };
+        }
+
+        public const int TILESET_TILE_SIZE = 16;
+        public Texture2D TileSet { get; private set; }
+
+        public const int MAP_ROOM_WIDTH = 6;
+        public const int MAP_ROOM_HEIGHT = 6;
+
+        public const int MAP_WIDTH = MAP_ROOM_WIDTH * Room.ROOM_WIDTH;
+        public const int MAP_HEIGHT = MAP_ROOM_HEIGHT * Room.ROOM_WIDTH;
+
         private Room[,] _rooms;
 
         public Room CurrentRoom { get; private set; }
         private Room _previousRoom = null;
 
-        private const float CHANGE_ROOM_COOLDOWN = 1;
+        private const float CHANGE_ROOM_COOLDOWN = 1.5f;
         private float _changeRoomTimer;
 
         public bool StayInRoom = false;
 
         public RoomManager(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
-            _tileset = game.Content.Load<Texture2D>("img/tileset");
-            GenerateRooms();
+            TileSet = game.Content.Load<Texture2D>("img/mapTextureSample");
         }
 
         public void GenerateRooms()
         {
-            _rooms = new Room[MAP_ROOM_SIZE, MAP_ROOM_SIZE];
-            _rooms[0, 0] = new Room(this, 0, 0, RoomOpening.South | RoomOpening.East);
-            _rooms[1, 0] = new Room(this, 1, 0, RoomOpening.North);
-            _rooms[0, 1] = new Room(this, 0, 1, RoomOpening.West);
+            _rooms = new Room[MAP_ROOM_HEIGHT, MAP_ROOM_WIDTH];
+            AddRoom(0, 0, RoomOpening.South | RoomOpening.East);
+            AddRoom(1, 0, RoomOpening.West);
+            AddRoom(0, 1, RoomOpening.North);
 
-            CurrentRoom = _rooms[0, 0];
-            //CurrentRoom.GenerateTiles();
+            CurrentRoom = GetRoom(0, 0);
+        }
+
+        public void AddRoom(int x, int y, RoomOpening openings)
+        {
+            Room newRoom = new Room(game, this, x, y, openings);
+            newRoom.GenerateTiles();
+
+            _rooms[y, x] = newRoom;
         }
 
         public Room GetRoom(int roomX, int roomY)
         {
-            if (roomX < 0 || roomY < 0 || roomX >= MAP_ROOM_SIZE || roomY >= MAP_ROOM_SIZE) return null;
-            return _rooms[roomX, roomY];
+            if (roomX < 0 || roomY < 0 || roomX >= MAP_ROOM_WIDTH || roomY >= MAP_ROOM_HEIGHT) return null;
+            return _rooms[roomY, roomX];
         }
 
         public void PlayerRoomExitsCollision()
@@ -108,6 +154,7 @@ namespace HypoluxAdventure.Managers
         public override void Draw()
         {
             if (_changeRoomTimer > 0) _previousRoom.Draw();
+            CurrentRoom.Draw();
         }
     }
 }

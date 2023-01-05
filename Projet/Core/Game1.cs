@@ -8,6 +8,8 @@ using HypoluxAdventure.Core;
 using HypoluxAdventure.Models;
 using HypoluxAdventure.Screens;
 using MonoGame.Extended;
+using HypoluxAdventure.Managers;
+using MonoGame.Extended.TextureAtlases;
 
 namespace HypoluxAdventure
 {
@@ -55,7 +57,9 @@ namespace HypoluxAdventure
             Camera = new Camera();
             UICanvas = new SpriteBatch(GraphicsDevice);
 
-            LoadCredit();
+            RoomManager.CreateTileFrames();
+
+            LoadWorld();
         }
 
         protected override void Update(GameTime gameTime)

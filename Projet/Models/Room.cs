@@ -41,6 +41,7 @@ namespace HypoluxAdventure.Models
 
         public const int ROOM_WIDTH = ROOM_SIZE * TILE_SIZE;
 
+        private Game1 _game;
         private RoomManager _roomManager;
         private int _roomX, _roomY;
 
@@ -49,8 +50,10 @@ namespace HypoluxAdventure.Models
         public RoomOpening Openings { get; private set; }
         public bool HasOpening(RoomOpening opening) => (Openings | opening) == Openings;
 
-        public Room(RoomManager roomManager, int roomX, int roomY, RoomOpening openings)
+        public Room(Game1 game, RoomManager roomManager, int roomX, int roomY, RoomOpening openings)
         {
+            _game = game;
+
             _roomManager = roomManager;
             Openings = openings;
 
@@ -69,9 +72,9 @@ namespace HypoluxAdventure.Models
                 _tiles.Fusion(
                         new int[,]
                         {
-                            { 1, 1, 1, 1},
-                            { 1, 1, 1, 1},
-                            { 1, 1, 1, 1},
+                            { 1, 1, 1, 1 },
+                            { 1, 1, 1, 1 },
+                            { 1, 1, 1, 1 },
                         },
                         18,
                         0
@@ -84,7 +87,7 @@ namespace HypoluxAdventure.Models
                             { 1, 1, 1 },
                             { 1, 1, 1 },
                             { 1, 1, 1 },
-                            { 1, 1, 1 }
+                            { 1, 1, 1 },
                         },
                         0,
                         18
@@ -94,12 +97,12 @@ namespace HypoluxAdventure.Models
                 _tiles.Fusion(
                         new int[,]
                         {
-                            { 1, 1, 1, 1},
-                            { 1, 1, 1, 1},
-                            { 1, 1, 1, 1},
+                            { 1, 1, 1, 1 },
+                            { 1, 1, 1, 1 },
+                            { 1, 1, 1, 1 },
                         },
                         18,
-                        36
+                        37
                     );
 
             if (HasOpening(RoomOpening.East))
@@ -109,16 +112,11 @@ namespace HypoluxAdventure.Models
                             { 1, 1, 1 },
                             { 1, 1, 1 },
                             { 1, 1, 1 },
+                            { 1, 1, 1 },
                         },
-                        36,
-                        16
+                        37,
+                        18
                     );
-
-            for(int row = 0; row < _tiles.GetLength(0); row++)
-            {
-                for (int col = 0; col < _tiles.GetLength(1); col++) Console.Write(_tiles[row, col].ToString().PadRight(3));
-                Console.WriteLine();
-            }
         }
 
         public Room GetNextRoom(RoomOpening opening)
@@ -175,6 +173,16 @@ namespace HypoluxAdventure.Models
                 if (monster.IsSlained) return;
                 monster.Draw();
             });
+
+            Vector2 topLeft = Position;
+
+            for(int j = 0; j < _tiles.GetLength(1); j++) for(int i = 0; i < _tiles.GetLength(0); i++)
+                {
+                    if (!RoomManager.GetTileFrame(_tiles[j, i], out Rectangle sourceRect)) continue;
+                    Rectangle destRect = new Rectangle(i * TILE_SIZE + _roomX * ROOM_WIDTH, j * TILE_SIZE + _roomY * ROOM_WIDTH, TILE_SIZE, TILE_SIZE);
+
+                    _game.BackgroundCanvas.Draw(_roomManager.TileSet, destRect, sourceRect, Color.White);
+                }
         }
         
     }

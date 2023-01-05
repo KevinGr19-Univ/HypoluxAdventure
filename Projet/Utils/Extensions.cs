@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HypoluxAdventure.Core;
+using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
@@ -15,11 +16,12 @@ namespace HypoluxAdventure.Utils
             if (map.Rank != baseMap.Rank)
                 throw new ArgumentException("Arrays do not have the same rank");
 
-            if (x + map.GetLength(0) > baseMap.GetLength(0) || y + map.GetLength(1) > baseMap.GetLength(1))
+            if (x + map.GetLength(0) - 1 > baseMap.GetLength(0) || y + map.GetLength(1) - 1 > baseMap.GetLength(1))
                 throw new ArgumentOutOfRangeException("Array out of range");
 
-            for (int i = 0; i < map.GetLength(0); i++) for (int j = 0; j < map.GetLength(1); j++)
-                    baseMap[i, j] = map[i + x, j + y];
+            for (int j = 0; j < map.GetLength(0); j++) for (int i = 0; i < map.GetLength(1); i++)
+                    baseMap[j + y, i + x] = map[j, i];
+                    
         }
 
         public static RectangleF Scale(this RectangleF rectangle, Vector2 scale)

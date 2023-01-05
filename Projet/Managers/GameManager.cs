@@ -38,6 +38,8 @@ namespace HypoluxAdventure.Managers
             _gameOverlay = new GameOverlay(_game, this);
 
             RoomManager = new RoomManager(_game, this);
+            RoomManager.GenerateRooms();
+
             ItemManager = new ItemManager(_game, this);
             _cameraManager = new CameraManager(_game, this);
 
