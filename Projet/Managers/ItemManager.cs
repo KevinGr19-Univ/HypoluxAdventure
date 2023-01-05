@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace HypoluxAdventure.Managers
 {
-    internal class ItemManager : GameObject
+    internal class InventoryManager : GameObject
     {
         private const int SLOT_SPACING = ItemSlot.SLOT_WIDTH + 20;
         private const int SLOT_AMOUNT = 3;
@@ -25,7 +25,7 @@ namespace HypoluxAdventure.Managers
         private Vector2 _position;
         private TextObject _itemDescription;
 
-        public ItemManager(Game1 game, GameManager gameManager) : base(game, gameManager)
+        public InventoryManager(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
             _position = new Vector2(1100, Application.SCREEN_HEIGHT - 60);
             _itemSlots = new ItemSlot[SLOT_AMOUNT];

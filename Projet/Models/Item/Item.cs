@@ -25,7 +25,7 @@ namespace HypoluxAdventure.Models.Item
         public Vector2 Scale = Vector2.One;
 
         public virtual float Cooldown => 0;
-        abstract public float DefaultAngle { get; }
+        abstract public Vector2 DefaultDirection { get; }
         abstract public float SlotScale { get; }
         abstract public float DistFromPlayer { get; }
 
@@ -33,7 +33,7 @@ namespace HypoluxAdventure.Models.Item
 
         public Item(Game1 game, GameManager gameManager) : base(game, gameManager) { }
 
-        protected void ResetCooldown()
+        protected void TriggerCooldown()
         {
             _currentCooldown = Cooldown;
         }
@@ -53,7 +53,8 @@ namespace HypoluxAdventure.Models.Item
 
         public virtual void SelectedUpdate()
         {
-
+            if (gameManager.FrameInputs.Shoot) OnShoot();
+            else if (gameManager.FrameInputs.Use) OnUse();
         }
 
         public override void Draw()
@@ -66,9 +67,9 @@ namespace HypoluxAdventure.Models.Item
             Vector2 origin = new Vector2(_texture.Width, _texture.Height) * 0.5f;
             game.UICanvas.Draw(_texture, slotPos, null, Color.White, 0, origin, SlotScale, SpriteEffects.None, ItemSlot.DEPTH + 0.001f);
         }
-        
-        public virtual void OnShoot() { }
-        public virtual void OnUse() { }
+
+        abstract public void OnShoot();
+        abstract public void OnUse();
         public virtual void OnCooldownRefresh() { }
     }
 }

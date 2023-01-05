@@ -3,6 +3,7 @@ using HypoluxAdventure.Managers;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace HypoluxAdventure.Models.Item
     {
         public const int SLOT_WIDTH = 80;
         public const float DEPTH = 0.6f;
+
+        public static readonly Color COOLDOWN_COLOR = new Color(Color.Black, 0.5f);
 
         public Item Item;
 
@@ -48,10 +51,20 @@ namespace HypoluxAdventure.Models.Item
             _frame.Color = IsSelected ? Color.LightCyan : Color.DarkGray;
 
             _frame.Draw(game.UICanvas, Position, 0, _scale);
-            if (Item == null) return;
+            float cooldownScale = 0;
 
-            Item.DrawSlot(Position);
-            if(IsSelected) Item.Draw();
+            if (Item != null)
+            {
+                Item.DrawSlot(Position);
+                cooldownScale = Item.CooldownProgress;
+
+                if (IsSelected) Item.Draw();
+            }
+
+            RectangleF frameRect = _frame.GetBoundingRectangle(Position, 0, _scale);
+
+            game.UICanvas.FillRectangle(frameRect.TopLeft, frameRect.Size * new Vector2(1, cooldownScale),
+                COOLDOWN_COLOR, DEPTH + 0.2f);
 
         }
     }

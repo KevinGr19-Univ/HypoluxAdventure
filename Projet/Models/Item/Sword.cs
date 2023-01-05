@@ -1,4 +1,5 @@
-﻿using HypoluxAdventure.Managers;
+﻿using HypoluxAdventure.Core;
+using HypoluxAdventure.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Sprites;
@@ -19,8 +20,8 @@ namespace HypoluxAdventure.Models.Item
         }
 
         public override float SlotScale => 4;
-        public override float DefaultAngle => 45;
-        public override float Cooldown => 0.5f;
+        public override Vector2 DefaultDirection => new Vector2(1, 1);
+        public override float Cooldown => 2f;
         public override float DistFromPlayer => 40;
 
         private float _timer = 3;
@@ -29,5 +30,13 @@ namespace HypoluxAdventure.Models.Item
         {
             base.SelectedUpdate();
         }
+
+        public override void OnShoot()
+        {
+            Logger.Debug("Hit");
+            TriggerCooldown();
+        }
+
+        public override void OnUse() { }
     }
 }

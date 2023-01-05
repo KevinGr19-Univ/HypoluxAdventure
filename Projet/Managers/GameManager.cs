@@ -25,7 +25,7 @@ namespace HypoluxAdventure.Managers
         private GameOverlay _gameOverlay;
 
         public RoomManager RoomManager { get; private set; }
-        public ItemManager ItemManager { get; private set; }
+        public InventoryManager ItemManager { get; private set; }
         private PauseManager _pauseManager;
         private CameraManager _cameraManager;
 
@@ -43,7 +43,7 @@ namespace HypoluxAdventure.Managers
             RoomManager = new RoomManager(_game, this);
             RoomManager.GenerateRooms();
 
-            ItemManager = new ItemManager(_game, this);
+            ItemManager = new InventoryManager(_game, this);
 
             _pauseManager = new PauseManager(_game, this);
             _cameraManager = new CameraManager(_game, this);

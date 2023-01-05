@@ -25,6 +25,7 @@ namespace HypoluxAdventure.Models.Monsters
             spawnPosition = spawnPos;
         }
 
+        abstract public void OnPlayerCollision();
         abstract public void Spawn();
     }
 }

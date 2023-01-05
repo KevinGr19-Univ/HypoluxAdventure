@@ -32,17 +32,17 @@ namespace HypoluxAdventure.Managers
 
             _tileFrames = new Dictionary<int, Rectangle>
             {
-                { 0, GetRectangle(1) },
-                { 1, GetRectangle(0) },
-                { 2, GetRectangle(11) },
+                { 0, GetRectangle(1) }, // Vide
+                { 1, GetRectangle(0) }, // Sol
+                { 2, GetRectangle(11) }, // 2 à 5 : Mur
                 { 3, GetRectangle(12) },
                 { 4, GetRectangle(13) },
                 { 5, GetRectangle(10) },
-                { 6, GetRectangle(8) },
+                { 6, GetRectangle(8) }, // 6 à 9 : Angle
                 { 7, GetRectangle(7) },
                 { 8, GetRectangle(6) },
                 { 9, GetRectangle(9) },
-                { 10, GetRectangle(3) },
+                { 10, GetRectangle(3) }, // 10 à 13 : Coin
                 { 11, GetRectangle(4) },
                 { 12, GetRectangle(5) },
                 { 13, GetRectangle(2) },
