@@ -1,6 +1,7 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
 using HypoluxAdventure.Models.Monsters;
+using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using MonoGame.Extended;
@@ -43,6 +44,8 @@ namespace HypoluxAdventure.Models
         private RoomManager _roomManager;
         private int _roomX, _roomY;
 
+        private int[,] _tiles;
+
         public RoomOpening Openings { get; private set; }
         public bool HasOpening(RoomOpening opening) => (Openings | opening) == Openings;
 
@@ -54,6 +57,62 @@ namespace HypoluxAdventure.Models
             _roomX = roomX;
             _roomY = roomY;
             Rectangle = new RectangleF(_roomX * ROOM_WIDTH, _roomY * ROOM_WIDTH, ROOM_WIDTH, ROOM_WIDTH);
+        }
+
+        public void GenerateTiles()
+        {
+            _tiles = new int[ROOM_SIZE, ROOM_SIZE];
+            for (int i = 3; i < ROOM_SIZE - 3; i++) for (int j = 3; j < ROOM_SIZE - 3; j++)
+                    _tiles[i, j] = 1;
+
+            if (HasOpening(RoomOpening.North))
+                _tiles.Fusion(
+                        new int[,]
+                        {
+                            { 1, 1, 1, 1},
+                            { 1, 1, 1, 1},
+                            { 1, 1, 1, 1},
+                        },
+                        18,
+                        0
+                    );
+
+            if (HasOpening(RoomOpening.West))
+                _tiles.Fusion(
+                        new int[,]
+                        {
+                            { 1, 1, 1 },
+                            { 1, 1, 1 },
+                            { 1, 1, 1 },
+                            { 1, 1, 1 }
+                        },
+                        0,
+                        18
+                    );
+
+            if (HasOpening(RoomOpening.South))
+                _tiles.Fusion(
+                        new int[,]
+                        {
+                            { 1, 1, 1, 1},
+                            { 1, 1, 1, 1},
+                            { 1, 1, 1, 1},
+                        },
+                        18,
+                        36
+                    );
+
+            if (HasOpening(RoomOpening.East))
+                _tiles.Fusion(
+                        new int[,]
+                        {
+                            { 1, 1, 1 },
+                            { 1, 1, 1 },
+                            { 1, 1, 1 },
+                        },
+                        36,
+                        16
+                    );
         }
 
         public Room GetNextRoom(RoomOpening opening)
