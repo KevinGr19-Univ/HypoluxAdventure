@@ -22,9 +22,13 @@ namespace HypoluxAdventure.Models.Item
         public Vector2 Position;
         private Vector2 _scale;
 
+        public bool isSelected;
+        private Color _frameColor;
+
 
         public ItemSlot(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
+            _frameColor=Color.White;
             _frame = new Sprite(game.Content.Load<Texture2D>("img/itemFrame"));
             GraphicsUtils.SetPixelSize(_frame, SLOT_WIDTH, SLOT_WIDTH, ref _scale);
         }
@@ -36,7 +40,7 @@ namespace HypoluxAdventure.Models.Item
 
         public override void Update()
         {
-            
+            _frameColor = isSelected ? Color.White : Color.Yellow;
         }
     }
 }

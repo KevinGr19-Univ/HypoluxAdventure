@@ -37,6 +37,7 @@ namespace HypoluxAdventure.Managers
         public override void Update()
         {
             
+            
         }
         
         private void AddItemSlot(int slot, ItemSlot newItemSlot)
