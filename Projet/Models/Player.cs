@@ -43,7 +43,7 @@ namespace HypoluxAdventure.Models
         }
 
         #region Movement and collisions
-        private float _maxSpeed = 600f;
+        private float _maxSpeed = 300f;
         private float _accelRate = 8f;
         private float _decelRate = 7f;
 

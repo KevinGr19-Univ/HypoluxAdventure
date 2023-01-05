@@ -53,8 +53,11 @@ namespace HypoluxAdventure.Models.Item
 
         public virtual void SelectedUpdate()
         {
-            if (gameManager.FrameInputs.Shoot) OnShoot();
-            else if (gameManager.FrameInputs.Use) OnUse();
+            if(_currentCooldown <= 0)
+            {
+                if (gameManager.FrameInputs.Shoot) OnShoot();
+                else if (gameManager.FrameInputs.Use) OnUse();
+            }
         }
 
         public override void Draw()
@@ -71,5 +74,7 @@ namespace HypoluxAdventure.Models.Item
         abstract public void OnShoot();
         abstract public void OnUse();
         public virtual void OnCooldownRefresh() { }
+
+        // TODO: abstract public DropItem ToDropItem();
     }
 }
