@@ -32,6 +32,8 @@ namespace HypoluxAdventure.Managers
         public Player Player { get; private set; }
         private Cursor _cursor;
 
+        // CREATE DROPPED ITEM LIST + UPDATE + DRAW
+
         public void LoadContent()
         {
             State = GameState.Play;

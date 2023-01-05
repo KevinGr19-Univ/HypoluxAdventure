@@ -9,6 +9,7 @@ using HypoluxAdventure.Models;
 using HypoluxAdventure.Screens;
 using MonoGame.Extended;
 using HypoluxAdventure.Managers;
+using HypoluxAdventure.Models.Item;
 
 namespace HypoluxAdventure
 {
@@ -57,6 +58,7 @@ namespace HypoluxAdventure
             UICanvas = new SpriteBatch(GraphicsDevice);
             
             RoomManager.CreateTileFrames();
+            ItemUtils.LoadTextures(Content);
 
             LoadWorld();
         }
