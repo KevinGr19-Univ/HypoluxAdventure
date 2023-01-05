@@ -27,7 +27,7 @@ namespace HypoluxAdventure.Managers
         public static void CreateTileFrames()
         {
             Rectangle GetRectangle(int tileX)
-                => new Rectangle(tileX * TILESET_TILE_SIZE, 0, TILESET_TILE_SIZE, TILESET_TILE_SIZE);
+                => new Rectangle(1 + tileX * (TILESET_TILE_SIZE  + 2), 1, TILESET_TILE_SIZE, TILESET_TILE_SIZE);
 
             _tileFrames = new Dictionary<int, Rectangle>
             {
