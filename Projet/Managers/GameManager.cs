@@ -79,6 +79,10 @@ namespace HypoluxAdventure.Managers
 
                 _gameOverlay.Update();
             }
+            else
+            {
+                _pauseManager.Update();
+            }
         }
 
         public void Draw()
@@ -93,6 +97,7 @@ namespace HypoluxAdventure.Managers
             else
             {
                 _game.IsMouseVisible = true;
+                if (State == GameState.Pause) _pauseManager.Draw();
             }
 
             Player.Draw();
