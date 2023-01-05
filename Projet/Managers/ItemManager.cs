@@ -18,12 +18,13 @@ namespace HypoluxAdventure.Managers
         private int _currentSlot;
         private Vector2 _position;
 
-
-
         public ItemManager(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
             _currentSlot = 0;
-            _position = new Vector2(Application.SCREEN_WIDTH/2,Application.SCREEN_HEIGHT/2);
+            _position = Application.ScreenDimensions * 0.5f;
+
+            _itemSlots = new ItemSlot[2];
+
             AddItemSlot(0, new ItemSlot(game, gameManager));
             AddItemSlot(1, new ItemSlot(game, gameManager));
         }
@@ -41,7 +42,7 @@ namespace HypoluxAdventure.Managers
         private void AddItemSlot(int slot, ItemSlot newItemSlot)
         {
             _itemSlots[slot] = newItemSlot;
-            newItemSlot._position = _position + Vector2.UnitX * SLOT_SPACING * slot;
+            newItemSlot.Position = _position + Vector2.UnitX * SLOT_SPACING * slot;
         }
     }
 }
