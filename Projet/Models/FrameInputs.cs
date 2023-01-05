@@ -12,5 +12,7 @@ namespace HypoluxAdventure.Models
         public int Y { get; init; }
         public bool Shoot { get; init; }
         public bool Use { get; init; }
+        public int SlotScroll { get; init; }
+        public bool DropItem { get; init; }
     }
 }

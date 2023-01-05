@@ -1,5 +1,6 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Models;
+using HypoluxAdventure.Models.Rooms;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -38,9 +39,9 @@ namespace HypoluxAdventure.Managers
                 { 4, GetRectangle(13) },
                 { 5, GetRectangle(10) },
                 { 6, GetRectangle(8) },
-                { 7, GetRectangle(9) },
+                { 7, GetRectangle(7) },
                 { 8, GetRectangle(6) },
-                { 9, GetRectangle(7) },
+                { 9, GetRectangle(9) },
                 { 10, GetRectangle(3) },
                 { 11, GetRectangle(4) },
                 { 12, GetRectangle(5) },

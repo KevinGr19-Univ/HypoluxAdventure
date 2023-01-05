@@ -15,10 +15,19 @@ namespace HypoluxAdventure.Models.Item
         public Sword(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
             _texture = game.Content.Load<Texture2D>("img/sword");
-            _sprite = new Sprite(_texture);
+            Label = "ÉPÉE";
         }
 
         public override float SlotScale => 4;
-        public override Vector2 StartingPoint => new Vector2(1, -1);
+        public override float DefaultAngle => 45;
+        public override float Cooldown => 0.5f;
+        public override float DistFromPlayer => 40;
+
+        private float _timer = 3;
+
+        public override void SelectedUpdate()
+        {
+            base.SelectedUpdate();
+        }
     }
 }

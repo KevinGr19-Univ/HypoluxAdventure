@@ -1,4 +1,5 @@
 ﻿using HypoluxAdventure.Managers;
+using HypoluxAdventure.Models.Rooms;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;

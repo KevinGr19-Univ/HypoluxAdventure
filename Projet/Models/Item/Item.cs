@@ -15,38 +15,60 @@ namespace HypoluxAdventure.Models.Item
     internal abstract class Item : GameObject
     {
         protected Texture2D _texture;
-        abstract public float SlotScale { get; }
+        public string Label = "No name item";
 
-        protected Sprite _sprite;
-        protected Vector2 Position;
+        protected float _currentCooldown { get; private set; }
+        public float CooldownProgress => _currentCooldown / Cooldown;              
+
+        public float AdditionalRotation;
+        private float _rotation;
         public Vector2 Scale = Vector2.One;
 
-        abstract public Vector2 StartingPoint { get; }
-        
         public virtual float Cooldown => 0;
-        protected float _currentCooldown { get; private set; }
+        abstract public float DefaultAngle { get; }
+        abstract public float SlotScale { get; }
+        abstract public float DistFromPlayer { get; }
+
+        public bool IsUsed = false; // If IsUsed -> ClearSlot(slot, false)
 
         public Item(Game1 game, GameManager gameManager) : base(game, gameManager) { }
+
+        protected void ResetCooldown()
+        {
+            _currentCooldown = Cooldown;
+        }
+
+        public override void Update()
+        {
+            if (_currentCooldown > 0)
+            {
+                _currentCooldown -= Time.DeltaTime;
+                if(_currentCooldown <= 0)
+                {
+                    _currentCooldown = 0;
+                    OnCooldownRefresh();
+                }
+            }
+        }
+
+        public virtual void SelectedUpdate()
+        {
+
+        }
+
+        public override void Draw()
+        {
+
+        }
 
         public void DrawSlot(Vector2 slotPos)
         {
             Vector2 origin = new Vector2(_texture.Width, _texture.Height) * 0.5f;
             game.UICanvas.Draw(_texture, slotPos, null, Color.White, 0, origin, SlotScale, SpriteEffects.None, ItemSlot.DEPTH + 0.001f);
         }
-
-        public override void Draw()
-        {
-            
-        }
-
-        public override void Update()
-        {
-            if (_currentCooldown > 0) _currentCooldown -= Time.DeltaTime;
-        }
-
-        public void SelectedUpdate()
-        {
-            
-        }
+        
+        public virtual void OnShoot() { }
+        public virtual void OnUse() { }
+        public virtual void OnCooldownRefresh() { }
     }
 }

@@ -14,7 +14,7 @@ namespace HypoluxAdventure.Models.Item
 {
     internal class ItemSlot : GameObject
     {
-        public const int SLOT_WIDTH = 100;
+        public const int SLOT_WIDTH = 80;
         public const float DEPTH = 0.6f;
 
         public Item Item;
@@ -25,27 +25,34 @@ namespace HypoluxAdventure.Models.Item
 
         public bool IsSelected = false;
 
+        public string Label => Item == null ? "" : Item.Label;
+
         public ItemSlot(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
-            Item = new Sword(game, gameManager);
             _frame = new Sprite(game.Content.Load<Texture2D>("img/itemFrame"));
             GraphicsUtils.SetPixelSize(_frame, SLOT_WIDTH, SLOT_WIDTH, ref _scale);
 
             _frame.Depth = DEPTH;
         }
 
-        public override void Draw()
-        {
-            _frame.Color = IsSelected ? Color.White : Color.Black;
-
-            _frame.Draw(game.UICanvas, Position, 0, _scale);
-            Item.DrawSlot(Position);
-
-        }
-
         public override void Update()
         {
-            
+            if (Item == null) return;
+
+            Item.Update();
+            if (IsSelected) Item.SelectedUpdate();
+        }
+
+        public override void Draw()
+        {
+            _frame.Color = IsSelected ? Color.LightCyan : Color.DarkGray;
+
+            _frame.Draw(game.UICanvas, Position, 0, _scale);
+            if (Item == null) return;
+
+            Item.DrawSlot(Position);
+            if(IsSelected) Item.Draw();
+
         }
     }
 }

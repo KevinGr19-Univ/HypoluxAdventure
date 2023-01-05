@@ -48,6 +48,9 @@ namespace HypoluxAdventure.Core
         public static int ScrollWheelValue => _currMouse.ScrollWheelValue;
         public static int HorizontalScrollWheelValue => _currMouse.HorizontalScrollWheelValue;
 
+        public static int ScrollChange => (_currMouse.ScrollWheelValue - _prevMouse.ScrollWheelValue) / 120;
+        public static int HorizontalScrollChange => (_currMouse.HorizontalScrollWheelValue - _prevMouse.HorizontalScrollWheelValue) / 120;
+
         private static bool IsClickDown(MouseState mouseState, MouseButton button)
         {
             return button switch

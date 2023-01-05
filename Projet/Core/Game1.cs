@@ -58,7 +58,6 @@ namespace HypoluxAdventure
             UICanvas = new SpriteBatch(GraphicsDevice);
             
             RoomManager.CreateTileFrames();
-            ItemUtils.LoadTextures(Content);
 
             LoadWorld();
         }

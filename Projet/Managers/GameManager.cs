@@ -10,7 +10,7 @@ using HypoluxAdventure.Models.UI;
 
 namespace HypoluxAdventure.Managers
 {
-    internal enum GameState { Transition, Play, Pause }
+    internal enum GameState { Loading, Play, Pause, Transition }
 
     internal class GameManager
     {
@@ -107,6 +107,7 @@ namespace HypoluxAdventure.Managers
         }
 
         public FrameInputs FrameInputs { get; private set; }
+
         public FrameInputs GatherInputs()
         {   
             int x = 0, y = 0;
@@ -120,7 +121,9 @@ namespace HypoluxAdventure.Managers
                 X = x,
                 Y = y,
                 Shoot = Inputs.IsClickPressed(Inputs.MouseButton.Left),
-                Use = Inputs.IsClickPressed(Inputs.MouseButton.Right)
+                Use = Inputs.IsClickPressed(Inputs.MouseButton.Right),
+                SlotScroll = Inputs.ScrollChange,
+                DropItem = Inputs.IsKeyPressed(Keys.Tab)
             };
         }
 

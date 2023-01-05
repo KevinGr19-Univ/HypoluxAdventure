@@ -21,6 +21,13 @@
 /processorParam:TextureFormat=Compressed
 /build:Font/CreditFont.spritefont
 
+#begin Font/ItemFont.spritefont
+/importer:FontDescriptionImporter
+/processor:LocalizedFontProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font/ItemFont.spritefont
+
 #begin Font/TitleCredit.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
