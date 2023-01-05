@@ -21,6 +21,12 @@ namespace HypoluxAdventure.Screens
             _gameManager.LoadContent();
         }
 
+        public override void UnloadContent()
+        {
+            base.UnloadContent();
+            _gameManager.UnloadContent();
+        }
+
         public override void Update(GameTime gameTime)
         {
             _gameManager.Update();

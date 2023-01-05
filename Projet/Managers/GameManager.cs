@@ -26,6 +26,7 @@ namespace HypoluxAdventure.Managers
 
         public RoomManager RoomManager { get; private set; }
         public ItemManager ItemManager { get; private set; }
+        private PauseManager _pauseManager;
         private CameraManager _cameraManager;
 
         public Player Player { get; private set; }
@@ -41,12 +42,19 @@ namespace HypoluxAdventure.Managers
             RoomManager.GenerateRooms();
 
             ItemManager = new ItemManager(_game, this);
+
+            _pauseManager = new PauseManager(_game, this);
             _cameraManager = new CameraManager(_game, this);
 
             Player = new Player(_game, this);
             _cursor = new Cursor(_game, this);
 
             _game.Camera.Zoom = 1.5f;
+        }
+
+        public void UnloadContent()
+        {
+            _game.Camera.Zoom = 1;
         }
 
         public void Update()

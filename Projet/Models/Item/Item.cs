@@ -12,26 +12,21 @@ using System.Threading.Tasks;
 
 namespace HypoluxAdventure.Models.Item
 {
-    internal class Item : GameObject
+    internal abstract class Item : GameObject
     {
-        private string _label;
-        private Vector2 _startingPoint;
-        private Vector2 _position;
+        protected Texture2D _texture;
+        abstract public float SlotScale { get; }
 
+        protected Sprite _sprite;
+        protected Vector2 Position;
         public Vector2 Scale = Vector2.One;
-        public virtual float SlotScale => 4;
 
-        private Texture2D _texture;
-        private Sprite _sprite;
+        abstract public Vector2 StartingPoint { get; }
         
         public virtual float Cooldown => 0;
-        private float _currentCooldown;
+        protected float _currentCooldown { get; private set; }
 
-        public Item(Game1 game, GameManager gameManager) : base(game, gameManager)
-        {
-            _texture = game.Content.Load<Texture2D>("img/sword");
-            _sprite = new Sprite(_texture);
-        }
+        public Item(Game1 game, GameManager gameManager) : base(game, gameManager) { }
 
         public void DrawSlot(Vector2 slotPos)
         {
@@ -46,15 +41,7 @@ namespace HypoluxAdventure.Models.Item
 
         public override void Update()
         {
-            if (_currentCooldown > 0)
-            {
-                _currentCooldown -= Core.Time.DeltaTime;
-            }
-            else
-            {
-                _currentCooldown = Cooldown;
-            }
-            
+            if (_currentCooldown > 0) _currentCooldown -= Time.DeltaTime;
         }
 
         public void SelectedUpdate()

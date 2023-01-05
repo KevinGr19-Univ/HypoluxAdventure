@@ -9,7 +9,6 @@ using HypoluxAdventure.Models;
 using HypoluxAdventure.Screens;
 using MonoGame.Extended;
 using HypoluxAdventure.Managers;
-using MonoGame.Extended.TextureAtlases;
 
 namespace HypoluxAdventure
 {

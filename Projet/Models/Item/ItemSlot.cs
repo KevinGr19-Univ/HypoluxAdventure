@@ -27,7 +27,7 @@ namespace HypoluxAdventure.Models.Item
 
         public ItemSlot(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
-            Item = new Item(game,gameManager);
+            Item = new Sword(game, gameManager);
             _frame = new Sprite(game.Content.Load<Texture2D>("img/itemFrame"));
             GraphicsUtils.SetPixelSize(_frame, SLOT_WIDTH, SLOT_WIDTH, ref _scale);
 
@@ -36,7 +36,7 @@ namespace HypoluxAdventure.Models.Item
 
         public override void Draw()
         {
-            _frame.Color = IsSelected ? Color.Yellow : Color.Black;
+            _frame.Color = IsSelected ? Color.White : Color.Black;
 
             _frame.Draw(game.UICanvas, Position, 0, _scale);
             Item.DrawSlot(Position);

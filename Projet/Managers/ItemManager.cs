@@ -49,14 +49,11 @@ namespace HypoluxAdventure.Managers
 
         public void ChangeSlot(int slot)
         {
-            //Logger.Debug($"{_currentSlot}");
             if (_currentSlot == slot) return;
             _itemSlots[_currentSlot].IsSelected = false;
 
             _currentSlot = slot;
             _itemSlots[_currentSlot].IsSelected = true;
-
-            //Logger.Debug($"{_itemSlots[0].IsSelected},{_itemSlots[1].IsSelected}");
         }
     }
 }
