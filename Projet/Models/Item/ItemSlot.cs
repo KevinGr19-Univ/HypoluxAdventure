@@ -14,7 +14,7 @@ namespace HypoluxAdventure.Models.Item
 {
     internal class ItemSlot : GameObject
     {
-        public const int SLOT_WIDTH = 50;
+        public const int SLOT_WIDTH = 100;
 
         public Item Item;
 
@@ -31,8 +31,7 @@ namespace HypoluxAdventure.Models.Item
 
         public override void Draw()
         {
-            Logger.Debug(Position);
-            _frame.Draw(game.UICanvas, Position, 0, Vector2.One);
+            _frame.Draw(game.UICanvas, Position, 0, _scale);
         }
 
         public override void Update()
