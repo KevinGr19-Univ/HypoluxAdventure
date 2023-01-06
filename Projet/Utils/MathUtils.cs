@@ -31,7 +31,7 @@ namespace HypoluxAdventure.Utils
         {
             if (time == 0) return b;
 
-            float lerpCoef = currentTime / time;
+            float lerpCoef = (float) Math.Clamp(currentTime / time, 0, 1);
             return Lerp(a, b, 1 - MathF.Pow(lerpCoef, 3));
         }
     }
