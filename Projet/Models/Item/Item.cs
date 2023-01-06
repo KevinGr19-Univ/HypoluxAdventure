@@ -37,6 +37,8 @@ namespace HypoluxAdventure.Models.Item
         private readonly float _defaultAngle;
 
         public bool UpdateRotation = true;
+        public bool IsLocked = true;
+
         private Vector2 _scale;
 
         public bool IsUsed = false; // If IsUsed -> ClearSlot(slot, false)
@@ -67,7 +69,6 @@ namespace HypoluxAdventure.Models.Item
                 }
             }
 
-            if (Inputs.IsKeyPressed(Keys.O)) UpdateRotation = !UpdateRotation;
             RotateAround();
         }
 
@@ -109,5 +110,6 @@ namespace HypoluxAdventure.Models.Item
         abstract public void OnShoot();
         abstract public void OnUse();
         public virtual void OnCooldownRefresh() { }
+        public virtual void OnDrop() { }
     }
 }

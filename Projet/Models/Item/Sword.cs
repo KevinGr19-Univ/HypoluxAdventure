@@ -1,5 +1,6 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
+using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Sprites;
@@ -18,24 +19,64 @@ namespace HypoluxAdventure.Models.Item
             Label = "ÉPÉE";
         }
 
-        public override float Cooldown => 2f;
+        public override float Cooldown => 0.4f;
         public override float SlotScale => 4;
 
         protected override float distFromPlayer => 55;
         protected override float defaultOrientation => 45;
         protected override int pixelSize => 40;
 
+        private const float SWEEP_ANGLE = 75;
+        private const float SWEEP_TIME = 0.4f;
+
+        private float _sweepTimer;
+
         public override void SelectedUpdate()
         {
             base.SelectedUpdate();
+            ProcessAnimation();
+        }
+
+        private void ProcessAnimation()
+        {
+            if (_sweepTimer > 0)
+            {
+                UpdateRotation = false;
+                IsLocked = true;
+
+                localRotation = MathUtils.LerpInCubic(-SWEEP_ANGLE, SWEEP_ANGLE, SWEEP_TIME, _sweepTimer);
+                sprite.Color = Color.Red;
+                _sweepTimer -= Time.DeltaTime;
+            }
+            else
+            {
+                UpdateRotation = true;
+                IsLocked = false;
+
+                localRotation = 0;
+                sprite.Color = Color.White;
+            }
         }
 
         public override void OnShoot()
         {
             TriggerCooldown();
+            DamageMonsters();
+            _sweepTimer = SWEEP_TIME;
+        }
+
+        private void DamageMonsters()
+        {
+
         }
 
         public override void OnUse() { }
+
+        public override void OnDrop()
+        {
+            base.OnDrop();
+            _sweepTimer = 0;
+        }
 
         public override DropItem ToDropItem(bool startHover, Vector2 pos)
         {

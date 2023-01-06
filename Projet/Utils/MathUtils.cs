@@ -34,5 +34,13 @@ namespace HypoluxAdventure.Utils
             float lerpCoef = (float) Math.Clamp(currentTime / time, 0, 1);
             return Lerp(a, b, 1 - MathF.Pow(lerpCoef, 3));
         }
+
+        public static float LerpInCubic(float a, float b, float time, float currentTime)
+        {
+            if (time == 0) return b;
+
+            float lerpCoef = (float)Math.Clamp(currentTime / time, 0, 1);
+            return Lerp(a, b, MathF.Pow(lerpCoef, 3));
+        }
     }
 }

@@ -45,6 +45,8 @@ namespace HypoluxAdventure.Managers
         public void SelectSlot(int slot)
         {
             if (_currentSlot == slot) return;
+            if (_itemSlots[_currentSlot].Item != null && _itemSlots[_currentSlot].Item.IsLocked) return;
+
             _itemSlots[_currentSlot].IsSelected = false;
 
             _currentSlot = slot;
@@ -81,7 +83,9 @@ namespace HypoluxAdventure.Managers
             if (_currentSlot == slot) _itemDescription.Text = "";
 
             if (dropOnGround)
-            { 
+            {
+                item.OnDrop();
+
                 DropItem dropItem = item.ToDropItem(true, gameManager.Player.Position);
                 gameManager.ItemManager.Summon(dropItem);
             }
@@ -96,7 +100,11 @@ namespace HypoluxAdventure.Managers
             int selectedSlot = Math.Clamp(_currentSlot - gameManager.FrameInputs.SlotScroll, 0, SLOT_AMOUNT - 1);
             SelectSlot(selectedSlot);
 
-            if(gameManager.FrameInputs.DropItem) ClearSlot(selectedSlot, true);
+            if (gameManager.FrameInputs.DropItem)
+            {
+                Item currentItem = _itemSlots[_currentSlot].Item;
+                if(currentItem != null && !currentItem.IsLocked) ClearSlot(selectedSlot, true);
+            }
 
             for (int i = 0; i < SLOT_AMOUNT; i++)
             {
