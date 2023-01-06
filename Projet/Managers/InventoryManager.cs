@@ -82,7 +82,8 @@ namespace HypoluxAdventure.Managers
 
             if (dropOnGround)
             { 
-
+                DropItem dropItem = item.ToDropItem(true, gameManager.Player.Position);
+                gameManager.ItemManager.Summon(dropItem);
             }
 
             // TODO: Spawn item object on ground

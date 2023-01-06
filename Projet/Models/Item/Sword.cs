@@ -15,7 +15,7 @@ namespace HypoluxAdventure.Models.Item
     {
         public Sword(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
-            _texture = game.Content.Load<Texture2D>("img/sword");
+            Texture = game.Content.Load<Texture2D>("img/sword");
             Label = "ÉPÉE";
         }
 
@@ -38,5 +38,13 @@ namespace HypoluxAdventure.Models.Item
         }
 
         public override void OnUse() { }
+
+        public override DropItem ToDropItem(bool startHover, Vector2 pos)
+        {
+            DropItem dropItem = new DropItem(game,gameManager, this, startHover);
+            dropItem.CalculateHitbox(pos, new Vector2(24,24));
+            dropItem.SetTextureSize(24,24);
+            return dropItem;
+        }
     }
 }

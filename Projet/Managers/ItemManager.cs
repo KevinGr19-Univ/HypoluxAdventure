@@ -24,9 +24,11 @@ namespace HypoluxAdventure.Managers
 
         public override void Update()
         {
-            // Update dropItems
             foreach (DropItem item in _items) item.Update();
 
+            // Effacer les objets
+            foreach (DropItem item in _itemsToRemove) _items.Remove(item);
+            _itemsToRemove.Clear();
         }
 
         public override void Draw()
