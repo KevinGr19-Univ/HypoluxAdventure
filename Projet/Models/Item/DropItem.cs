@@ -1,6 +1,7 @@
 ﻿using HypoluxAdventure.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace HypoluxAdventure.Models.Item
         private Texture2D _texture;
         private Item _item;
 
-        public Rectangle Hitbox;
+        public RectangleF Hitbox;
         private bool _startHover, _hover;
 
 
