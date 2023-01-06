@@ -20,7 +20,7 @@ namespace HypoluxAdventure.Screens
 
         public MenuScreen(Game1 game) : base(game) 
         {
-            _title = game.Content.Load<Texture2D>("img/titleImage");
+            
             
         }
 
