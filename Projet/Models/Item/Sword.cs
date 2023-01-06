@@ -42,7 +42,7 @@ namespace HypoluxAdventure.Models.Item
         public override DropItem ToDropItem(bool startHover, Vector2 pos)
         {
             DropItem dropItem = new DropItem(game,gameManager, this, startHover);
-            dropItem.CalculateHitbox(pos, new Vector2(24,24));
+            dropItem.CalculateHitbox(pos, new Vector2(22,22));
             dropItem.SetTextureSize(24,24);
             return dropItem;
         }

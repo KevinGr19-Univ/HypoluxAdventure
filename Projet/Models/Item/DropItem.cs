@@ -32,7 +32,6 @@ namespace HypoluxAdventure.Models.Item
 
         public override void Draw()
         {
-            // Affichage Canvas (depth = 0.2f)
             game.Canvas.Draw(_texture, Position, null, Color.White, 0, ORIGIN, _scale, SpriteEffects.None, 0.2f);
         }
 
@@ -47,7 +46,7 @@ namespace HypoluxAdventure.Models.Item
         public void CalculateHitbox (Vector2 pos, Vector2 size)
         {
             Position = pos;
-            Hitbox = new RectangleF(pos-size*0.5f, size);
+            Hitbox = new RectangleF(pos, size);
         }
 
         public void SetTextureSize(int width, int height)
