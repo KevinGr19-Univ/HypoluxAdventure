@@ -16,7 +16,7 @@ namespace HypoluxAdventure.Models.UI
         public string Text;
         public Vector2 Position;
         public Vector2 Scale = Vector2.One;
-        public Color Color;
+        public Color Color = Color.White;
         public float Depth = 0.5f;
 
         public TextObject(SpriteFont font, string text, Vector2 position, Color? color = null)
@@ -35,7 +35,7 @@ namespace HypoluxAdventure.Models.UI
         public void Draw(SpriteBatch spriteBatch)
         {
             Vector2 measure = Measure();
-            spriteBatch.DrawString(_font, Text, Position, Color.White, 0, measure * 0.5f, Scale, SpriteEffects.None, Depth);
+            spriteBatch.DrawString(_font, Text, Position, Color, 0, measure * 0.5f, Scale, SpriteEffects.None, Depth);
         }
 
 
