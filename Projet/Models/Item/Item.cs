@@ -49,6 +49,8 @@ namespace HypoluxAdventure.Models.Item
                     OnCooldownRefresh();
                 }
             }
+
+            RotateAround();
         }
 
         public virtual void SelectedUpdate()
@@ -58,6 +60,12 @@ namespace HypoluxAdventure.Models.Item
                 if (gameManager.FrameInputs.Shoot) OnShoot();
                 else if (gameManager.FrameInputs.Use) OnUse();
             }
+        }
+
+        private void RotateAround()
+        {
+            float angle = MathHelper.ToDegrees((float) Math.Asin(gameManager.Player.ShootDirection.Y));
+            Logger.Debug(angle);
         }
 
         public override void Draw()
