@@ -75,6 +75,6 @@ namespace HypoluxAdventure.Models.Item
         abstract public void OnUse();
         public virtual void OnCooldownRefresh() { }
 
-        // TODO: abstract public DropItem ToDropItem();
+        abstract public DropItem ToDropItem(); 
     }
 }

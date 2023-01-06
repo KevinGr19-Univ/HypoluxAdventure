@@ -80,6 +80,11 @@ namespace HypoluxAdventure.Managers
             _itemSlots[slot].Item = null;
             if (_currentSlot == slot) _itemDescription.Text = "";
 
+            if (dropOnGround)
+            { 
+
+            }
+
             // TODO: Spawn item object on ground
         }
 
