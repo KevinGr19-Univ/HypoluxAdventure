@@ -117,5 +117,10 @@ namespace HypoluxAdventure
             CreditScreen creditScreen = new CreditScreen(this);
             LoadScreen(creditScreen);
         }
+
+        public void LoadMenu()
+        {
+
+        }
     }
 }

@@ -76,7 +76,7 @@ namespace HypoluxAdventure.Managers
         public void GenerateRooms()
         {
             _rooms = new Room[MAP_ROOM_HEIGHT, MAP_ROOM_WIDTH];
-            AddRoom(0, 0, RoomOpening.South | RoomOpening.East);
+            AddRoom(0, 0, RoomOpening.South | RoomOpening.East | RoomOpening.North);
             AddRoom(1, 0, RoomOpening.West);
             AddRoom(0, 1, RoomOpening.North);
 

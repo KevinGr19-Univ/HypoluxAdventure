@@ -22,28 +22,31 @@ namespace HypoluxAdventure.Managers
             _game = game;
         }
 
-        private GameOverlay _gameOverlay;
+        public GameOverlay GameOverlay;
+        public DamageOverlay DamageOverlay { get; private set; }
 
         public RoomManager RoomManager { get; private set; }
-        public InventoryManager ItemManager { get; private set; }
+        public InventoryManager InventoryManager { get; private set; }
+        public ItemManager ItemManager { get; private set; }
+
         private PauseManager _pauseManager;
         private CameraManager _cameraManager;
 
         public Player Player { get; private set; }
         private Cursor _cursor;
 
-        // CREATE DROPPED ITEM LIST + UPDATE + DRAW
-
         public void LoadContent()
         {
             State = GameState.Play;
 
-            _gameOverlay = new GameOverlay(_game, this);
+            GameOverlay = new GameOverlay(_game, this);
+            DamageOverlay = new DamageOverlay(_game, this);
 
             RoomManager = new RoomManager(_game, this);
             RoomManager.GenerateRooms();
 
-            ItemManager = new InventoryManager(_game, this);
+            InventoryManager = new InventoryManager(_game, this);
+            ItemManager = new ItemManager(_game, this);
 
             _pauseManager = new PauseManager(_game, this);
             _cameraManager = new CameraManager(_game, this);
@@ -73,13 +76,19 @@ namespace HypoluxAdventure.Managers
             if(State != GameState.Pause)
             {
                 Player.Update();
-                ItemManager.Update();
                 RoomManager.Update();
+
+                if (State == GameState.Play)
+                {
+                    ItemManager.Update();
+                    InventoryManager.Update();
+                }
 
                 _cursor.Update();
                 _cameraManager.Update();
 
-                _gameOverlay.Update();
+                GameOverlay.Update();
+                DamageOverlay.Update();
             }
             else
             {
@@ -93,8 +102,8 @@ namespace HypoluxAdventure.Managers
             {
                 _game.IsMouseVisible = false;
                 _cursor.Draw();
-                _gameOverlay.Draw();
-                ItemManager.Draw();
+                GameOverlay.Draw();
+                InventoryManager.Draw();
             }
             else
             {
@@ -104,6 +113,9 @@ namespace HypoluxAdventure.Managers
 
             Player.Draw();
             RoomManager.Draw();
+            ItemManager.Draw();
+
+            DamageOverlay.Draw();
         }
 
         public FrameInputs FrameInputs { get; private set; }
