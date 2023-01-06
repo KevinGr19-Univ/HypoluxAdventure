@@ -70,7 +70,7 @@ namespace HypoluxAdventure
             // Screen fade and switch
             if (_load)
             {
-                _fadeTimer += Time.DeltaTime;
+                _fadeTimer += Time.RealDeltaTime;
                 if (_fadeTimer >= _targetTime)
                 {
                     _fadeTimer = _targetTime;
@@ -79,7 +79,7 @@ namespace HypoluxAdventure
                     screenToLoad = null;
                 }
             }
-            else if (_fadeTimer > 0) _fadeTimer -= Time.DeltaTime;
+            else if (_fadeTimer > 0) _fadeTimer -= Time.RealDeltaTime;
 
             _screenManager.Update(gameTime);
 
@@ -115,7 +115,7 @@ namespace HypoluxAdventure
             if(_fadeTimer > 0)
             {
                 Color fadeColor = new Color(_fadeColor, _fadeTimer / _targetTime);
-                UICanvas.FillRectangle(0, 0, Application.SCREEN_WIDTH, Application.SCREEN_HEIGHT, fadeColor, 1);
+                UICanvas.FillRectangle(0, 0, Application.SCREEN_WIDTH, Application.SCREEN_HEIGHT, fadeColor, 1); // Custom FadeTransition on top
             }
 
             UICanvas.End();
@@ -141,6 +141,8 @@ namespace HypoluxAdventure
 
         private void SetScreenToLoad(Screen screen, Color fadeColor, float time)
         {
+            if (_load) return;
+
             _fadeColor = fadeColor;
             _targetTime = time;
             _fadeTimer = 0;
