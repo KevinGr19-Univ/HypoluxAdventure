@@ -15,7 +15,7 @@ namespace HypoluxAdventure.Utils
 
         public static Vector2 Damp(Vector2 current, Vector2 target, float smoothRate, float deltaTime)
         {
-            float lerpCoef = (float)Math.Pow(deltaTime, smoothRate);
+            float lerpCoef = MathF.Pow(deltaTime, smoothRate);
             float x = Lerp(current.X, target.X, lerpCoef);
             float y = Lerp(current.Y, target.Y, lerpCoef);
             return new Vector2(x, y);
@@ -25,6 +25,14 @@ namespace HypoluxAdventure.Utils
         {
             if (a == b) return 1;
             return (value - a) / (b - a);
+        }
+
+        public static float LerpOutCubic(float a, float b, float time, float currentTime)
+        {
+            if (time == 0) return b;
+
+            float lerpCoef = (float) Math.Clamp(currentTime / time, 0, 1);
+            return Lerp(a, b, 1 - MathF.Pow(lerpCoef, 3));
         }
     }
 }

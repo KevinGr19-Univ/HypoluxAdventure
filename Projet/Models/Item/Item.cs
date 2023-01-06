@@ -3,6 +3,7 @@ using HypoluxAdventure.Managers;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Sprites;
 using System;
@@ -32,9 +33,10 @@ namespace HypoluxAdventure.Models.Item
 
         protected Vector2 position { get; private set; }
         protected float localRotation;
-        private float _rotation;
+        protected float rotation { get; private set; }
         private readonly float _defaultAngle;
 
+        public bool UpdateRotation = true;
         private Vector2 _scale;
 
         public bool IsUsed = false; // If IsUsed -> ClearSlot(slot, false)
@@ -65,6 +67,7 @@ namespace HypoluxAdventure.Models.Item
                 }
             }
 
+            if (Inputs.IsKeyPressed(Keys.O)) UpdateRotation = !UpdateRotation;
             RotateAround();
         }
 
@@ -77,18 +80,21 @@ namespace HypoluxAdventure.Models.Item
             }
         }
 
+        private float _tempRot;
+
         private void RotateAround()
         {
-            float angle = MathF.Atan2(gameManager.Player.ShootDirection.X, gameManager.Player.ShootDirection.Y) + MathHelper.ToRadians(localRotation);
-            position = gameManager.Player.Position + new Vector2(MathF.Sin(angle), MathF.Cos(angle)) * distFromPlayer;
+            if(UpdateRotation) _tempRot = MathF.Atan2(gameManager.Player.ShootDirection.X, gameManager.Player.ShootDirection.Y);
+            float angle = _tempRot + MathHelper.ToRadians(localRotation);
 
-            _rotation = -angle + _defaultAngle;
+            position = gameManager.Player.Position + new Vector2(MathF.Sin(angle), MathF.Cos(angle)) * distFromPlayer;
+            rotation = -angle + _defaultAngle;
         }
 
         public override void Draw()
         {
             sprite.Depth = GameManager.GetYDepth(position.Y);
-            sprite.Draw(game.Canvas, position, _rotation, _scale);
+            sprite.Draw(game.Canvas, position, rotation, _scale);
         }
 
         public void DrawSlot(Vector2 slotPos)

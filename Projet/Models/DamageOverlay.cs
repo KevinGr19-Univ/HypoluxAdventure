@@ -1,9 +1,12 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
 using HypoluxAdventure.Models.UI;
+using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
+using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +19,7 @@ namespace HypoluxAdventure.Models
     {
         public const float PULSE_TIME = 1; 
 
-        private Texture2D _damageScreen;
+        private Sprite _damageScreen;
         // float _timer + const float PULSE_TIME => à faire quand MathUtils.LerpCubic existe
 
         private float _timer;
@@ -30,23 +33,32 @@ namespace HypoluxAdventure.Models
             _nextNumberId = 0;
             _damageNumbers = new Dictionary<int, DamageNumber>();
             Font = game.Content.Load<SpriteFont>("Font/DamageFont");
-            _damageScreen = game.Content.Load<Texture2D>("img/damageScreen");
+            _damageScreen = new Sprite(game.Content.Load<Texture2D>("img/damageScreen"));
+            _damageScreen.OriginNormalized = Vector2.Zero;
+            _damageScreen.Depth = 0.1f;
+            _timer = PULSE_TIME;
         }
 
         int damage = 1;
         public override void Update()
         {
-            if (Inputs.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.R))
+            _timer += Time.DeltaTime;
+            _damageScreen.Alpha = _timer<PULSE_TIME ? MathUtils.LerpOutCubic(0, 1, PULSE_TIME, _timer) : 0;
+            if (Inputs.IsKeyPressed(Keys.R))
             {
                 SpawnNumber(gameManager.Player.Position, damage);
                 damage  = damage%19 + 1;
             }
-            if (Inputs.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.T)) Pulse();
+            if (Inputs.IsKeyPressed(Keys.T))
+            {
+                Pulse();
+            }
             foreach (DamageNumber number in _damageNumbers.Values) number.Update();
         }
 
         public override void Draw()
         {
+            _damageScreen.Draw(game.UICanvas, Vector2.Zero, 0, Vector2.One);
             foreach (DamageNumber number in _damageNumbers.Values) number.Draw();
         }
 
@@ -64,7 +76,7 @@ namespace HypoluxAdventure.Models
 
         public void Pulse()
         {
-            
+            _timer = 0;
         }
     }
 }
