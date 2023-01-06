@@ -3,6 +3,7 @@ using HypoluxAdventure.Models.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
+using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,15 @@ namespace HypoluxAdventure.Screens
 {
     internal class MenuScreen : AbstractScreen
     {
-        
+        private Sprite _title;
+        private AnimatedSprite _hypoluxSprite;
+        private AnimatedSprite _diaboluxEyes;
 
-        public MenuScreen(Game1 game) : base(game) {}
+        public MenuScreen(Game1 game) : base(game) 
+        {
+            
+            
+        }
 
         public override void LoadContent()
         {

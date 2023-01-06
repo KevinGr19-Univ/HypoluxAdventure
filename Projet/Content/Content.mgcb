@@ -21,6 +21,13 @@
 /processorParam:TextureFormat=Compressed
 /build:Font/CreditFont.spritefont
 
+#begin Font/DamageFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font/DamageFont.spritefont
+
 #begin Font/ItemFont.spritefont
 /importer:FontDescriptionImporter
 /processor:LocalizedFontProcessor
@@ -96,6 +103,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:img/chest.png
+
+#begin img/damage.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/damage.png
+
+#begin img/damageScreen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/damageScreen.png
 
 #begin img/diabolux.png
 /importer:TextureImporter
@@ -228,6 +259,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:img/tileset.png
+
+#begin img/titleImage.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/titleImage.png
 
 #begin img/worm.png
 /importer:TextureImporter
