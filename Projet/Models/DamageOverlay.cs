@@ -1,5 +1,6 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
+using HypoluxAdventure.Models.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -26,8 +27,14 @@ namespace HypoluxAdventure.Models
             Font = game.Content.Load<SpriteFont>("Font/DamageFont");
         }
 
+        int damage = 1;
         public override void Update()
         {
+            if (Inputs.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.R))
+            {
+                SpawnNumber(gameManager.Player.Position, damage);
+                damage  = damage%19 + 1;
+            }
             foreach (DamageNumber number in _damageNumbers.Values) number.Update();
         }
 
@@ -38,7 +45,7 @@ namespace HypoluxAdventure.Models
 
         public void SpawnNumber(Vector2 gamePos, int damage)
         {
-            DamageNumber number = new DamageNumber(game,gameManager, _nextNumberId++,damage);
+            DamageNumber number = new DamageNumber(game,gameManager, _nextNumberId++,damage, gamePos);
             _damageNumbers.Add(number.Id, number);
         }
 
