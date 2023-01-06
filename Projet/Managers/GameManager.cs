@@ -67,11 +67,7 @@ namespace HypoluxAdventure.Managers
             FrameInputs = GatherInputs();
 
             // Pause button
-            if (Inputs.IsKeyPressed(Keys.Space) && State != GameState.Transition)
-            {
-                if (State == GameState.Play) State = GameState.Pause;
-                else State = GameState.Play;
-            }
+            if (Inputs.IsKeyPressed(Keys.Space)) SwitchPause();
 
             if(State != GameState.Pause)
             {
@@ -137,6 +133,12 @@ namespace HypoluxAdventure.Managers
                 SlotScroll = Inputs.ScrollChange,
                 DropItem = Inputs.IsKeyPressed(Keys.Tab)
             };
+        }
+
+        public void SwitchPause()
+        {
+            if (State == GameState.Play) State = GameState.Pause;
+            else if (State == GameState.Pause) State = GameState.Play;
         }
 
     }
