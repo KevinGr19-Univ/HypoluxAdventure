@@ -120,7 +120,8 @@ namespace HypoluxAdventure
 
         public void LoadMenu()
         {
-
+            MenuScreen menuScreen = new MenuScreen(this);
+            LoadScreen(menuScreen);
         }
     }
 }
