@@ -26,8 +26,6 @@ namespace HypoluxAdventure.Screens
         private float _timer = 0;
         private const float MOVE_SPEED = 75;
 
-        public Button test;
-
         public CreditScreen(Game1 game) : base(game) { }
 
         public override void LoadContent()
@@ -35,34 +33,6 @@ namespace HypoluxAdventure.Screens
             _titleFont = Content.Load<SpriteFont>("Font/TitleCredit");
             _normalFont = Content.Load<SpriteFont>("Font/CreditFont");
 
-            test = new Button(Game, _normalFont, "LEBRON JAMES", Application.ScreenDimensions * 0.5f, () =>
-            {
-                Console.WriteLine("Bonjour");
-            });
-            test.Scale = new Vector2(2);
-            test.Border = 2f;
-            test.Depth = 0.9f;
-            test.ColorNormal = new ButtonColor()
-            {
-                TextColor = Color.White,
-                BackgroundColor = Color.Red,
-                BorderColor = Color.Purple
-
-            };
-            test.ColorHover = new ButtonColor()
-            {
-                TextColor = Color.RosyBrown,
-                BackgroundColor = Color.RoyalBlue,
-                BorderColor = Color.BlanchedAlmond
-
-            };
-            test.ColorDown = new ButtonColor()
-            {
-                TextColor = Color.Black,
-                BackgroundColor = Color.Tan,
-                BorderColor = Color.AliceBlue
-
-            };
 
             AddLine(_titleFont, "Crédits : ", 3);
             AddLine(_normalFont,"Jeu créé par :",1);
@@ -70,9 +40,7 @@ namespace HypoluxAdventure.Screens
             AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
             AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,2);
             AddLine(_normalFont,"Level Design fait par :",1);
-            AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING",1);
-            AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
-            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,2);
+            AddLine(_normalFont,"Une IA pas très intélligente",2);
             AddLine(_normalFont,"Direction artistique et graphismes conçuent par :",1);
             AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING (Majeure partie)",1);
             AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
@@ -88,7 +56,6 @@ namespace HypoluxAdventure.Screens
 
         public override void Update(GameTime gameTime)
         {
-            test.Update();
             if(_textListStart < _textListActif.Count)
             {
                 for (int i = _textListStart; i < _textListActif.Count; i++)
@@ -123,8 +90,6 @@ namespace HypoluxAdventure.Screens
                     line.Draw(Game.UICanvas);
                 }
             }
-            test.Draw();
-      
         }
 
         public void AddLine(SpriteFont font, string text, float time)
