@@ -63,6 +63,7 @@ namespace HypoluxAdventure.Managers
         {
             _game.Camera.Position = Vector2.Zero;
             _game.Camera.Zoom = 1;
+            _game.IsMouseVisible = true;
         }
 
         public void Update()
