@@ -15,7 +15,6 @@ namespace HypoluxAdventure.Screens
     {
         
 
-
         public MenuScreen(Game1 game) : base(game) {}
 
         public override void LoadContent()

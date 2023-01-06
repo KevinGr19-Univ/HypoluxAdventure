@@ -28,6 +28,20 @@
 /processorParam:TextureFormat=Compressed
 /build:Font/ItemFont.spritefont
 
+#begin Font/PauseMenuFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font/PauseMenuFont.spritefont
+
+#begin Font/PauseTitleFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font/PauseTitleFont.spritefont
+
 #begin Font/TitleCredit.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
