@@ -85,9 +85,7 @@ namespace HypoluxAdventure.Models
 
         public override void Draw()
         {
-            float yDepth = MathUtils.InverseLerp(0, RoomManager.MAP_HEIGHT, Position.Y);
-            Sprite.Depth = yDepth;
-
+            Sprite.Depth = GameManager.GetYDepth(Position.Y);
             Sprite.Draw(game.Canvas, Position, Rotation, Scale);
         }
     }

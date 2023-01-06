@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using HypoluxAdventure.Core;
 using HypoluxAdventure.Models;
 using HypoluxAdventure.Models.UI;
+using HypoluxAdventure.Utils;
 
 namespace HypoluxAdventure.Managers
 {
@@ -141,5 +142,11 @@ namespace HypoluxAdventure.Managers
             else if (State == GameState.Pause) State = GameState.Play;
         }
 
+        public void ReturnToMenu()
+        {
+
+        }
+
+        public static float GetYDepth(float yPos) => MathUtils.InverseLerp(0, RoomManager.MAP_HEIGHT, yPos) * 0.2f + 0.4f; // de 0.4f à 0.6f
     }
 }
