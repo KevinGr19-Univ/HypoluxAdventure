@@ -67,6 +67,20 @@ namespace HypoluxAdventure
             Time.Update(gameTime);
             Inputs.Update();
 
+            // Screen fade and switch
+            if (_load)
+            {
+                _fadeTimer += Time.DeltaTime;
+                if (_fadeTimer >= _targetTime)
+                {
+                    _fadeTimer = _targetTime;
+                    _load = false;
+                    _screenManager.LoadScreen(screenToLoad);
+                    screenToLoad = null;
+                }
+            }
+            else if (_fadeTimer > 0) _fadeTimer -= Time.DeltaTime;
+
             _screenManager.Update(gameTime);
 
             base.Update(gameTime);
@@ -93,35 +107,47 @@ namespace HypoluxAdventure
                 transformMatrix: Camera.ViewMatrix,
                 sortMode: SpriteSortMode.Deferred);
 
-            _screenManager.Draw(gameTime);
+            _screenManager.Draw(gameTime); // FadeTransition was being drawn underneath all the other spriteBatches
 
             BackgroundCanvas.End();
             Canvas.End();
+
+            if(_fadeTimer > 0)
+            {
+                Color fadeColor = new Color(_fadeColor, _fadeTimer / _targetTime);
+                UICanvas.FillRectangle(0, 0, Application.SCREEN_WIDTH, Application.SCREEN_HEIGHT, fadeColor, 1);
+            }
+
             UICanvas.End();
+
             base.Draw(gameTime);
         }
 
-        private void LoadScreen(AbstractScreen screen)
+        private void LoadScreen(AbstractScreen screen, float transitionTime)
         {
-            _screenManager.LoadScreen(screen, new FadeTransition(GraphicsDevice, Color.Black, 1));
+            SetScreenToLoad(screen, Color.Black, transitionTime);
         }
 
-        public void LoadWorld()
-        {
-            WorldScreen worldScreen = new WorldScreen(this);
-            LoadScreen(worldScreen);
-        }
+        public void LoadWorld() => LoadScreen(new WorldScreen(this), 2);
+        public void LoadCredit() => LoadScreen(new CreditScreen(this), 1);
+        public void LoadMenu() => LoadScreen(new MenuScreen(this), 2);
+        public void LoadGameOver() => LoadScreen(new GameOverScreen(this), 4);
 
-        public void LoadCredit()
-        {
-            CreditScreen creditScreen = new CreditScreen(this);
-            LoadScreen(creditScreen);
-        }
+        #region FadeTransition
+        private float _targetTime, _fadeTimer;
+        private Color _fadeColor;
+        private bool _load;
+        private Screen screenToLoad;
 
-        public void LoadMenu()
+        private void SetScreenToLoad(Screen screen, Color fadeColor, float time)
         {
-            MenuScreen menuScreen = new MenuScreen(this);
-            LoadScreen(menuScreen);
+            _fadeColor = fadeColor;
+            _targetTime = time;
+            _fadeTimer = 0;
+
+            screenToLoad = screen;
+            _load = true;
         }
+        #endregion
     }
 }

@@ -28,6 +28,7 @@ namespace HypoluxAdventure.Models.Item
 
         private const float SWEEP_ANGLE = 75;
         private const float SWEEP_TIME = 0.4f;
+        private const float SWEEP_RANGE = 85;
 
         private float _sweepTimer;
 
@@ -44,7 +45,7 @@ namespace HypoluxAdventure.Models.Item
                 UpdateRotation = false;
                 IsLocked = true;
 
-                localRotation = MathUtils.LerpInCubic(-SWEEP_ANGLE, SWEEP_ANGLE, SWEEP_TIME, _sweepTimer);
+                localRotation = MathUtils.LerpInToPower(-SWEEP_ANGLE, SWEEP_ANGLE, SWEEP_TIME, _sweepTimer, 6);
                 sprite.Color = Color.Red;
                 _sweepTimer -= Time.DeltaTime;
             }
@@ -70,7 +71,10 @@ namespace HypoluxAdventure.Models.Item
 
         }
 
-        public override void OnUse() { }
+        public override void OnUse()
+        {
+            IsUsed = true;
+        }
 
         public override void OnDrop()
         {
@@ -86,9 +90,10 @@ namespace HypoluxAdventure.Models.Item
             return dropItem;
         }
 
-        protected override Texture2D LoadTexture()
+        protected override void LoadSprite()
         {
-            return game.Content.Load<Texture2D>("img/sword");
+            Texture = game.Content.Load<Texture2D>("img/sword");
+            sprite = new Sprite(Texture);
         }
     }
 }

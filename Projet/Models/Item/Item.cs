@@ -17,7 +17,7 @@ namespace HypoluxAdventure.Models.Item
     internal abstract class Item : GameObject
     {
         public Texture2D Texture { get; protected set; }
-        protected Sprite sprite { get; private set; }
+        protected Sprite sprite;
 
         public string Label = "No name item";
 
@@ -45,8 +45,7 @@ namespace HypoluxAdventure.Models.Item
 
         public Item(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
-            Texture = LoadTexture();
-            sprite = new Sprite(Texture);
+            LoadSprite();
             GraphicsUtils.SetPixelSize(sprite, pixelSize, pixelSize, ref _scale);
 
             _defaultAngle = MathHelper.ToRadians(defaultOrientation + 90);
@@ -104,7 +103,7 @@ namespace HypoluxAdventure.Models.Item
             game.UICanvas.Draw(Texture, slotPos, null, Color.White, 0, origin, SlotScale, SpriteEffects.None, ItemSlot.DEPTH + 0.001f);
         }
 
-        abstract protected Texture2D LoadTexture();
+        abstract protected void LoadSprite();
         abstract public DropItem ToDropItem(bool startHover, Vector2 pos); 
 
         abstract public void OnShoot();

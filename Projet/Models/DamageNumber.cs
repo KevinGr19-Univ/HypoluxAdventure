@@ -13,9 +13,9 @@ namespace HypoluxAdventure.Models
 {
     internal class DamageNumber : GameObject
     {
-        public const float MIN_SCALE = 0.6f;
-        public const float MAX_SCALE = 0.8f;
-        public const int MIN_SCALE_DAMAGE = 2;
+        public const float MIN_SCALE = 0.8f;
+        public const float MAX_SCALE = 1;
+        public const int MIN_SCALE_DAMAGE = 1;
         public const int MAX_SCALE_DAMAGE = 10;
 
         public const float velY = 30;
@@ -31,8 +31,6 @@ namespace HypoluxAdventure.Models
         private Vector2 _position;
 
         // float scale = MathUtils.Lerp(MIN_SCALE, MAX_SCALE, MathUtils.InverseLerp(damage, MIN_SCALE_DAMAGE, MAX_SCALE_DAMAGE))
-
-        
 
         public DamageNumber(Game1 game, GameManager gameManager, int id, int damage, Vector2 pos) : base(game, gameManager)
         {

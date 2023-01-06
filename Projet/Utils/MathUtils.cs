@@ -27,20 +27,20 @@ namespace HypoluxAdventure.Utils
             return (value - a) / (b - a);
         }
 
-        public static float LerpOutCubic(float a, float b, float time, float currentTime)
+        public static float LerpOutToPower(float a, float b, float time, float currentTime, int power)
         {
             if (time == 0) return b;
 
             float lerpCoef = (float) Math.Clamp(currentTime / time, 0, 1);
-            return Lerp(a, b, 1 - MathF.Pow(lerpCoef, 3));
+            return Lerp(a, b, 1 - MathF.Pow(lerpCoef, power));
         }
 
-        public static float LerpInCubic(float a, float b, float time, float currentTime)
+        public static float LerpInToPower(float a, float b, float time, float currentTime, int power)
         {
             if (time == 0) return b;
 
             float lerpCoef = (float)Math.Clamp(currentTime / time, 0, 1);
-            return Lerp(a, b, MathF.Pow(lerpCoef, 3));
+            return Lerp(a, b, MathF.Pow(lerpCoef, power));
         }
     }
 }

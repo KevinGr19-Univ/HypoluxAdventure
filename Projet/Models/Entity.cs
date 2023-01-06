@@ -53,8 +53,10 @@ namespace HypoluxAdventure.Models
             if (IsInvincible) return 0;
 
             int finalDamage = Math.Min(Health, damage);
-            Health -= finalDamage;
+            if (finalDamage <= 0) return 0;
 
+            Health -= finalDamage;
+            gameManager.DamageOverlay.SpawnNumber(Position, finalDamage);
             isDamageFrame = true;
             return finalDamage;
         }
@@ -86,7 +88,7 @@ namespace HypoluxAdventure.Models
         public override void Draw()
         {
             Sprite.Depth = GameManager.GetYDepth(Position.Y);
-            Sprite.Draw(game.Canvas, Position, Rotation, Scale);
+            Sprite.Draw(game.Canvas, Position, MathHelper.ToRadians(Rotation), Scale);
         }
     }
 }

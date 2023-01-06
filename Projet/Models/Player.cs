@@ -44,35 +44,36 @@ namespace HypoluxAdventure.Models
 
                 if(Controllable) Sprite.Effect = IsFlipped ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             }
+            else
+            {
+                ProcessDeathAnimation();
+            }
         }
 
-        #region Movement and collisions
         public RectangleF Hitbox { get; private set; }
 
-        private float _maxSpeed = 300f;
-        private float _accelRate = 8f;
-        private float _decelRate = 7f;
+        private const float MAX_SPEED = 300f;
+        private const float ACCEL_RATE = 8f;
+        private const float DECEL_RATE = 7f;
 
         private void CalculateVelocity()
         {
             if(_inputs.X == 0 && _inputs.Y == 0)
             {
-                Velocity -= Velocity * _decelRate * Time.DeltaTime;
+                Velocity -= Velocity * DECEL_RATE * Time.DeltaTime;
                 return;
             }
 
-            Vector2 targetVel = Vector2.Normalize(new Vector2(_inputs.X, _inputs.Y)) * _maxSpeed;
+            Vector2 targetVel = Vector2.Normalize(new Vector2(_inputs.X, _inputs.Y)) * MAX_SPEED;
             Vector2 velDif = targetVel - Velocity;
-            Velocity += velDif * _accelRate * Time.DeltaTime;
+            Velocity += velDif * ACCEL_RATE * Time.DeltaTime;
         }
 
         private void CalculateHitbox()
         {
             Hitbox = new RectangleF((Position - new Vector2(SIZE) * 0.5f), new Vector2(SIZE));
         }
-        #endregion
 
-        #region Shooting
         public Vector2 ShootDirection { get; private set; }
         public bool IsFlipped => ShootDirection.X >= 0;
         
@@ -80,6 +81,38 @@ namespace HypoluxAdventure.Models
         {
             Vector2 mousePos = game.Camera.CameraToWorld(Inputs.MousePosition);
             ShootDirection = Vector2.Normalize(mousePos - Position);
+        }
+
+        public override int Damage(int damage)
+        {
+            int finalDamage = base.Damage(damage);
+            if (finalDamage > 0) gameManager.DamageOverlay.Pulse();
+
+            return finalDamage;
+        }
+
+        public override void OnDeath()
+        {
+            base.OnDeath();
+            gameManager.GameOver();
+
+            Sprite.Effect = SpriteEffects.None;
+            Random r = new Random();
+
+            _deathRotateSpeed = r.NextSingle(DEATH_ROTATE_MIN_SPEED, DEATH_ROTATE_MAX_SPEED) * (r.NextSingle() < 0.5f ? -1 : 1);
+            Logger.Debug(_deathRotateSpeed);
+        }
+
+        #region Death
+        private const float DEATH_ROTATE_MIN_SPEED = 360;
+        private const float DEATH_ROTATE_MAX_SPEED = 720;
+        private const float DEATH_ROTATE_DECEL = 1.5f;
+        private float _deathRotateSpeed;
+
+        private void ProcessDeathAnimation()
+        {
+            Rotation += _deathRotateSpeed * Time.DeltaTime;
+            _deathRotateSpeed -= _deathRotateSpeed * DEATH_ROTATE_DECEL * Time.DeltaTime;
         }
         #endregion
     }

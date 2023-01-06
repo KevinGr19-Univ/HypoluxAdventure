@@ -23,7 +23,7 @@ namespace HypoluxAdventure.Models
         {
             ViewMatrix = Matrix.CreateTranslation(-Position.X, -Position.Y, 0)
                 * Matrix.CreateRotationZ(MathHelper.ToRadians(Rotation))
-                * Matrix.CreateScale(Zoom)
+                * Matrix.CreateScale(Zoom, Zoom, 1)
                 * Matrix.CreateTranslation(new Vector3(Application.ScreenDimensions, 0) * 0.5f);
 
             _inverseMatrix = Matrix.Invert(ViewMatrix);

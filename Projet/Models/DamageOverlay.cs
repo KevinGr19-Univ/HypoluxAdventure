@@ -20,7 +20,7 @@ namespace HypoluxAdventure.Models
         public const float PULSE_TIME = 1; 
 
         private Sprite _damageScreen;
-        // float _timer + const float PULSE_TIME => à faire quand MathUtils.LerpCubic existe
+        private Vector2 _scale;
 
         private float _timer;
 
@@ -33,9 +33,12 @@ namespace HypoluxAdventure.Models
             _nextNumberId = 0;
             _damageNumbers = new Dictionary<int, DamageNumber>();
             Font = game.Content.Load<SpriteFont>("Font/DamageFont");
+
             _damageScreen = new Sprite(game.Content.Load<Texture2D>("img/damageScreen"));
             _damageScreen.OriginNormalized = Vector2.Zero;
             _damageScreen.Depth = 0.1f;
+            GraphicsUtils.SetPixelSize(_damageScreen, Application.SCREEN_WIDTH, Application.SCREEN_HEIGHT, ref _scale);
+
             _timer = PULSE_TIME;
         }
 
@@ -43,22 +46,22 @@ namespace HypoluxAdventure.Models
         public override void Update()
         {
             _timer += Time.DeltaTime;
-            _damageScreen.Alpha = _timer<PULSE_TIME ? MathUtils.LerpOutCubic(0, 1, PULSE_TIME, _timer) : 0;
+            _damageScreen.Alpha = _timer<PULSE_TIME ? MathUtils.LerpOutToPower(0, 1, PULSE_TIME, _timer, 3) : 0;
+
+            // DEBUG
             if (Inputs.IsKeyPressed(Keys.R))
             {
                 SpawnNumber(gameManager.Player.Position, damage);
-                damage  = damage%19 + 1;
+                damage  = damage%20 + 1;
             }
-            if (Inputs.IsKeyPressed(Keys.T))
-            {
-                Pulse();
-            }
+            if (Inputs.IsKeyPressed(Keys.T)) Pulse();
+
             foreach (DamageNumber number in _damageNumbers.Values) number.Update();
         }
 
         public override void Draw()
         {
-            _damageScreen.Draw(game.UICanvas, Vector2.Zero, 0, Vector2.One);
+            _damageScreen.Draw(game.UICanvas, Vector2.Zero, 0, _scale);
             foreach (DamageNumber number in _damageNumbers.Values) number.Draw();
         }
 

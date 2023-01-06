@@ -16,17 +16,20 @@ namespace HypoluxAdventure.Managers
     {
         private const float BORDER_BUFFER = 10;
 
+        public Vector2 TargetPosition = Vector2.Zero;
+        public float TargetZoom = 1;
+
         public CameraManager(Game1 game, GameManager gameManager) : base(game, gameManager) { }
 
         public override void Update()
         {
-            Vector2 halfCameraDim = Application.ScreenDimensions * 0.5f / game.Camera.Zoom;
-            halfCameraDim += new Vector2(BORDER_BUFFER, BORDER_BUFFER);
+            Vector2 halfCameraDim = Application.ScreenDimensions * 0.5f / game.Camera.Zoom + new Vector2(BORDER_BUFFER);
 
             RectangleF roomRect = gameManager.RoomManager.CurrentRoom.Rectangle;
-            Vector2 targetPos = Vector2.Clamp(gameManager.Player.Position, roomRect.TopLeft + halfCameraDim, roomRect.BottomRight - halfCameraDim);
+            Vector2 targetPos = Vector2.Clamp(TargetPosition, roomRect.TopLeft + halfCameraDim, roomRect.BottomRight - halfCameraDim);
 
             game.Camera.Position = MathUtils.Damp(game.Camera.Position, targetPos, 0.7f, Time.RealDeltaTime);
+            game.Camera.Zoom = MathUtils.Damp(game.Camera.Zoom, TargetZoom, 0.9f, Time.RealDeltaTime);
         }
 
         public override void Draw() { }

@@ -93,11 +93,22 @@ namespace HypoluxAdventure.Managers
             // TODO: Spawn item object on ground
         }
 
+        private int CalculateSelectedSlot()
+        {
+            int selectedSlot;
+            if (gameManager.FrameInputs.Slot1) selectedSlot = 0;
+            else if (gameManager.FrameInputs.Slot2) selectedSlot = 1;
+            else if (gameManager.FrameInputs.Slot3) selectedSlot = 2;
+
+            else selectedSlot = Math.Clamp(_currentSlot - gameManager.FrameInputs.SlotScroll, 0, SLOT_AMOUNT - 1);
+            return selectedSlot;
+        }
+
         public override void Update()
         {
             if (Inputs.IsClickPressed(Inputs.MouseButton.Middle)) AddItem(new Sword(game, gameManager)); // DEBUG
 
-            int selectedSlot = Math.Clamp(_currentSlot - gameManager.FrameInputs.SlotScroll, 0, SLOT_AMOUNT - 1);
+            int selectedSlot = CalculateSelectedSlot();
             SelectSlot(selectedSlot);
 
             if (gameManager.FrameInputs.DropItem)
