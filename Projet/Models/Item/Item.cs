@@ -3,6 +3,7 @@ using HypoluxAdventure.Managers;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
@@ -15,37 +16,51 @@ namespace HypoluxAdventure.Models.Item
     internal abstract class Item : GameObject
     {
         public Texture2D Texture { get; protected set; }
+        protected Sprite sprite { get; private set; }
+
         public string Label = "No name item";
 
-        protected float _currentCooldown { get; private set; }
-        public float CooldownProgress => _currentCooldown / Cooldown;              
-
-        public float AdditionalRotation;
-        private float _rotation;
-        public Vector2 Scale = Vector2.One;
-
         public virtual float Cooldown => 0;
-        abstract public Vector2 DefaultDirection { get; }
+        protected float currentCooldown { get; private set; }
+
         abstract public float SlotScale { get; }
-        abstract public float DistFromPlayer { get; }
+        public float CooldownProgress => currentCooldown / Cooldown;
+
+        abstract protected float distFromPlayer { get; }
+        abstract protected float defaultOrientation { get; }
+        abstract protected int pixelSize { get; }
+
+        protected Vector2 position { get; private set; }
+        protected float localRotation;
+        private float _rotation;
+        private readonly float _defaultAngle;
+
+        private Vector2 _scale;
 
         public bool IsUsed = false; // If IsUsed -> ClearSlot(slot, false)
 
-        public Item(Game1 game, GameManager gameManager) : base(game, gameManager) { }
+        public Item(Game1 game, GameManager gameManager) : base(game, gameManager)
+        {
+            Texture = LoadTexture();
+            sprite = new Sprite(Texture);
+            GraphicsUtils.SetPixelSize(sprite, pixelSize, pixelSize, ref _scale);
+
+            _defaultAngle = MathHelper.ToRadians(defaultOrientation + 90);
+        }
 
         protected void TriggerCooldown()
         {
-            _currentCooldown = Cooldown;
+            currentCooldown = Cooldown;
         }
 
         public override void Update()
         {
-            if (_currentCooldown > 0)
+            if (currentCooldown > 0)
             {
-                _currentCooldown -= Time.DeltaTime;
-                if(_currentCooldown <= 0)
+                currentCooldown -= Time.DeltaTime;
+                if(currentCooldown <= 0)
                 {
-                    _currentCooldown = 0;
+                    currentCooldown = 0;
                     OnCooldownRefresh();
                 }
             }
@@ -55,7 +70,7 @@ namespace HypoluxAdventure.Models.Item
 
         public virtual void SelectedUpdate()
         {
-            if(_currentCooldown <= 0)
+            if(currentCooldown <= 0)
             {
                 if (gameManager.FrameInputs.Shoot) OnShoot();
                 else if (gameManager.FrameInputs.Use) OnUse();
@@ -64,13 +79,16 @@ namespace HypoluxAdventure.Models.Item
 
         private void RotateAround()
         {
-            float angle = MathHelper.ToDegrees((float) Math.Asin(gameManager.Player.ShootDirection.Y));
-            Logger.Debug(angle);
+            float angle = MathF.Atan2(gameManager.Player.ShootDirection.X, gameManager.Player.ShootDirection.Y) + MathHelper.ToRadians(localRotation);
+            position = gameManager.Player.Position + new Vector2(MathF.Sin(angle), MathF.Cos(angle)) * distFromPlayer;
+
+            _rotation = -angle + _defaultAngle;
         }
 
         public override void Draw()
         {
-
+            sprite.Depth = GameManager.GetYDepth(position.Y);
+            sprite.Draw(game.Canvas, position, _rotation, _scale);
         }
 
         public void DrawSlot(Vector2 slotPos)
@@ -79,10 +97,11 @@ namespace HypoluxAdventure.Models.Item
             game.UICanvas.Draw(Texture, slotPos, null, Color.White, 0, origin, SlotScale, SpriteEffects.None, ItemSlot.DEPTH + 0.001f);
         }
 
+        abstract protected Texture2D LoadTexture();
+        abstract public DropItem ToDropItem(bool startHover, Vector2 pos); 
+
         abstract public void OnShoot();
         abstract public void OnUse();
         public virtual void OnCooldownRefresh() { }
-
-        abstract public DropItem ToDropItem(bool startHover, Vector2 pos); 
     }
 }

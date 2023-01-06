@@ -15,16 +15,15 @@ namespace HypoluxAdventure.Models.Item
     {
         public Sword(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
-            Texture = game.Content.Load<Texture2D>("img/sword");
             Label = "ÉPÉE";
         }
 
-        public override float SlotScale => 4;
-        public override Vector2 DefaultDirection => new Vector2(1, 1);
         public override float Cooldown => 2f;
-        public override float DistFromPlayer => 40;
+        public override float SlotScale => 4;
 
-        private float _timer = 3;
+        protected override float distFromPlayer => 55;
+        protected override float defaultOrientation => 45;
+        protected override int pixelSize => 40;
 
         public override void SelectedUpdate()
         {
@@ -33,7 +32,6 @@ namespace HypoluxAdventure.Models.Item
 
         public override void OnShoot()
         {
-            Logger.Debug("Hit");
             TriggerCooldown();
         }
 
@@ -45,6 +43,11 @@ namespace HypoluxAdventure.Models.Item
             dropItem.CalculateHitbox(pos, new Vector2(22,22));
             dropItem.SetTextureSize(24,24);
             return dropItem;
+        }
+
+        protected override Texture2D LoadTexture()
+        {
+            return game.Content.Load<Texture2D>("img/sword");
         }
     }
 }
