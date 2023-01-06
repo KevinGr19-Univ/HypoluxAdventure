@@ -1,4 +1,6 @@
 ﻿using HypoluxAdventure.Managers;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,24 +11,34 @@ namespace HypoluxAdventure.Models
 {
     internal class DamageOverlay : GameObject
     {
-        // Texture2D damageScreen
+        private Texture2D _damageScreen;
         // float _timer + const float PULSE_TIME => à faire quand MathUtils.LerpCubic existe
 
-        // int nextNumberId
-        // Dictionary<int, DamageNumber>
+        private int nextNumberId;
+        private Dictionary<int, DamageNumber> _damageNumbers;
+        public SpriteFont Font;
 
-        public DamageOverlay(Game1 game, GameManager gameManager) : base(game, gameManager) { }
+        public DamageOverlay(Game1 game, GameManager gameManager) : base(game, gameManager) 
+        {
+            nextNumberId = 0;
+            _damageNumbers = new Dictionary<int, DamageNumber>();
+            Font = game.Content.Load<SpriteFont>("Font/DamageFont");
+        }
 
         public override void Update()
         {
-            
+            foreach (DamageNumber number in _damageNumbers.Values) number.Update();
         }
 
         public override void Draw()
         {
-
+            foreach (DamageNumber number in _damageNumbers.Values) number.Draw();
         }
 
-        // Spawn number(int damage)
+        public void SpawnNumber(Vector2 gamePos, int damage)
+        {
+            DamageNumber number = new DamageNumber(game,gameManager, nextNumberId++,damage);
+            _damageNumbers.Add(number.Id, number);
+        }
     }
 }
