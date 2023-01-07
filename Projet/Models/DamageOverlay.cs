@@ -42,19 +42,10 @@ namespace HypoluxAdventure.Models
             _timer = PULSE_TIME;
         }
 
-        int damage = 1;
         public override void Update()
         {
             _timer += Time.DeltaTime;
             _damageScreen.Alpha = _timer<PULSE_TIME ? MathUtils.LerpOutToPower(0, 1, PULSE_TIME, _timer, 3) : 0;
-
-            // DEBUG
-            if (Inputs.IsKeyPressed(Keys.R))
-            {
-                SpawnNumber(gameManager.Player.Position, damage);
-                damage  = damage%20 + 1;
-            }
-            if (Inputs.IsKeyPressed(Keys.T)) Pulse();
 
             foreach (DamageNumber number in _damageNumbers.Values) number.Update();
         }

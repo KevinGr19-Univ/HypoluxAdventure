@@ -1,4 +1,5 @@
 ﻿using HypoluxAdventure.Core;
+using HypoluxAdventure.Managers;
 using HypoluxAdventure.Models.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -16,6 +17,9 @@ namespace HypoluxAdventure.Screens
 {
     internal class GameOverScreen : AbstractScreen
     {
+        private TextObject _floorText;
+        private readonly int _reachedFloor;
+
         private AnimatedSprite _eyes;
         private Vector2 _eyesPosition;
         private float _eyesRotation;
@@ -26,7 +30,10 @@ namespace HypoluxAdventure.Screens
         private Vector2 _textPositionCenter;
 
         private SoundEffect _clickedSound;
-        public GameOverScreen(Game1 game) : base(game) { }
+        public GameOverScreen(Game1 game, int reachedFloor) : base(game)
+        {
+            _reachedFloor = reachedFloor;
+        }
 
         public override void LoadContent()
         {
@@ -41,9 +48,14 @@ namespace HypoluxAdventure.Screens
             _eyes.Play("blink");
             _eyesPosition = Application.ScreenDimensions * 0.5f;
             _eyesRotation = 0;
-            _eyesScale = new Vector2(30,30);
+            _eyesScale = new Vector2(30);
 
-            
+            Color floorTextColor = _reachedFloor == GameManager.FINAL_FLOOR ? Color.DarkRed : Color.Gray;
+            Vector2 floorTextPos = new Vector2(Application.SCREEN_WIDTH * 0.5f, 100);
+
+            _floorText = new TextObject(_menuFont, $"Étage atteint : {_reachedFloor}", floorTextPos, floorTextColor);
+            _floorText.Scale = new Vector2(0.4f);
+            _floorText.Depth = 1;
         }
 
         public override void Update(GameTime gameTime)
@@ -56,6 +68,7 @@ namespace HypoluxAdventure.Screens
         {
             GraphicsDevice.Clear(Color.Black); // Color.Black
             _eyes.Draw(Game.UICanvas, _eyesPosition, _eyesRotation, _eyesScale);
+            _floorText.Draw(Game.UICanvas);
             _menuButton.Draw();
         }
 

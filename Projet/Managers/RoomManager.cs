@@ -251,7 +251,6 @@ namespace HypoluxAdventure.Managers
             } + CurrentRoom.Position;
 
             gameManager.Player.Position = spawnPosition;
-            game.Camera.Position = CurrentRoom.Rectangle.Center;
         }
 
         public void AddRoom(Room room)

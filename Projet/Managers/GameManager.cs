@@ -9,6 +9,7 @@ using HypoluxAdventure.Models;
 using HypoluxAdventure.Models.UI;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
+using HypoluxAdventure.Models.Item;
 
 namespace HypoluxAdventure.Managers
 {
@@ -23,6 +24,11 @@ namespace HypoluxAdventure.Managers
         {
             _game = game;
         }
+
+        public const int FINAL_FLOOR = -5;
+        public int Floor { get; private set; } = 1;
+
+        public float Difficulty => Floor / (FINAL_FLOOR + 1);
 
         public HealthOverlay HealthOverlay;
         public DamageOverlay DamageOverlay { get; private set; }
@@ -42,27 +48,23 @@ namespace HypoluxAdventure.Managers
         {
             State = GameState.Play;
 
-            HealthOverlay = new HealthOverlay(_game, this);
+            Player = new Player(_game, this);
+
             DamageOverlay = new DamageOverlay(_game, this);
             MinimapOverlay = new MinimapOverlay(_game, this);
+            HealthOverlay = new HealthOverlay(_game, this);
 
             RoomManager = new RoomManager(_game, this);
-
-            RoomManager.GenerateRooms();
-            MinimapOverlay.Visit(RoomManager.CurrentRoom.PointPos);
 
             InventoryManager = new InventoryManager(_game, this);
             ItemManager = new ItemManager(_game, this);
 
-            _pauseManager = new PauseManager(_game, this);
             CameraManager = new CameraManager(_game, this);
-
-            Player = new Player(_game, this);
-            RoomManager.SpawnPlayer();
-
+            _pauseManager = new PauseManager(_game, this);
             _cursor = new Cursor(_game, this);
 
-            _game.Camera.Zoom = CameraManager.TargetZoom = 1.5f;
+            LoadNextFloor();
+            InventoryManager.AddItem(new Sword(_game, this));
         }
 
         public void UnloadContent()
@@ -72,12 +74,26 @@ namespace HypoluxAdventure.Managers
             _game.IsMouseVisible = true;
         }
 
+        public void LoadNextFloor()
+        {
+            Floor -= 1;
+            ItemManager.Clear();
+            MinimapOverlay.Clear();
+
+            RoomManager.GenerateRooms();
+            RoomManager.SpawnPlayer();
+            MinimapOverlay.Visit(RoomManager.CurrentRoom.PointPos);
+
+            _game.Camera.Position = RoomManager.CurrentRoom.Rectangle.Center;
+            _game.Camera.Zoom = CameraManager.TargetZoom = 1.5f;
+        }
+
         public void Update()
         {
             if(_gameOverTimer > 0)
             {
                 _gameOverTimer -= Time.DeltaTime;
-                if (_gameOverTimer <= 0) _game.LoadGameOver();
+                if (_gameOverTimer <= 0) _game.LoadGameOver(Floor);
             }
 
             FrameInputs = GatherInputs();
@@ -103,12 +119,12 @@ namespace HypoluxAdventure.Managers
                 CameraManager.Update();
 
                 DamageOverlay.Update();
+                HealthOverlay.Update();
             }
             else
             {
                 _pauseManager.Update();
             }
-            HealthOverlay.Update();
         }
 
         public void Draw()
@@ -116,13 +132,13 @@ namespace HypoluxAdventure.Managers
             if(State != GameState.Pause)
             {
                 _game.IsMouseVisible = false;
+                HealthOverlay.Draw();
                 
                 if(State != GameState.GameOver)
                 {
                     _cursor.Draw();
                     InventoryManager.Draw();
                     MinimapOverlay.Draw();
-                    HealthOverlay.Draw();
                 }
             }
             else

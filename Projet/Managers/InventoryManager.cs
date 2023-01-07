@@ -106,8 +106,6 @@ namespace HypoluxAdventure.Managers
 
         public override void Update()
         {
-            if (Inputs.IsClickPressed(Inputs.MouseButton.Middle)) AddItem(new Sword(game, gameManager)); // DEBUG
-
             int selectedSlot = CalculateSelectedSlot();
             SelectSlot(selectedSlot);
 

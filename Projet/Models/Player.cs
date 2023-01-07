@@ -41,6 +41,7 @@ namespace HypoluxAdventure.Models
                 Move();
 
                 CalculateHitbox();
+                ProcessPulse();
 
                 if(Controllable) Sprite.Effect = IsFlipped ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
             }
@@ -48,6 +49,12 @@ namespace HypoluxAdventure.Models
             {
                 ProcessDeathAnimation();
             }
+
+        }
+
+        public override void Draw()
+        {
+            if (_damageTimer <= 0 || _damageHitVisible) base.Draw();
         }
 
         public RectangleF Hitbox { get; private set; }
@@ -86,7 +93,11 @@ namespace HypoluxAdventure.Models
         public override int Damage(int damage)
         {
             int finalDamage = base.Damage(damage);
-            if (finalDamage > 0) gameManager.DamageOverlay.Pulse();
+            if (finalDamage > 0)
+            {
+                gameManager.DamageOverlay.Pulse();
+                StartPulsing();
+            }
 
             return finalDamage;
         }
@@ -94,6 +105,7 @@ namespace HypoluxAdventure.Models
         public override void OnDeath()
         {
             base.OnDeath();
+            StopPulsing();
             gameManager.GameOver();
 
             Sprite.Effect = SpriteEffects.None;
@@ -101,6 +113,47 @@ namespace HypoluxAdventure.Models
 
             _deathRotateSpeed = r.NextSingle(DEATH_ROTATE_MIN_SPEED, DEATH_ROTATE_MAX_SPEED) * (r.NextSingle() < 0.5f ? -1 : 1);
         }
+        #region Invulnerability
+        private const float DAMAGE_COOLDOWN = 1.5f;
+        private const float DAMAGE_HIT_FLIP_TIME = 0.2f;
+        private float _damageTimer;
+        private float _damageHitFlipTimer;
+        private bool _damageHitVisible = false;
+
+        private void StartPulsing()
+        {
+            _damageTimer = DAMAGE_COOLDOWN;
+            _damageHitFlipTimer = DAMAGE_HIT_FLIP_TIME;
+            IsInvincible = true;
+        }
+
+        private void StopPulsing()
+        {
+            IsInvincible = false;
+            _damageHitVisible = false;
+            _damageTimer = 0;
+        }
+
+        public void ProcessPulse()
+        {
+            if(_damageTimer > 0)
+            {
+                _damageTimer -= Time.DeltaTime;
+                if(_damageTimer <= 0)
+                {
+                    StopPulsing();
+                    return;
+                }
+
+                _damageHitFlipTimer -= Time.DeltaTime;
+                if(_damageHitFlipTimer <= 0)
+                {
+                    _damageHitFlipTimer += DAMAGE_HIT_FLIP_TIME;
+                    _damageHitVisible = !_damageHitVisible;
+                }
+            }
+        }
+        #endregion
 
         #region Death
         private const float DEATH_ROTATE_MIN_SPEED = 360;
