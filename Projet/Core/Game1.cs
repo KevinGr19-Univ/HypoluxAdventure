@@ -181,6 +181,7 @@ namespace HypoluxAdventure
         public void LoadWorld() => LoadScreen(new WorldScreen(this), 2);
         public void LoadCredit() => LoadScreen(new CreditScreen(this), 1);
         public void LoadMenu() => LoadScreen(new MenuScreen(this), 2);
+        public void LoadSettings() => LoadScreen(new SettingsScreen(this), 1);
         public void LoadGameOver() => LoadScreen(new GameOverScreen(this), 4);
 
         #region FadeTransition
