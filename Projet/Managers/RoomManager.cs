@@ -52,8 +52,10 @@ namespace HypoluxAdventure.Managers
         public const int TILESET_TILE_SIZE = 16;
         public Texture2D TileSet { get; private set; }
 
-        public const int MAP_ROOM_WIDTH = 6;
-        public const int MAP_ROOM_HEIGHT = 6;
+        public const int MAP_ROOM_WIDTH = 7;
+        public const int MAP_ROOM_HEIGHT = 7;
+
+        public static readonly Point StartingPos = new Point(MAP_ROOM_WIDTH / 2, MAP_ROOM_HEIGHT / 2);
 
         public const int MAP_WIDTH = MAP_ROOM_WIDTH * Room.ROOM_WIDTH;
         public const int MAP_HEIGHT = MAP_ROOM_HEIGHT * Room.ROOM_WIDTH;

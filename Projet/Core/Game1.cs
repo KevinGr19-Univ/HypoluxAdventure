@@ -10,6 +10,7 @@ using HypoluxAdventure.Screens;
 using MonoGame.Extended;
 using HypoluxAdventure.Managers;
 using HypoluxAdventure.Models.Item;
+using System.IO;
 
 namespace HypoluxAdventure
 {
@@ -59,7 +60,56 @@ namespace HypoluxAdventure
             
             RoomManager.CreateTileFrames();
 
+            LoadInputLayout();
+
             LoadWorld();
+        }
+
+        protected override void UnloadContent()
+        {
+            base.UnloadContent();
+            SaveInputLayout();
+        }
+
+        private void LoadInputLayout()
+        {
+            if (!File.Exists(Inputs.INPUT_FILE_PATH)) File.WriteAllText(Inputs.INPUT_FILE_PATH, "0");
+
+            string optionLine = File.ReadAllText(Inputs.INPUT_FILE_PATH);
+            bool ok = int.TryParse(optionLine, out int option);
+
+            if (ok)
+            {
+                switch (option)
+                {
+                    case 0:
+                        Inputs.ChangeInputLayout(Inputs.AZERTY);
+                        return;
+
+                    case 1:
+                        Inputs.ChangeInputLayout(Inputs.QWERTY);
+                        return;
+                }
+            }
+
+            File.WriteAllText(Inputs.INPUT_FILE_PATH, "0");
+            Inputs.ChangeInputLayout(Inputs.AZERTY);
+        }
+
+        private void SaveInputLayout()
+        {
+            int id = 0;
+
+            switch (Inputs.InputLayout.Name)
+            {
+                case "QWERTY":
+                    id = 1;
+                    break;
+
+                // Could add more
+            }
+
+            File.WriteAllText(Inputs.INPUT_FILE_PATH, id.ToString());
         }
 
         protected override void Update(GameTime gameTime)
