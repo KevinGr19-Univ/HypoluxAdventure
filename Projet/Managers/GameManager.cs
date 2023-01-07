@@ -166,7 +166,7 @@ namespace HypoluxAdventure.Managers
 
         public void ReturnToMenu()
         {
-
+            _game.LoadMenu();
         }
 
         private const float GAME_OVER_TIME = 4;
