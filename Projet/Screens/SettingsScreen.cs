@@ -1,4 +1,5 @@
 ﻿using HypoluxAdventure.Core;
+using HypoluxAdventure.Models.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Sprites;
@@ -18,6 +19,10 @@ namespace HypoluxAdventure.Screens
         private Vector2 _titlePosition;
         private float _titleRotation;
         private Vector2 _titleScale;
+
+        public string InputLayoutChoice;
+        private Button _inputButtonLayout;
+
         public SettingsScreen(Game1 game) : base(game)
         {
 
@@ -29,6 +34,8 @@ namespace HypoluxAdventure.Screens
             _titlePosition = new Vector2(175,100);
             _titleRotation = 0;
             _titleScale = Vector2.One * 0.3f;
+
+
         }
 
         public override void Draw(GameTime gameTime)
