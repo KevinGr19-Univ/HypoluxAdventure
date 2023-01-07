@@ -321,3 +321,9 @@
 /processorParam:Quality=Best
 /build:sound/buttonSound.wav
 
+#begin sound/wanderingInTheDark.mov
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sound/wanderingInTheDark.mov
+

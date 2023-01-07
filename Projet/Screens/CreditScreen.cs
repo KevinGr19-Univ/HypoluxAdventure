@@ -2,6 +2,7 @@
 using HypoluxAdventure.Models.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using System;
 using System.Collections.Generic;
@@ -26,10 +27,15 @@ namespace HypoluxAdventure.Screens
         private float _timer = 0;
         private const float MOVE_SPEED = 75;
 
+        private Song _music;
         public CreditScreen(Game1 game) : base(game) { }
 
         public override void LoadContent()
         {
+            _music = Content.Load<Song>("sound/wanderingInTheDark");
+            MediaPlayer.Play(_music);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.1f;
             _titleFont = Content.Load<SpriteFont>("Font/TitleCredit");
             _normalFont = Content.Load<SpriteFont>("Font/CreditFont");
 
