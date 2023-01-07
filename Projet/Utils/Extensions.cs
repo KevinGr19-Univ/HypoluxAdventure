@@ -26,5 +26,23 @@ namespace HypoluxAdventure.Utils
 
         public static RectangleF Scale(this RectangleF rectangle, Vector2 scale)
             => new RectangleF(rectangle.Center - rectangle.Size * scale * 0.5f, rectangle.Size * scale);
+
+        public static T[] TakeRandom<T>(this T[] array, int amount)
+        {
+            if (amount < 0 || amount > array.Length)
+                throw new ArgumentException("Invalid amount to take random elements");
+
+            T[] values = new T[amount];
+            List<int> indexes = Enumerable.Range(0, amount).ToList();
+
+            for(int i = 0; i < amount; i++)
+            {
+                int randomIndex = indexes[new Random().Next(0, indexes.Count)];
+                values[i] = array[randomIndex];
+                indexes.Remove(randomIndex);
+            }
+
+            return values;
+        }
     }
 }

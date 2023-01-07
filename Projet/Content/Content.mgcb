@@ -28,6 +28,13 @@
 /processorParam:TextureFormat=Compressed
 /build:Font/DamageFont.spritefont
 
+#begin Font/ExitCounterFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font/ExitCounterFont.spritefont
+
 #begin Font/ItemFont.spritefont
 /importer:FontDescriptionImporter
 /processor:LocalizedFontProcessor
@@ -314,6 +321,20 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:img/worm.png
+
+#begin PauseMenuFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:PauseMenuFont.spritefont
+
+#begin PauseMenuFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:PauseMenuFont.spritefont
 
 #begin sound/buttonSound.wav
 /importer:WavImporter

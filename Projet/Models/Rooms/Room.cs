@@ -29,6 +29,7 @@ namespace HypoluxAdventure.Models.Rooms
         public const int ROOM_WIDTH = ROOM_SIZE * TILE_SIZE;
 
         private Game1 _game;
+        private GameManager _gameManager;
         private RoomManager _roomManager;
 
         public int X { get; private set; }
@@ -41,18 +42,20 @@ namespace HypoluxAdventure.Models.Rooms
         public int RawSpawnDistance;
         public int SpawnDistance = int.MaxValue;
 
+        private RoomLayer _roomLayer;
         private int[,] _tiles;
 
-
-        public Room(Game1 game, RoomManager roomManager, int roomX, int roomY)
+        public Room(Game1 game, GameManager gameManager, RoomManager roomManager, int roomX, int roomY)
         {
             _game = game;
-
+            _gameManager = gameManager;
             _roomManager = roomManager;
 
             X = roomX;
             Y = roomY;
             Rectangle = new RectangleF(X * ROOM_WIDTH, Y * ROOM_WIDTH, ROOM_WIDTH, ROOM_WIDTH);
+
+            _roomLayer = RoomLayer.GetRandomRoomLayer();
         }
 
         public void AddDirection(Point dir)
@@ -90,8 +93,6 @@ namespace HypoluxAdventure.Models.Rooms
             _tiles[ROOM_SIZE - 3, 2] = 11;
             _tiles[ROOM_SIZE - 3, ROOM_SIZE - 3] = 12;
             _tiles[2, ROOM_SIZE - 3] = 13;
-
-            
 
             if (directions.Contains(Directions[0]))
                 _tiles.Fusion(
@@ -150,6 +151,8 @@ namespace HypoluxAdventure.Models.Rooms
                         S_END,
                         S_TOP
                     );
+
+            _roomLayer.FusionLayer(_tiles);
         }
 
         public Room GetNextRoom(int x, int y) => _roomManager.GetRoom(X + x, Y + y);
@@ -157,9 +160,24 @@ namespace HypoluxAdventure.Models.Rooms
         public RectangleF Rectangle { get; private set; }
         public Vector2 Position => Rectangle.TopLeft;
 
+        // Monsters
         private List<Monster> _monsters = new List<Monster>(0);
+        private int _aliveMonsters;
+
+        // Projectiles
         // TODO: Room projectiles
+
+        // Chest
         // TODO: Chest? or List of chests
+
+        // Exit
+        public Exit Exit { get; private set; }
+
+        public void SpawnExit()
+        {
+            Point pos = _roomLayer.SpawnExit();
+            Exit = new Exit(_game, _gameManager, this, pos);
+        }
 
         /// <summary>Method called when the room is entered by the player.</summary>
         public void Load()

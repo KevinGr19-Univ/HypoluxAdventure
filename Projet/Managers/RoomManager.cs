@@ -230,6 +230,7 @@ namespace HypoluxAdventure.Managers
             }
 
             Room exitRoom = potentialExitRooms[r.Next(0, potentialExitRooms.Count)];
+            exitRoom.SpawnExit();
 
             // DEBUG
             for (int row = 0; row < MAP_ROOM_WIDTH; row++)
