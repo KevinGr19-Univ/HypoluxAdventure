@@ -35,6 +35,13 @@
 /processorParam:TextureFormat=Compressed
 /build:Font/ItemFont.spritefont
 
+#begin Font/MainMenuFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Font/MainMenuFont.spritefont
+
 #begin Font/PauseMenuFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -307,4 +314,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:img/worm.png
+
+#begin sound/buttonSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/buttonSound.wav
 
