@@ -315,3 +315,9 @@
 /processorParam:TextureFormat=Color
 /build:img/worm.png
 
+#begin sound/buttonSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/buttonSound.wav
+
