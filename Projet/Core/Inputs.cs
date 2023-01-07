@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HypoluxAdventure.Models;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -71,6 +72,35 @@ namespace HypoluxAdventure.Core
 
         public static bool IsClickReleased(MouseButton button) =>
             IsClickDown(_prevMouse, button) && !IsClickDown(_currMouse, button);
+        #endregion
+
+        #region Input Layout
+        public static InputLayout InputLayout { get; private set; }
+
+        public static void ChangeInputLayout(InputLayout inputLayout)
+        {
+            InputLayout = inputLayout;
+        }
+
+        public static InputLayout AZERTY { get; private set; } = new InputLayout()
+        {
+            Name = "AZERTY",
+            NegX = Keys.Q,
+            NegY = Keys.S,
+            PosX = Keys.D,
+            PosY = Keys.Z
+        };
+
+        public static InputLayout QWERTY { get; private set; } = new InputLayout()
+        {
+            Name = "QWERTY",
+            NegX = Keys.A,
+            NegY = Keys.S,
+            PosX = Keys.D,
+            PosY = Keys.W
+        };
+
+        public const string INPUT_FILE_PATH = "./input.txt";
         #endregion
     }
 }
