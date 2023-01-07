@@ -92,7 +92,7 @@ namespace HypoluxAdventure.Managers
             _rooms = new Room[MAP_ROOM_WIDTH, MAP_ROOM_WIDTH];
 
             // Place starting room
-            Room startingRoom = new Room(game, this, StartingPos.X, StartingPos.Y);
+            Room startingRoom = new Room(game, gameManager, this, StartingPos.X, StartingPos.Y);
             startingRoom.directions = new List<Point>(Room.Directions);
             startingRoom.SpawnDistance = 0;
             AddRoom(startingRoom);
@@ -107,7 +107,7 @@ namespace HypoluxAdventure.Managers
             {
                 Point pos = parentRoom.PointPos + dir;
 
-                Room newRoom = new Room(game, this, pos.X, pos.Y);
+                Room newRoom = new Room(game, gameManager, this, pos.X, pos.Y);
                 newRoom.RawSpawnDistance = parentRoom.RawSpawnDistance + 1;
 
                 newRoom.spawnDir = new Point(-dir.X, -dir.Y); // If spawned from left, seal right for positions, and vice-versa
