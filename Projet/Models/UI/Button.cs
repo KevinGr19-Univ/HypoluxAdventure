@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MonoGame.Extended;
 using HypoluxAdventure.Utils;
+using Microsoft.Xna.Framework.Audio;
+using System.Reflection.Metadata;
 
 namespace HypoluxAdventure.Models.UI
 {
@@ -43,9 +45,11 @@ namespace HypoluxAdventure.Models.UI
         public float Depth = 0.5f;
 
         private Action _action;
+        private SoundEffect _clickedSound;
 
         public Button(Game1 game, SpriteFont textFont, string text, Vector2 position, Action action)
-        {            
+        {
+            _clickedSound = game.Content.Load<SoundEffect>("sound/buttonSound");
             _text = new TextObject(textFont, text, position);
             Position = position;
             this.game = game;
@@ -66,7 +70,11 @@ namespace HypoluxAdventure.Models.UI
             _hover = _rect.Scale(Scale).Contains(Inputs.MousePosition);
             _down = _hover && Inputs.IsClickDown(Inputs.MouseButton.Left);
 
-            if (_hover && Inputs.IsClickReleased(Inputs.MouseButton.Left)) _action.Invoke();
+            if (_hover && Inputs.IsClickReleased(Inputs.MouseButton.Left))
+            {
+                _clickedSound.Play();
+                _action.Invoke();
+            } 
         }
 
         public void Draw()
