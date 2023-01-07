@@ -48,7 +48,7 @@ namespace HypoluxAdventure.Screens
             _textPositionCenter = new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.9f);
 
             _play = new Button(game, _menuFont, "JOUER", new Vector2(_textPositionCenter.X + 30, _textPositionCenter.Y), () => { Game.LoadWorld(); });
-            _quit = new Button(game, _menuFont, "QUITTER", new Vector2(_textPositionCenter.X+400, _textPositionCenter.Y), () => { });
+            _quit = new Button(game, _menuFont, "QUITTER", new Vector2(_textPositionCenter.X+400, _textPositionCenter.Y), () => { Game.Exit(); });
             _settings = new Button(game, _menuFont, "PARAMETRES", new Vector2(_textPositionCenter.X-400, _textPositionCenter.Y), () => { });
             
             _play.Depth = _quit.Depth = _settings.Depth = 0.6f;
