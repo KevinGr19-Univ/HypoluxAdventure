@@ -122,6 +122,7 @@ namespace HypoluxAdventure.Managers
                     _cursor.Draw();
                     InventoryManager.Draw();
                     MinimapOverlay.Draw();
+                    HealthOverlay.Draw();
                 }
             }
             else
@@ -133,7 +134,6 @@ namespace HypoluxAdventure.Managers
             Player.Draw();
             RoomManager.Draw();
             ItemManager.Draw();
-            HealthOverlay.Draw();
             DamageOverlay.Draw();
         }
 
