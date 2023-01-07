@@ -1,4 +1,5 @@
 ﻿using HypoluxAdventure.Core;
+using HypoluxAdventure.Managers;
 using HypoluxAdventure.Models.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Collections.Specialized.BitVector32;
 
 namespace HypoluxAdventure.Screens
 {
@@ -33,9 +35,31 @@ namespace HypoluxAdventure.Screens
         private float _diaboluxRotation;
         private Vector2 _diaboluxScale;
 
+        private Button _play;
+        private Button _quit;
+        private Button _settings;
+
+        private SpriteFont _menuFont;
+        private Vector2 _textPositionCenter;
 
         public MenuScreen(Game1 game) : base(game) 
         {
+            _menuFont = Content.Load<SpriteFont>("Font/MainMenuFont");
+            _textPositionCenter = new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.9f);
+
+            _play = new Button(game, _menuFont, "JOUER", new Vector2(_textPositionCenter.X + 30, _textPositionCenter.Y), () => { Game.LoadWorld(); });
+            _quit = new Button(game, _menuFont, "QUITTER", new Vector2(_textPositionCenter.X+400, _textPositionCenter.Y), () => { });
+            _settings = new Button(game, _menuFont, "PARAMETRES", new Vector2(_textPositionCenter.X-400, _textPositionCenter.Y), () => { });
+            
+            _play.Depth = _quit.Depth = _settings.Depth = 0.6f;
+            _play.Border = _quit.Border = _settings.Border = 5;
+            _play.Padding = _quit.Padding = _settings.Padding = new Vector2(10);
+
+            ChangeButtonColor(_play);
+            ChangeButtonColor(_quit);
+            ChangeButtonColor(_settings);
+
+
         }
 
         public override void LoadContent()
@@ -65,6 +89,10 @@ namespace HypoluxAdventure.Screens
         public override void Update(GameTime gameTime)
         {
             _diaboluxEyes.Update(Time.DeltaTime);
+
+            _play.Update();
+            _quit.Update();
+            _settings.Update();
         }
 
         public override void Draw(GameTime gameTime)
@@ -74,7 +102,34 @@ namespace HypoluxAdventure.Screens
             _hypoluxSprite.Draw(Game.UICanvas, _hypoluxPosition, _hypoluxRotation, _hypoluxScale);
             _diaboluxEyes.Draw(Game.UICanvas, _diaboluxPosition, _diaboluxRotation, _diaboluxScale);
 
+            _play.Draw();
+            _quit.Draw();
+            _settings.Draw();
+
         }
 
+        private void ChangeButtonColor(Button button)
+        {
+            button.ColorNormal = new ButtonColor
+            {
+                TextColor = Color.White,
+                BackgroundColor = Color.DarkGreen,
+                BorderColor = Color.DarkOliveGreen
+            };
+
+            button.ColorHover = new ButtonColor
+            {
+                TextColor = Color.White,
+                BackgroundColor = Color.GreenYellow,
+                BorderColor = Color.Green
+            };
+
+            button.ColorDown = new ButtonColor
+            {
+                TextColor = Color.Black,
+                BackgroundColor = Color.LightGray,
+                BorderColor = Color.DarkGray
+            };
+        }
     }
 }
