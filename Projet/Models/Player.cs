@@ -100,7 +100,6 @@ namespace HypoluxAdventure.Models
             Random r = new Random();
 
             _deathRotateSpeed = r.NextSingle(DEATH_ROTATE_MIN_SPEED, DEATH_ROTATE_MAX_SPEED) * (r.NextSingle() < 0.5f ? -1 : 1);
-            Logger.Debug(_deathRotateSpeed);
         }
 
         #region Death

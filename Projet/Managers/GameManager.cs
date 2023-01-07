@@ -31,8 +31,8 @@ namespace HypoluxAdventure.Managers
         public InventoryManager InventoryManager { get; private set; }
         public ItemManager ItemManager { get; private set; }
 
+        public CameraManager CameraManager { get; private set; }
         private PauseManager _pauseManager;
-        private CameraManager _cameraManager;
 
         public Player Player { get; private set; }
         private Cursor _cursor;
@@ -45,18 +45,21 @@ namespace HypoluxAdventure.Managers
             DamageOverlay = new DamageOverlay(_game, this);
 
             RoomManager = new RoomManager(_game, this);
+
             RoomManager.GenerateRooms();
 
             InventoryManager = new InventoryManager(_game, this);
             ItemManager = new ItemManager(_game, this);
 
             _pauseManager = new PauseManager(_game, this);
-            _cameraManager = new CameraManager(_game, this);
+            CameraManager = new CameraManager(_game, this);
 
             Player = new Player(_game, this);
+            RoomManager.SpawnPlayer();
+
             _cursor = new Cursor(_game, this);
 
-            _game.Camera.Zoom = _cameraManager.TargetZoom = 1.5f;
+            _game.Camera.Zoom = CameraManager.TargetZoom = 1.5f;
         }
 
         public void UnloadContent()
@@ -92,8 +95,8 @@ namespace HypoluxAdventure.Managers
 
                 _cursor.Update();
 
-                _cameraManager.TargetPosition = Player.Position;
-                _cameraManager.Update();
+                CameraManager.TargetPosition = Player.Position;
+                CameraManager.Update();
 
                 DamageOverlay.Update();
             }
@@ -177,7 +180,7 @@ namespace HypoluxAdventure.Managers
             State = GameState.GameOver;
             _gameOverTimer = GAME_OVER_TIME;
 
-            _cameraManager.TargetZoom = 5.5f;
+            CameraManager.TargetZoom = 5.5f;
             HealthOverlay.PlayDeathAnimation();
         }
 

@@ -29,7 +29,9 @@ namespace HypoluxAdventure.Managers
             Vector2 targetPos = Vector2.Clamp(TargetPosition, roomRect.TopLeft + halfCameraDim, roomRect.BottomRight - halfCameraDim);
 
             game.Camera.Position = MathUtils.Damp(game.Camera.Position, targetPos, 0.7f, Time.RealDeltaTime);
-            game.Camera.Zoom = MathUtils.Damp(game.Camera.Zoom, TargetZoom, 0.9f, Time.RealDeltaTime);
+
+            float logZoom = MathUtils.Damp(MathF.Log(game.Camera.Zoom), MathF.Log(TargetZoom), 0.9f, Time.RealDeltaTime);
+            game.Camera.Zoom = MathF.Exp(logZoom);
         }
 
         public override void Draw() { }
