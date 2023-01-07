@@ -33,7 +33,7 @@
     <None Update="Content\globuxAnimation.sf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\img\diaboluxEyes.sf">
+    <None Update="Content\img\diaboluxEyesAnimation.sf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Content\img\Heart\heartAnimation.sf">

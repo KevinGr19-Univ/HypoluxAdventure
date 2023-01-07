@@ -132,12 +132,14 @@ namespace HypoluxAdventure.Managers
         public FrameInputs FrameInputs { get; private set; }
 
         public FrameInputs GatherInputs()
-        {   
+        {
+            InputLayout inputLayout = Inputs.InputLayout;
+
             int x = 0, y = 0;
-            if (Inputs.IsKeyDown(Keys.Z) || Inputs.IsKeyDown(Keys.Up)) y -= 1;
-            if (Inputs.IsKeyDown(Keys.S) || Inputs.IsKeyDown(Keys.Down)) y += 1;
-            if (Inputs.IsKeyDown(Keys.Q) || Inputs.IsKeyDown(Keys.Left)) x -= 1;
-            if (Inputs.IsKeyDown(Keys.D) || Inputs.IsKeyDown(Keys.Right)) x += 1;
+            if (Inputs.IsKeyDown(inputLayout.NegX)) x -= 1;
+            if (Inputs.IsKeyDown(inputLayout.PosY)) y -= 1;
+            if (Inputs.IsKeyDown(inputLayout.PosX)) x += 1;
+            if (Inputs.IsKeyDown(inputLayout.NegY)) y += 1;
 
             return new FrameInputs()
             {
