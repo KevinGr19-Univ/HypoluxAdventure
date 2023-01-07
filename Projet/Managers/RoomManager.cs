@@ -80,6 +80,7 @@ namespace HypoluxAdventure.Managers
             const int MIN_SPAWN_DIST_STOP = 3;
             const int MAX_SPAWN_DIST_STOP = 7;
 
+            const float CHANGE_DIRECTION_CHANCE = 0.6f;
             const int MIN_SPAWN_DIST_BRANCH = 3;
             const float BRANCHING_CHANCE = 0.6f;
             const float BRANCHING_REDUCE_COEF = 0.5f;
@@ -160,7 +161,12 @@ namespace HypoluxAdventure.Managers
 
                 if(freePos.Count > 0)
                 {
-                    Point nextPos = freePos[r.Next(0, freePos.Count)];
+                    Point frontPos = room.PointPos - room.spawnDir;
+                    Point nextPos;
+
+                    if(freePos.Contains(frontPos) && r.NextSingle() > CHANGE_DIRECTION_CHANCE) nextPos = frontPos;
+                    else nextPos = freePos[r.Next(0, freePos.Count)];
+                    
                     Point dir = nextPos - room.PointPos;
 
                     AddRoomWithDirection(room, dir);
