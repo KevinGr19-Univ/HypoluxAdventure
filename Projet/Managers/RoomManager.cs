@@ -54,12 +54,11 @@ namespace HypoluxAdventure.Managers
         public Texture2D TileSet { get; private set; }
 
         public const int MAP_ROOM_WIDTH = 7;
-        public const int MAP_ROOM_HEIGHT = 7;
 
-        public static readonly Point StartingPos = new Point(MAP_ROOM_WIDTH / 2, MAP_ROOM_HEIGHT / 2);
+        public static readonly Point StartingPos = new Point(MAP_ROOM_WIDTH / 2);
 
         public const int MAP_WIDTH = MAP_ROOM_WIDTH * Room.ROOM_WIDTH;
-        public const int MAP_HEIGHT = MAP_ROOM_HEIGHT * Room.ROOM_WIDTH;
+        public const int MAP_HEIGHT = MAP_ROOM_WIDTH * Room.ROOM_WIDTH;
 
         private Room[,] _rooms;
 
@@ -89,7 +88,7 @@ namespace HypoluxAdventure.Managers
 
             Random r = new Random(); // Seedable
 
-            _rooms = new Room[MAP_ROOM_HEIGHT, MAP_ROOM_WIDTH];
+            _rooms = new Room[MAP_ROOM_WIDTH, MAP_ROOM_WIDTH];
 
             // Place starting room
             Room startingRoom = new Room(game, this, StartingPos.X, StartingPos.Y);
@@ -227,7 +226,7 @@ namespace HypoluxAdventure.Managers
             Room exitRoom = potentialExitRooms[r.Next(0, potentialExitRooms.Count)];
 
             // DEBUG
-            for (int row = 0; row < MAP_ROOM_HEIGHT; row++)
+            for (int row = 0; row < MAP_ROOM_WIDTH; row++)
             {
                 for (int col = 0; col < MAP_ROOM_WIDTH; col++)
                 {
@@ -267,7 +266,7 @@ namespace HypoluxAdventure.Managers
         }
 
         public bool IsOutOfBounds(int roomX, int roomY)
-            => roomX < 0 || roomY < 0 || roomX >= MAP_ROOM_WIDTH || roomY >= MAP_ROOM_HEIGHT;
+            => roomX < 0 || roomY < 0 || roomX >= MAP_ROOM_WIDTH || roomY >= MAP_ROOM_WIDTH;
 
         public Room GetRoom(Point point) => GetRoom(point.X, point.Y);
 
@@ -309,6 +308,7 @@ namespace HypoluxAdventure.Managers
 
             _previousRoom = CurrentRoom;
             CurrentRoom = nextRoom;
+            gameManager.MinimapOverlay.Visit(CurrentRoom.PointPos);
 
             _changeRoomTimer = CHANGE_ROOM_COOLDOWN;
             Logger.Debug("Switch room");
@@ -331,7 +331,7 @@ namespace HypoluxAdventure.Managers
             //if (_changeRoomTimer > 0) _previousRoom.Draw();
             //CurrentRoom.Draw();
 
-            for (int j = 0; j < MAP_ROOM_HEIGHT; j++) for (int i = 0; i < MAP_ROOM_WIDTH; i++)
+            for (int j = 0; j < MAP_ROOM_WIDTH; j++) for (int i = 0; i < MAP_ROOM_WIDTH; i++)
                     GetRoom(i, j)?.Draw();
         }
     }

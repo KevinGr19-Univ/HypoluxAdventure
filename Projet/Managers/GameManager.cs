@@ -26,6 +26,7 @@ namespace HypoluxAdventure.Managers
 
         public HealthOverlay HealthOverlay;
         public DamageOverlay DamageOverlay { get; private set; }
+        public MinimapOverlay MinimapOverlay { get; private set; }
 
         public RoomManager RoomManager { get; private set; }
         public InventoryManager InventoryManager { get; private set; }
@@ -43,10 +44,12 @@ namespace HypoluxAdventure.Managers
 
             HealthOverlay = new HealthOverlay(_game, this);
             DamageOverlay = new DamageOverlay(_game, this);
+            MinimapOverlay = new MinimapOverlay(_game, this);
 
             RoomManager = new RoomManager(_game, this);
 
             RoomManager.GenerateRooms();
+            MinimapOverlay.Visit(RoomManager.CurrentRoom.PointPos);
 
             InventoryManager = new InventoryManager(_game, this);
             ItemManager = new ItemManager(_game, this);
@@ -86,6 +89,7 @@ namespace HypoluxAdventure.Managers
             {
                 Player.Update();
                 RoomManager.Update();
+                MinimapOverlay.Update();
 
                 if (State == GameState.Play)
                 {
@@ -117,6 +121,7 @@ namespace HypoluxAdventure.Managers
                 {
                     _cursor.Draw();
                     InventoryManager.Draw();
+                    MinimapOverlay.Draw();
                 }
             }
             else

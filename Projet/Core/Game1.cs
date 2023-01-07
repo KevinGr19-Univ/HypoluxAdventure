@@ -139,7 +139,7 @@ namespace HypoluxAdventure
         protected override void Draw(GameTime gameTime)
         {
             Time.Draw(gameTime);
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             Camera.CalculateMatrix();
 
