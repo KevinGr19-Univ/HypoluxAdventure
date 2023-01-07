@@ -32,7 +32,7 @@ namespace HypoluxAdventure.Screens
 
         public override void LoadContent()
         {
-            _music = Content.Load<Song>("sound/AudioSAE1_01");
+            _music = Content.Load<Song>("sound/wanderingInTheDark");
             MediaPlayer.Play(_music);
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = 0.1f;

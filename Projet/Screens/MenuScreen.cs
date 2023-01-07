@@ -4,6 +4,7 @@ using HypoluxAdventure.Models.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Serialization;
@@ -42,6 +43,8 @@ namespace HypoluxAdventure.Screens
 
         private SpriteFont _menuFont;
         private Vector2 _textPositionCenter;
+
+        private Song _music;
 
         public MenuScreen(Game1 game) : base(game) 
         {
@@ -85,6 +88,10 @@ namespace HypoluxAdventure.Screens
             _diaboluxRotation = 0;
             _diaboluxScale = new Vector2(3f, 3f);
 
+            _music = Content.Load<Song>("sound/lonelyInThisWorld");
+            MediaPlayer.Play(_music);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 100f;
 
         }
 

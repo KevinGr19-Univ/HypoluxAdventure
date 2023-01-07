@@ -315,17 +315,17 @@
 /processorParam:TextureFormat=Color
 /build:img/worm.png
 
-#begin sound/AudioSAE1_01.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:sound/AudioSAE1_01.mp3
-
 #begin sound/buttonSound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sound/buttonSound.wav
+
+#begin sound/lonelyInThisWorld.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sound/lonelyInThisWorld.mp3
 
 #begin sound/wanderingInTheDark.mov
 /importer:Mp3Importer
