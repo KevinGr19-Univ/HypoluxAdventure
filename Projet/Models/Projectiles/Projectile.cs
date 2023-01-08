@@ -21,7 +21,7 @@ namespace HypoluxAdventure.Models.Projectiles
 
         protected Sprite Sprite;
         protected float rotation;
-        protected Vector2 scale;
+        protected Vector2 scale = Vector2.One;
 
         abstract public Vector2 HitboxSize { get; }
         public RectangleF Hitbox => new RectangleF(position - HitboxSize * 0.5f, HitboxSize);
