@@ -56,9 +56,9 @@ namespace HypoluxAdventure.Models
             foreach (DamageNumber number in _damageNumbers.Values) number.Draw();
         }
 
-        public void SpawnNumber(Vector2 gamePos, int damage)
+        public void SpawnNumber(Vector2 gamePos, int damage, bool heal)
         {
-            DamageNumber number = new DamageNumber(game,gameManager, _nextNumberId++,damage, gamePos);
+            DamageNumber number = new DamageNumber(game,gameManager, _nextNumberId++,damage, gamePos, heal);
             _damageNumbers.Add(number.Id, number);
         }
 

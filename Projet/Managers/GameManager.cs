@@ -126,8 +126,6 @@ namespace HypoluxAdventure.Managers
             FrameInputs = GatherInputs();
             if (FrameInputs.Pause) SwitchPause();
 
-            if (Inputs.IsKeyPressed(Keys.A)) Player.Damage(5); // DEBUG
-
             if(State != GameState.Pause)
             {
                 Player.Update();

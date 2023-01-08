@@ -66,7 +66,7 @@ namespace HypoluxAdventure.Models
             if (finalDamage <= 0) return 0;
 
             Health -= finalDamage;
-            gameManager.DamageOverlay.SpawnNumber(Position, finalDamage);
+            gameManager.DamageOverlay.SpawnNumber(Position, finalDamage, false);
             isDamageFrame = true;
             return finalDamage;
         }

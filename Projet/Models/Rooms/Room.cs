@@ -172,8 +172,6 @@ namespace HypoluxAdventure.Models.Rooms
                 Vector2 spawnPos = spawnPoint.ToVector2() * TILE_SIZE + Position;
                 _monsters.Add(RandomMonster(spawnPos));
             }
-
-            Logger.Warn(spawnPoints.Length);
         }
 
         private Monster RandomMonster(Vector2 spawnPos)
