@@ -59,7 +59,7 @@ namespace HypoluxAdventure.Screens
                 IsUnactive(_azerty);
             });
 
-            _credit = new Button(Game, _menuFont, "CREDIT", new Vector2(Application.SCREEN_WIDTH - (float)_menuFont.MeasureString("CREDIT").X * 0.7f, _textPositionCenter.Y), () => { Game.LoadCredit(); });
+            _credit = new Button(Game, _menuFont, "CREDITS", new Vector2(Application.SCREEN_WIDTH - (float)_menuFont.MeasureString("CREDIT").X * 0.7f, _textPositionCenter.Y), () => { Game.LoadCredit(); });
 
             
             if (Inputs.InputLayout.Name == "AZERTY")
