@@ -41,7 +41,7 @@ namespace HypoluxAdventure.Models
             float lerpCoef = Math.Clamp(MathUtils.InverseLerp(MIN_SCALE_DAMAGE, MAX_SCALE_DAMAGE, _damage), 0, 1);
             _text.Scale = new Vector2(MathUtils.Lerp(MIN_SCALE, MAX_SCALE, lerpCoef));
 
-            if (heal) _text.Color = Color.Lerp(Color.Green, Color.Green, lerpCoef);
+            if (heal) _text.Color = Color.Green;
             else _text.Color = Color.Lerp(Color.Crimson, Color.Red, lerpCoef);
         }
 

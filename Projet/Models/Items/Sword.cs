@@ -93,10 +93,7 @@ namespace HypoluxAdventure.Models.Items
             }
         }
 
-        public override void OnUse()
-        {
-            IsUsed = true;
-        }
+        public override void OnUse() { }
 
         public override void OnDrop()
         {
