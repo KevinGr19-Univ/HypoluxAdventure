@@ -80,7 +80,7 @@ namespace HypoluxAdventure.Models.Rooms
         public override void Draw()
         {
             if (!_opened) _counter.Draw(game.Canvas);
-            else _sprite.Draw(game.BackgroundCanvas, _position, 0, _scale);
+            _sprite.Draw(game.BackgroundCanvas, _position, 0, _scale);
         }
     }
 }
