@@ -112,7 +112,7 @@ namespace HypoluxAdventure.Managers
 
         public void LoadVictoryScreen()
         {
-
+            _game.LoadVictory();
         }
 
         public void Update()
