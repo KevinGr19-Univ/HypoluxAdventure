@@ -1,0 +1,14 @@
+{
+  "textureAtlas": {
+    "texture": "..\\AnimatedSprites\\hypoluxWin.png",
+    "regionWidth": 55,
+    "regionHeight": 27
+  },
+  "cycles": {
+    "victory": {
+      "frames": [0,1,2,3,4,5,6,7,0],
+      "isLooping": false,
+      "frameDuration": 0.230000019
+    }
+  }
+}
