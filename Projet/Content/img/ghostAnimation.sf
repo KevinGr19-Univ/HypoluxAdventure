@@ -1,0 +1,29 @@
+{
+  "textureAtlas": {
+    "texture": "..\\AnimatedSprites\\ghost.png",
+    "regionWidth": 32,
+    "regionHeight": 32
+  },
+  "cycles": {
+    "south": {
+      "frames": [6,7,8],
+      "isLooping": true,
+      "frameDuration": 0.2
+    },
+    "north": {
+      "frames": [3,4,5],
+      "isLooping": true,
+      "frameDuration": 0.2
+    },
+    "side": {
+      "frames": [0,1,2],
+      "isLooping": true,
+      "frameDuration": 0.2
+    },
+    "death": {
+      "frames": [9,10,11,12,13],
+      "isLooping": false,
+      "frameDuration": 0.149999976
+    }
+  }
+}
