@@ -49,26 +49,13 @@ namespace HypoluxAdventure.Screens
         public MenuScreen(Game1 game) : base(game) 
         {
 
-            _menuFont = Content.Load<SpriteFont>("Font/MainMenuFont");
-            _textPositionCenter = new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.9f);
-
-            _play = new Button(game, _menuFont, "JOUER", new Vector2(_textPositionCenter.X + 30, _textPositionCenter.Y), () => { Game.LoadWorld(); });
-            _quit = new Button(game, _menuFont, "QUITTER", new Vector2(_textPositionCenter.X+400, _textPositionCenter.Y), () => { Game.Exit(); });
-            _settings = new Button(game, _menuFont, "PARAMETRES", new Vector2(_textPositionCenter.X-400, _textPositionCenter.Y), () => { Game.LoadSettings(); });
-            
-            _play.Depth = _quit.Depth = _settings.Depth = 0.6f;
-            _play.Border = _quit.Border = _settings.Border = 5;
-            _play.Padding = _quit.Padding = _settings.Padding = new Vector2(10);
-
-            ChangeButtonColor(_play);
-            ChangeButtonColor(_quit);
-            ChangeButtonColor(_settings);
-
-
         }
 
         public override void LoadContent()
         {
+            _menuFont = Content.Load<SpriteFont>("Font/MainMenuFont");
+            _textPositionCenter = new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.9f);
+
             _title = new Sprite(Content.Load<Texture2D>("img/titleImage"));
             _titlePosition = Application.ScreenDimensions * 0.5f;
             _titleRotation = 0;
@@ -87,6 +74,18 @@ namespace HypoluxAdventure.Screens
             _diaboluxPosition = new Vector2(550, 500);
             _diaboluxRotation = 0;
             _diaboluxScale = new Vector2(3f, 3f);
+
+            _play = new Button(Game, _menuFont, "JOUER", new Vector2(_textPositionCenter.X + 30, _textPositionCenter.Y), () => { Game.LoadWorld(); });
+            _quit = new Button(Game, _menuFont, "QUITTER", new Vector2(_textPositionCenter.X + 400, _textPositionCenter.Y), () => { Game.Exit(); });
+            _settings = new Button(Game, _menuFont, "PARAMETRES", new Vector2(_textPositionCenter.X - 400, _textPositionCenter.Y), () => { Game.LoadSettings(); });
+
+            _play.Depth = _quit.Depth = _settings.Depth = 0.6f;
+            _play.Border = _quit.Border = _settings.Border = 5;
+            _play.Padding = _quit.Padding = _settings.Padding = new Vector2(10);
+
+            ChangeButtonColor(_play);
+            ChangeButtonColor(_quit);
+            ChangeButtonColor(_settings);
 
             _music = Content.Load<Song>("sound/lonelyInThisWorld");
             //MediaPlayer.Play(_music);

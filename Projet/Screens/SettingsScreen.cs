@@ -21,7 +21,6 @@ namespace HypoluxAdventure.Screens
         private Vector2 _titleScale;
 
         private TextObject _name;
-        private Button _inputButtonLayout;
 
         private Button _menuButton;
         private SpriteFont _menuFont;
@@ -29,11 +28,10 @@ namespace HypoluxAdventure.Screens
 
         private Button _qwerty;
         private Button _azerty;
-
+        private Button _credit;
 
         public SettingsScreen(Game1 game) : base(game)
         {
-
         }
 
         public override void LoadContent()
@@ -48,24 +46,38 @@ namespace HypoluxAdventure.Screens
             _menuButton = new Button(Game, _menuFont, "MENU", new Vector2(_textPositionCenter.X+30, _textPositionCenter.Y), () => { Game.LoadMenu(); });
             ChangeButtonColor(_menuButton);
 
-            _name = new TextObject(_menuFont, "CHANGER LES CONTROLES :", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.2f));
+            _name = new TextObject(_menuFont, "CHANGER LES CONTROLES :", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.3f));
 
-            _azerty = new Button(Game, _menuFont, "AZERTY", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.4f),() => {
+            _azerty = new Button(Game, _menuFont, "AZERTY", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.5f),() => {
                 Inputs.ChangeInputLayout(Inputs.AZERTY);
                 ChangeButtonColor(_azerty);
                 IsUnactive(_qwerty);
             });
-            _qwerty = new Button(Game, _menuFont, "QWERTY", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.6f), () => {
+            _qwerty = new Button(Game, _menuFont, "QWERTY", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.7f), () => {
                 Inputs.ChangeInputLayout(Inputs.QWERTY);
                 ChangeButtonColor(_qwerty);
                 IsUnactive(_azerty);
             });
 
+            _credit = new Button(Game, _menuFont, "CREDIT", new Vector2(Application.SCREEN_WIDTH - (float)_menuFont.MeasureString("CREDIT").X * 0.7f, _textPositionCenter.Y), () => { Game.LoadCredit(); });
+
+            
+            if (Inputs.InputLayout.Name == "AZERTY")
+            {
             IsUnactive(_qwerty);
             ChangeButtonColor(_azerty);
+            }
+            else
+            {
+                IsUnactive(_azerty);
+                ChangeButtonColor(_qwerty);
+            }
 
-            _qwerty.Depth = _azerty.Depth = 0.6f;
-            _qwerty.Border = _azerty.Border = _menuButton.Border = 5;
+            
+            ChangeButtonColor(_credit);
+
+            _qwerty.Depth = _azerty.Depth = _menuButton.Depth = _credit.Depth = 0.6f;
+            _qwerty.Border = _azerty.Border = _menuButton.Border = _credit.Border = 5;
 
 
 
@@ -79,6 +91,7 @@ namespace HypoluxAdventure.Screens
             _name.Draw(Game.UICanvas);
             _qwerty.Draw();
             _azerty.Draw();
+            _credit.Draw();
 
         }
 
@@ -87,6 +100,7 @@ namespace HypoluxAdventure.Screens
             _menuButton.Update();
             _qwerty.Update();
             _azerty.Update();
+            _credit.Update();
         }
 
         private void ChangeButtonColor(Button button)
