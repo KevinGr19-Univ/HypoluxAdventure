@@ -29,7 +29,7 @@ namespace HypoluxAdventure.Managers
         }
 
         public const int FINAL_FLOOR = -5;
-        public int Floor { get; private set; } = 1;
+        public int Floor { get; private set; } = -3;
 
         public float Difficulty => Floor / (FINAL_FLOOR + 1);
 
@@ -50,6 +50,7 @@ namespace HypoluxAdventure.Managers
         private void Preload()
         {
             SoundPlayer.LoadSound(_game.Content, "sound/diaboluxLaughSound");
+            SoundPlayer.LoadSound(_game.Content, "sound/diaboluxDefeatedSound");
         }
 
         public void LoadContent()
@@ -108,8 +109,13 @@ namespace HypoluxAdventure.Managers
             ItemManager.Clear();
             MinimapOverlay.Clear();
 
-            RoomManager.GenerateRooms();
-            RoomManager.SpawnPlayer();
+            if (Floor == FINAL_FLOOR) RoomManager.GenerateBossRoom();
+            else
+            {
+                RoomManager.GenerateRooms();
+                RoomManager.SpawnPlayer();
+            }
+            
             MinimapOverlay.Visit(RoomManager.CurrentRoom.PointPos);
 
             _game.Camera.Position = RoomManager.CurrentRoom.Rectangle.Center;

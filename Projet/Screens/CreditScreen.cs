@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace HypoluxAdventure.Screens
 {
     internal class CreditScreen : AbstractScreen

@@ -18,7 +18,7 @@ namespace HypoluxAdventure.Utils
             _soundEffects.Add(soundPath, content.Load<SoundEffect>(soundPath));
         }
 
-        public static void PlaySound(string soundPath, float volume = 0.5f, float pitch = 1)
+        public static void PlaySound(string soundPath, float volume = 0.5f, float pitch = 0)
         {
             if (!_soundEffects.TryGetValue(soundPath, out SoundEffect sound))
                 throw new ArgumentException("This soundEffect is not loaded");

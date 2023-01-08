@@ -21,7 +21,7 @@ namespace HypoluxAdventure.Models.Projectiles
         private const float DECEL_RATE = 2.5f;
         private const float MIN_SPEED = 100f;
 
-        private const float MIN_DAMAGE = 1;
+        private const float MIN_DAMAGE = 2;
         private const float MAX_DAMAGE = 3;
 
         public Bullet(Game1 game, GameManager gameManager, bool isPlayerProj, Vector2 pos) : base(game, gameManager, isPlayerProj, pos)

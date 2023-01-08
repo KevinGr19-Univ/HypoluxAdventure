@@ -74,6 +74,7 @@ namespace HypoluxAdventure.Models
         {
             _visitedRooms.Clear();
             _floorCounter.Text = $"Étage {gameManager.Floor}";
+            _floorCounter.Color = gameManager.Floor == GameManager.FINAL_FLOOR ? Color.DarkRed : Color.White;
         }
     }
 }

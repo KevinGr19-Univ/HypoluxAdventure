@@ -267,6 +267,24 @@ namespace HypoluxAdventure.Managers
             CurrentRoom.Load();
         }
 
+        public void GenerateBossRoom()
+        {
+            _rooms = new Room[MAP_ROOM_WIDTH, MAP_ROOM_WIDTH];
+
+            Room startingRoom = new Room(game, gameManager, this, StartingPos.X, StartingPos.Y);
+            CurrentRoom = startingRoom;
+
+            AddRoom(startingRoom);
+
+            startingRoom.RoomLayer = RoomLayer.BossRoom;
+            startingRoom.GenerateTiles();
+            startingRoom.GenerateMonsters();
+
+            gameManager.Player.Position = new Vector2(19, 35) * Room.TILE_SIZE + CurrentRoom.Position;
+
+            CurrentRoom.Load();
+        }
+
         public void SpawnPlayer()
         {
             float distFromSide = 5 * Room.TILE_SIZE;

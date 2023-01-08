@@ -170,6 +170,7 @@ namespace HypoluxAdventure.Models.Rooms
         public void GenerateMonsters()
         {
             Point[] spawnPoints = RoomLayer.SpawnMonsters(_gameManager.Difficulty);
+
             foreach(Point spawnPoint in spawnPoints)
             {
                 Vector2 spawnPos = spawnPoint.ToVector2() * TILE_SIZE + Position;
@@ -179,6 +180,7 @@ namespace HypoluxAdventure.Models.Rooms
 
         private Monster RandomMonster(Vector2 spawnPos)
         {
+            if (_gameManager.Floor == GameManager.FINAL_FLOOR) return new Diabolux(_game, _gameManager, this, spawnPos);
             return new Globux(_game, _gameManager, this, spawnPos);
         }
 

@@ -10,6 +10,14 @@ namespace HypoluxAdventure.Models.Rooms
 {
     internal class RoomLayer
     {
+        public static readonly RoomLayer BossRoom = new RoomLayer(
+                new int[0,0],
+                Point.Zero,
+                new Point[] {new Point(19)},
+                new Point[0],
+                new Point[0]
+            );
+
         private static readonly RoomLayer[] _roomLayers = new RoomLayer[]
         {
             new RoomLayer(
@@ -84,7 +92,8 @@ namespace HypoluxAdventure.Models.Rooms
 
         public Point[] SpawnMonsters(float difficulty)
         {
-            int amount = (int)(_monsterSpawns.Length * MathUtils.Lerp(MIN_MONSTER_SPAWN_RATE, MAX_MONSTER_SPAWN_RATE, difficulty));
+            float fAmount = _monsterSpawns.Length * MathUtils.Lerp(MIN_MONSTER_SPAWN_RATE, MAX_MONSTER_SPAWN_RATE, difficulty);
+            int amount = (int) MathF.Round(fAmount);
             return _monsterSpawns.TakeRandom(amount);
         }
 
