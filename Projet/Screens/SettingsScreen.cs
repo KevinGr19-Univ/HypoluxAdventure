@@ -30,10 +30,8 @@ namespace HypoluxAdventure.Screens
         private Button _azerty;
         private Button _credit;
 
-
         public SettingsScreen(Game1 game) : base(game)
         {
-
         }
 
         public override void LoadContent()
@@ -63,8 +61,19 @@ namespace HypoluxAdventure.Screens
 
             _credit = new Button(Game, _menuFont, "CREDIT", new Vector2(Application.SCREEN_WIDTH - (float)_menuFont.MeasureString("CREDIT").X * 0.7f, _textPositionCenter.Y), () => { Game.LoadCredit(); });
 
+            
+            if (Inputs.InputLayout.Name == "AZERTY")
+            {
             IsUnactive(_qwerty);
             ChangeButtonColor(_azerty);
+            }
+            else
+            {
+                IsUnactive(_azerty);
+                ChangeButtonColor(_qwerty);
+            }
+
+            
             ChangeButtonColor(_credit);
 
             _qwerty.Depth = _azerty.Depth = _menuButton.Depth = _credit.Depth = 0.6f;
