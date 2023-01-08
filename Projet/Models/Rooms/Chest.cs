@@ -1,13 +1,17 @@
 ﻿using HypoluxAdventure.Managers;
+using HypoluxAdventure.Core;
 using HypoluxAdventure.Models.Items;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using MonoGame.Extended.Sprites;
+using MonoGame.Extended.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using MonoGame.Extended.Content;
 
 namespace HypoluxAdventure.Models.Rooms
 {
@@ -21,18 +25,22 @@ namespace HypoluxAdventure.Models.Rooms
         public Chest(Game1 game, GameManager gameManager, Room room, Point pos) : base(game, gameManager)
         {
             // LOAD SPRITE ETC...
+            SpriteSheet spriteSheet = game.Content.Load<SpriteSheet>("img/chestAnimation.sf", new JsonContentLoader());
+            _sprite = new AnimatedSprite(spriteSheet);
             Hitbox = new RectangleF(pos.ToVector2() * Room.TILE_SIZE + room.Position, new Vector2(Room.TILE_SIZE));
+            _sprite.Play("idle");
         }
 
         public override void Draw()
         {
             float yDepth = GameManager.GetYDepth(Hitbox.Center.Y);
-            //_sprite.Draw(game.Canvas, Hitbox.Center, 0, Vector2.One); // Créer var _scale si besoin (idem pour exit)
-            game.Canvas.FillRectangle(Hitbox, Color.Blue, yDepth); // DEBUG
+            _sprite.Draw(game.Canvas, Hitbox.Center, 0, Vector2.One); // Créer var _scale si besoin (idem pour exit)
+            //game.Canvas.FillRectangle(Hitbox, Color.Blue, yDepth); // DEBUG
         }
 
         public override void Update()
         {
+            _sprite.Update(Time.DeltaTime*1.5f);
             //_sprite.Update();
         }
 
@@ -42,6 +50,7 @@ namespace HypoluxAdventure.Models.Rooms
             _opened = true;
 
             // PLAY ANIMATION
+            _sprite.Play("open");
             DropItem dropItem = LootItem().ToDropItem(false, gameManager.Player.Position);
             gameManager.ItemManager.Summon(dropItem);
         }
