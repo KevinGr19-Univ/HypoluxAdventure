@@ -1,0 +1,19 @@
+{
+  "textureAtlas": {
+    "texture": "..\\AnimatedSprites\\chest.png",
+    "regionWidth": 17,
+    "regionHeight": 17
+  },
+  "cycles": {
+    "idle": {
+      "frames": [0],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "open": {
+      "frames": [0,1,2,3,4,5,6,7],
+      "isLooping": false,
+      "frameDuration": 0.06999998
+    }
+  }
+}

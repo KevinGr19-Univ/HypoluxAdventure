@@ -20,12 +20,16 @@ namespace HypoluxAdventure.Screens
         private float _titleRotation;
         private Vector2 _titleScale;
 
-        public string InputLayoutChoice;
+        private TextObject _name;
         private Button _inputButtonLayout;
 
         private Button _menuButton;
         private SpriteFont _menuFont;
         private Vector2 _textPositionCenter;
+
+        private Button _qwerty;
+        private Button _azerty;
+
 
         public SettingsScreen(Game1 game) : base(game)
         {
@@ -43,6 +47,28 @@ namespace HypoluxAdventure.Screens
             _textPositionCenter = new Vector2(Application.SCREEN_WIDTH * 0.117f, Application.SCREEN_HEIGHT * 0.1f);
             _menuButton = new Button(Game, _menuFont, "MENU", new Vector2(_textPositionCenter.X+30, _textPositionCenter.Y), () => { Game.LoadMenu(); });
             ChangeButtonColor(_menuButton);
+
+            _name = new TextObject(_menuFont, "CHANGER LES CONTROLES :", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.2f));
+
+            _azerty = new Button(Game, _menuFont, "AZERTY", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.4f),() => {
+                Inputs.ChangeInputLayout(Inputs.AZERTY);
+                ChangeButtonColor(_azerty);
+                IsUnactive(_qwerty);
+            });
+            _qwerty = new Button(Game, _menuFont, "QWERTY", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.6f), () => {
+                Inputs.ChangeInputLayout(Inputs.QWERTY);
+                ChangeButtonColor(_qwerty);
+                IsUnactive(_azerty);
+            });
+
+            IsUnactive(_qwerty);
+            ChangeButtonColor(_azerty);
+
+            _qwerty.Depth = _azerty.Depth = 0.6f;
+            _qwerty.Border = _azerty.Border = _menuButton.Border = 5;
+
+
+
         }
 
         public override void Draw(GameTime gameTime)
@@ -50,11 +76,17 @@ namespace HypoluxAdventure.Screens
             GraphicsDevice.Clear(SettingsScreen.BACKGROUND_COLOUR);
             _titleSprite.Draw(Game.UICanvas, _titlePosition, _titleRotation, _titleScale);
             _menuButton.Draw();
+            _name.Draw(Game.UICanvas);
+            _qwerty.Draw();
+            _azerty.Draw();
+
         }
 
         public override void Update(GameTime gameTime)
         {
             _menuButton.Update();
+            _qwerty.Update();
+            _azerty.Update();
         }
 
         private void ChangeButtonColor(Button button)
@@ -64,6 +96,30 @@ namespace HypoluxAdventure.Screens
                 TextColor = Color.White,
                 BackgroundColor = Color.DarkGreen,
                 BorderColor = Color.DarkOliveGreen
+            };
+
+            button.ColorHover = new ButtonColor
+            {
+                TextColor = Color.White,
+                BackgroundColor = Color.GreenYellow,
+                BorderColor = Color.Green
+            };
+
+            button.ColorDown = new ButtonColor
+            {
+                TextColor = Color.Black,
+                BackgroundColor = Color.LightGray,
+                BorderColor = Color.DarkGray
+            };
+
+        }
+        private void IsUnactive(Button button)
+        {
+            button.ColorNormal = new ButtonColor
+            {
+                TextColor = Color.Black,
+                BackgroundColor = Color.Crimson,
+                BorderColor = Color.DarkRed
             };
 
             button.ColorHover = new ButtonColor
