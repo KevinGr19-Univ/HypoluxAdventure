@@ -7,7 +7,7 @@
   "cycles": {
     "idle": {
       "frames": [0,1,2,3],
-      "isLooping": false,
+      "isLooping": true,
       "frameDuration": 0.25000003
     },
     "death": {
