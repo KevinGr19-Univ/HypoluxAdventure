@@ -82,8 +82,8 @@ namespace HypoluxAdventure.Managers
             const int MAX_SPAWN_DIST_STOP = 7;
 
             const int MIN_SPAWN_DIST_CHEST = 3;
-            const float CHEST_CHANCE = 0.5f;
-            const float CHEST_REDUCE_COEF = 0.5f;
+            const float CHEST_CHANCE = 0.6f;
+            const float CHEST_REDUCE_COEF = 0.8f;
 
             const float CHANGE_DIRECTION_CHANCE = 0.5f;
             const int MIN_SPAWN_DIST_BRANCH = 3;

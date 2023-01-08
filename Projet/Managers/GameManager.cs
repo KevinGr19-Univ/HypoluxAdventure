@@ -29,7 +29,7 @@ namespace HypoluxAdventure.Managers
         }
 
         public const int FINAL_FLOOR = -5;
-        public int Floor { get; private set; } = -3;
+        public int Floor { get; private set; } = 1;
 
         public float Difficulty => Floor / (FINAL_FLOOR + 1);
 
@@ -75,8 +75,7 @@ namespace HypoluxAdventure.Managers
 
             LoadNextFloor();
             InventoryManager.AddItem(new Sword(_game, this));
-            InventoryManager.AddItem(new Bow(_game, this));
-            InventoryManager.AddItem(new KnifeItem(_game, this));
+            InventoryManager.AddItem(new Potion(_game, this));
         }
 
         public void UnloadContent()

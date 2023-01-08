@@ -68,9 +68,10 @@ namespace HypoluxAdventure.Models
             else Logger.Warn("Tried to remove unregistered damage number.");
         }
 
-        public void Pulse()
+        public void Pulse(bool damage)
         {
             _timer = 0;
+            _damageScreen.Color = damage ? Color.Red : Color.LimeGreen;
         }
     }
 }

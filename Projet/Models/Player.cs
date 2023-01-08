@@ -92,11 +92,19 @@ namespace HypoluxAdventure.Models
             int finalDamage = base.Damage(damage);
             if (finalDamage > 0)
             {
-                gameManager.DamageOverlay.Pulse();
+                gameManager.DamageOverlay.Pulse(true);
                 StartPulsing();
             }
 
             return finalDamage;
+        }
+
+        public override int Heal(int heal)
+        {
+            int finalHeal = base.Heal(heal);
+            if (finalHeal > 0) gameManager.DamageOverlay.Pulse(false);
+
+            return finalHeal;
         }
 
         public override void OnDeath()

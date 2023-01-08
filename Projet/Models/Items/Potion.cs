@@ -10,27 +10,28 @@ using System.Threading.Tasks;
 
 namespace HypoluxAdventure.Models.Items
 {
-    internal class HealthPotion : Item
+    internal class Potion : Item
     {
-        public HealthPotion(Game1 game, GameManager gameManager) : base(game, gameManager)
+        public Potion(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
-            Label = "Potion de vie";
+            Label = "POTION";
         }
 
-        public override float SlotScale => 4;
+        public override float SlotScale => 7;
 
-        protected override float distFromPlayer => 20;
+        protected override float distFromPlayer => 30;
         protected override float defaultOrientation => 0;
         protected override int pixelSize => 20;
 
         public override void SelectedUpdate()
         {
             base.SelectedUpdate();
+            sprite.Effect = gameManager.Player.ShootDirection.X > 0 ? SpriteEffects.None : SpriteEffects.FlipVertically;
         }
 
         public override void OnUse() 
         {
-            IsUsed = true;
+            if(gameManager.Player.Heal(5) > 0) IsUsed = true;
         }
 
         public override DropItem ToDropItem(bool startHover, Vector2 pos)
@@ -47,10 +48,7 @@ namespace HypoluxAdventure.Models.Items
             sprite = new Sprite(Texture);
         }
 
-        public override void OnShoot()
-        {
-            gameManager.Player.Heal(10);
-        }
+        public override void OnShoot() { }
         
 
     }

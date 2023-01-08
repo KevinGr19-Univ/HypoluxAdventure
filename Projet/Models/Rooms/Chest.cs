@@ -62,8 +62,15 @@ namespace HypoluxAdventure.Models.Rooms
 
         private Item LootItem()
         {
-            // TODO: Faire item random
-            return new HealthPotion(game, gameManager);
+            const int MAX_WEIGHT = 100;
+            float chance = new Random().NextSingle() * MAX_WEIGHT;
+
+            if (chance < 10f) return new Sword(game, gameManager); // 10 %
+            if (chance < 20) return new Bow(game, gameManager); // 10 %
+            if (chance < 30) return new Shotgun(game, gameManager); // 10 %
+            if (chance < 40) return new KnifeItem(game, gameManager); // 10 %
+            if (chance < 55) return new Sword(game, gameManager); // 15 %
+            else return new Potion(game, gameManager); // 45 %
         }
     }
 }

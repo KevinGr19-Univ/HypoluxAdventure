@@ -74,7 +74,7 @@ namespace HypoluxAdventure.Models
         public virtual int Heal(int heal)
         {
             int finalHeal = Math.Min(MaxHealth - Health, heal);
-            if (heal <= 0) return 0;
+            if (finalHeal <= 0) return 0;
 
             Health += finalHeal;
             gameManager.DamageOverlay.SpawnNumber(Position, finalHeal, true);
