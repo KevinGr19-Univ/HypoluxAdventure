@@ -15,7 +15,7 @@ namespace HypoluxAdventure.Models.Projectiles
 {
     internal class Arrow : Projectile
     {
-        public const float SPEED = 800f;
+        public const float SPEED = 1000f;
         public override Vector2 HitboxSize => new Vector2(8);
 
         public Arrow(Game1 game, GameManager gameManager, bool isPlayerProj, Vector2 pos) : base(game, gameManager, isPlayerProj, pos)

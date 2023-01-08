@@ -40,7 +40,7 @@ namespace HypoluxAdventure.Models.Items
             base.SelectedUpdate();
             AnimatedSprite.Update(Time.DeltaTime);
 
-            if (_startCharge && !_charged && !Inputs.IsClickDown(Inputs.MouseButton.Left))
+            if (_startCharge && !_charged && !Inputs.IsClickDown(Inputs.MouseButton.Left) && !Inputs.IsClickDown(Inputs.MouseButton.Right))
             {
                 AnimatedSprite.Play("idle");
                 ResetBow();
