@@ -257,5 +257,23 @@ namespace HypoluxAdventure.Models.Rooms
             Exit?.Draw();
         }
 
+        #region Collisions
+        public int GetTile(int x, int y)
+        {
+            if (x < 0 || x >= ROOM_SIZE || y < 0 || y >= ROOM_SIZE) return 1;
+            return _tiles[y, x];
+        }
+
+        public bool IsWall(int x, int y) => GetTile(x, y) == 1;
+
+        public RectangleF? GetTileCollider(Vector2 pos)
+        {
+            Point tilePos = ((pos - Position) / TILE_SIZE).ToPoint();
+
+            if (IsWall(tilePos.X, tilePos.Y)) return null;
+            return new RectangleF(tilePos.ToVector2() * TILE_SIZE + Position, new Vector2(TILE_SIZE));
+        }
+        #endregion
+
     }
 }

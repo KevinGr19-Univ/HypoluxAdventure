@@ -89,9 +89,9 @@ namespace HypoluxAdventure.Screens
             _diaboluxScale = new Vector2(3f, 3f);
 
             _music = Content.Load<Song>("sound/lonelyInThisWorld");
-            MediaPlayer.Play(_music);
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.005f;
+            //MediaPlayer.Play(_music);
+            //MediaPlayer.IsRepeating = true;
+            //MediaPlayer.Volume = 0.005f;
 
         }
 

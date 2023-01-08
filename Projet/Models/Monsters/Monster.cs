@@ -27,8 +27,6 @@ namespace HypoluxAdventure.Models.Monsters
             spawnPosition = spawnPos;
         }
 
-        public bool NoClip = true;
-
         abstract public void OnPlayerCollision();
         abstract public void Spawn();
     }

@@ -36,7 +36,7 @@ namespace HypoluxAdventure.Models.Rooms
             //_sprite.Update();
         }
 
-        public void OpenChest()
+        public void Open()
         {
             if (_opened) return;
             _opened = true;
