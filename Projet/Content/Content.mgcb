@@ -113,7 +113,7 @@
 /processorParam:TextureFormat=Color
 /build:img/bow.png
 
-#begin img/chest.png
+#begin img/bullet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -123,7 +123,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:img/chest.png
+/build:img/bullet.png
 
 #begin img/chest.png
 /importer:TextureImporter
@@ -269,6 +269,18 @@
 /processorParam:TextureFormat=Color
 /build:img/itemFrame.png
 
+#begin img/Knife.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/Knife.png
+
 #begin img/mapTextureSample.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -292,6 +304,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:img/perso.png
+
+#begin img/Shotgun.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/Shotgun.png
 
 #begin img/sword.png
 /importer:TextureImporter
