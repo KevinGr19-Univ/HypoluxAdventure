@@ -62,7 +62,7 @@ namespace HypoluxAdventure
 
             LoadInputLayout();
 
-            LoadMenu();
+            LoadVictory();
         }
 
         protected override void UnloadContent()
@@ -183,6 +183,8 @@ namespace HypoluxAdventure
         public void LoadMenu() => LoadScreen(new MenuScreen(this), 2);
         public void LoadSettings() => LoadScreen(new SettingsScreen(this), 1);
         public void LoadGameOver(int reachedFloor) => LoadScreen(new GameOverScreen(this, reachedFloor), 4);
+
+        public void LoadVictory() => LoadScreen(new VictoryScreen(this), 2);
 
         #region FadeTransition
         private float _targetTime, _fadeTimer;
