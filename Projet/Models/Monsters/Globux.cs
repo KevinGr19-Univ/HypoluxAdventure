@@ -38,7 +38,7 @@ namespace HypoluxAdventure.Models.Monsters
 
         public override void Update()
         {
-            if (Inputs.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.I)) Damage(3);
+            if (Inputs.IsKeyPressed(Keys.I)) Damage(3);
 
             _followingPlayer = _followingPlayer ? IsPlayerInRange(KEEP_RANGE) : CanSeePlayer(DETECT_RANGE);
 
