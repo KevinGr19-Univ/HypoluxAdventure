@@ -1,0 +1,29 @@
+{
+  "textureAtlas": {
+    "texture": "..\\AnimatedSprites\\worm.png",
+    "regionWidth": 16,
+    "regionHeight": 16
+  },
+  "cycles": {
+    "idleSide": {
+      "frames": [0,1],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idleSouth": {
+      "frames": [2,3],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idleNorth": {
+      "frames": [4,5],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "death": {
+      "frames": [6,7,8,9,10],
+      "isLooping": false,
+      "frameDuration": 0.09999997
+    }
+  }
+}

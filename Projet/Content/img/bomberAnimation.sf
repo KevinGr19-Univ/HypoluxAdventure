@@ -1,0 +1,44 @@
+{
+  "textureAtlas": {
+    "texture": "..\\AnimatedSprites\\bomberBoss.png",
+    "regionWidth": 32,
+    "regionHeight": 32
+  },
+  "cycles": {
+    "idleSouth": {
+      "frames": [0],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idleNorth": {
+      "frames": [2],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "idleSide": {
+      "frames": [4],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "atqSouth": {
+      "frames": [0,1],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "atqNorth": {
+      "frames": [2,3],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "atqSide": {
+      "frames": [4,5],
+      "isLooping": false,
+      "frameDuration": 0.2
+    },
+    "death": {
+      "frames": [6,7,8,9,10,11,12,13],
+      "isLooping": false,
+      "frameDuration": 0.09999997
+    }
+  }
+}
