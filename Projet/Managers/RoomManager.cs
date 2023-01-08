@@ -225,7 +225,11 @@ namespace HypoluxAdventure.Managers
             foreach (Point dir in startingRoom.directions) CalculateSpawnDistance(GetRoom(StartingPos + dir), 0);
 
             // Init rooms
-            foreach (Room room in roomsToList) room.GenerateTiles();
+            foreach (Room room in roomsToList)
+            {
+                room.GenerateTiles();
+                room.GenerateMonsters();
+            }
             foreach (Room room in chestRooms) room.SummonChest();
             startingRoom.SummonChest(); // DEBUG
 
@@ -257,6 +261,8 @@ namespace HypoluxAdventure.Managers
                 }
                 Console.WriteLine("\n");
             }
+
+            CurrentRoom.Load();
         }
 
         public void SpawnPlayer()
@@ -329,10 +335,10 @@ namespace HypoluxAdventure.Managers
 
             _previousRoom = CurrentRoom;
             CurrentRoom = nextRoom;
+            CurrentRoom.Load();
             gameManager.MinimapOverlay.Visit(CurrentRoom.PointPos);
 
             _changeRoomTimer = CHANGE_ROOM_COOLDOWN;
-            Logger.Debug("Switch room");
         }
 
         public override void Update()
@@ -343,7 +349,9 @@ namespace HypoluxAdventure.Managers
             if(_changeRoomTimer > 0)
             {
                 _changeRoomTimer -= Time.RealDeltaTime;
-                _previousRoom.Update(true);
+
+                if (_changeRoomTimer <= 0) _previousRoom.Unload();
+                else _previousRoom.Update(true);
             }
         }
 

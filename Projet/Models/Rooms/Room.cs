@@ -172,11 +172,13 @@ namespace HypoluxAdventure.Models.Rooms
                 Vector2 spawnPos = spawnPoint.ToVector2() * TILE_SIZE + Position;
                 _monsters.Add(RandomMonster(spawnPos));
             }
+
+            Logger.Warn(spawnPoints.Length);
         }
 
         private Monster RandomMonster(Vector2 spawnPos)
         {
-            return null;
+            return new Globux(_game, _gameManager, this, spawnPos);
         }
 
         public IEnumerable<Monster> GetAliveMonsters() => _monsters.Where(monster => !monster.IsDead && !monster.IsSlained);
@@ -217,7 +219,11 @@ namespace HypoluxAdventure.Models.Rooms
         /// <summary>Method called when the room is left by the player.</summary>
         public void Unload()
         {
-
+            _monsters.ForEach((monster) =>
+            {
+                if (monster.IsSlained) return;
+                monster.Unload();
+            });
         }
 
         public void Update(bool transitionOut)
@@ -264,13 +270,13 @@ namespace HypoluxAdventure.Models.Rooms
             return _tiles[y, x];
         }
 
-        public bool IsWall(int x, int y) => GetTile(x, y) == 1;
+        public bool IsWall(int x, int y) => GetTile(x, y) != 1;
 
         public RectangleF? GetTileCollider(Vector2 pos)
         {
             Point tilePos = ((pos - Position) / TILE_SIZE).ToPoint();
 
-            if (IsWall(tilePos.X, tilePos.Y)) return null;
+            if (!IsWall(tilePos.X, tilePos.Y)) return null;
             return new RectangleF(tilePos.ToVector2() * TILE_SIZE + Position, new Vector2(TILE_SIZE));
         }
         #endregion
