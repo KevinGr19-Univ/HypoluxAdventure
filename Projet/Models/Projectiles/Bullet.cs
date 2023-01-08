@@ -41,8 +41,8 @@ namespace HypoluxAdventure.Models.Projectiles
 
         public override bool OnEntityCollision(Entity entity)
         {
-            float speedLerp = MathF.Pow(Velocity.Length() / MAX_START_SPEED, 3);
-            int damage = (int)Math.Round(MathUtils.Lerp(MIN_DAMAGE, MAX_DAMAGE, speedLerp));
+            float speedLerp = 1 - MathF.Pow(Velocity.Length() / MAX_START_SPEED, 3);
+            int damage = (int)Math.Round(MathUtils.Lerp(MAX_DAMAGE, MIN_DAMAGE, speedLerp));
 
             entity.Damage(damage);
             Despawn();

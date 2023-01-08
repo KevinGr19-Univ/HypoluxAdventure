@@ -30,7 +30,7 @@ namespace HypoluxAdventure.Models.Items
 
         private const float SWEEP_ANGLE = 90;
         private const float ANIM_SWEEP_ANGLE = 75;
-        private const float SWEEP_TIME = 0.4f;
+        private const float SWEEP_TIME = 0.3f;
         private const float SWEEP_RANGE = 85;
 
         private float _sweepTimer;

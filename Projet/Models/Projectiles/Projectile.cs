@@ -62,6 +62,12 @@ namespace HypoluxAdventure.Models.Projectiles
                     break;
                 }
 
+                if (currentRoom.Chest != null && currentRoom.Chest.Hitbox.Contains(point))
+                {
+                    OnRoomCollision();
+                    break;
+                }
+
                 Point tilePos = ((point - currentRoom.Position) / Room.TILE_SIZE).ToPoint();
                 if (currentRoom.IsWall(tilePos.X, tilePos.Y))
                 {

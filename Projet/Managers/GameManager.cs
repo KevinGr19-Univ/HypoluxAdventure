@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework;
 using HypoluxAdventure.Models.Items;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using System.Xml.Resolvers;
 
 namespace HypoluxAdventure.Managers
 {
@@ -46,8 +47,14 @@ namespace HypoluxAdventure.Managers
         public Player Player { get; private set; }
         private Cursor _cursor;
 
+        private void Preload()
+        {
+            SoundPlayer.LoadSound(_game.Content, "sound/diaboluxLaughSound");
+        }
+
         public void LoadContent()
         {
+            Preload();
             State = GameState.Play;
 
             Player = new Player(_game, this);
@@ -67,6 +74,8 @@ namespace HypoluxAdventure.Managers
 
             LoadNextFloor();
             InventoryManager.AddItem(new Sword(_game, this));
+            InventoryManager.AddItem(new Bow(_game, this));
+            InventoryManager.AddItem(new KnifeItem(_game, this));
         }
 
         public void UnloadContent()

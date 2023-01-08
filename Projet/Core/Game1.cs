@@ -11,6 +11,7 @@ using MonoGame.Extended;
 using HypoluxAdventure.Managers;
 using HypoluxAdventure.Models.Items;
 using System.IO;
+using HypoluxAdventure.Utils;
 
 namespace HypoluxAdventure
 {
@@ -59,10 +60,11 @@ namespace HypoluxAdventure
             UICanvas = new SpriteBatch(GraphicsDevice);
             
             RoomManager.CreateTileFrames();
+            SoundPlayer.LoadSound(Content, "sound/buttonSound");
 
             LoadInputLayout();
 
-            LoadMenu();
+            LoadVictory();
         }
 
         protected override void UnloadContent()

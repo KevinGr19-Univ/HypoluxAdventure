@@ -6,9 +6,9 @@
   },
   "cycles": {
     "victory": {
-      "frames": [0,1,2,3,4,5,6,7],
-      "isLooping": true,
-      "frameDuration": 0.230000019
+      "frames": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+      "isLooping": false,
+      "frameDuration": 0.23
     }
   }
 }

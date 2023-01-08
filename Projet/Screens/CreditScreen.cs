@@ -27,18 +27,15 @@ namespace HypoluxAdventure.Screens
         private float _timer = 0;
         private const float MOVE_SPEED = 75;
 
+        private float _lifetime = 38;
+
         private Song _music;
         public CreditScreen(Game1 game) : base(game) { }
 
         public override void LoadContent()
         {
-            _music = Content.Load<Song>("sound/wanderingInTheDark");
-            MediaPlayer.Play(_music);
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.1f;
             _titleFont = Content.Load<SpriteFont>("Font/TitleCredit");
             _normalFont = Content.Load<SpriteFont>("Font/CreditFont");
-
 
             AddLine(_titleFont, "Crédits : ", 3);
             AddLine(_normalFont,"Jeu créé par :",1);
@@ -58,10 +55,26 @@ namespace HypoluxAdventure.Screens
             AddLine(_normalFont,"-... --- -... .. -. ..- ... ",1);
             AddLine(_normalFont,"-.. .-. .- --. --- -. ..- ...",1);
 
+            _music = Content.Load<Song>("sound/wanderingInTheDark");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.1f;
+            MediaPlayer.Play(_music);
+        }
+
+        public override void UnloadContent()
+        {
+            base.UnloadContent();
+            MediaPlayer.Stop();
         }
 
         public override void Update(GameTime gameTime)
         {
+            if(_lifetime > 0)
+            {
+                _lifetime -= Time.DeltaTime;
+                if (_lifetime < 0) Game.LoadMenu();
+            }
+
             if(_textListStart < _textListActif.Count)
             {
                 for (int i = _textListStart; i < _textListActif.Count; i++)

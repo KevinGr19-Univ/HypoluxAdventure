@@ -28,7 +28,7 @@ namespace HypoluxAdventure.Models.Items
         protected override int pixelSize => 40;
 
         private const int SHOOT_ANGLE = 15;
-        private const int BULLET_COUNT = 5;
+        private const int BULLET_COUNT = 6;
 
         public override void SelectedUpdate()
         {
