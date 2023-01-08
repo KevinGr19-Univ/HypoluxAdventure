@@ -26,6 +26,7 @@ namespace HypoluxAdventure.Models.Items
 
         abstract public float SlotScale { get; }
         public float CooldownProgress => currentCooldown / Cooldown;
+        public bool IsOnCooldown => currentCooldown > 0;
 
         abstract protected float distFromPlayer { get; }
         abstract protected float defaultOrientation { get; }
@@ -37,7 +38,7 @@ namespace HypoluxAdventure.Models.Items
         private readonly float _defaultAngle;
 
         public bool UpdateRotation = true;
-        public bool IsLocked = true;
+        public bool IsLocked = false;
 
         private Vector2 _scale;
 

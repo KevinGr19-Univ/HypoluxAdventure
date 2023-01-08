@@ -11,6 +11,7 @@ using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
 using HypoluxAdventure.Utils;
 using MonoGame.Extended;
+using HypoluxAdventure.Models.Projectiles;
 
 namespace HypoluxAdventure.Models
 {
@@ -25,6 +26,8 @@ namespace HypoluxAdventure.Models
         {
             Sprite = new Sprite(game.Content.Load<Texture2D>("img/perso"));
             GraphicsUtils.SetPixelSize(Sprite, SIZE, SIZE, ref Scale);
+
+            ProjectileHolder = new ProjectileHolder(game, gameManager);
         }
 
         private FrameInputs _inputs;
@@ -42,18 +45,19 @@ namespace HypoluxAdventure.Models
                 Move();
 
                 ProcessPulse();
-
                 if(Controllable) Sprite.Effect = IsFlipped ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+
+                ProjectileHolder.Update();
             }
             else
             {
                 ProcessDeathAnimation();
             }
-
         }
 
         public override void Draw()
         {
+            ProjectileHolder.Draw();
             if (_damageTimer <= 0 || _damageHitVisible) base.Draw();
         }
 
@@ -98,6 +102,8 @@ namespace HypoluxAdventure.Models
         public override void OnDeath()
         {
             base.OnDeath();
+            ProjectileHolder.Clear();
+
             StopPulsing();
             gameManager.GameOver();
 
@@ -146,6 +152,11 @@ namespace HypoluxAdventure.Models
                 }
             }
         }
+        #endregion
+
+        #region Projectiles
+        public ProjectileHolder ProjectileHolder { get; private set; }
+
         #endregion
 
         #region Death

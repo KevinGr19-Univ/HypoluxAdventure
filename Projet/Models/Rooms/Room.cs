@@ -1,6 +1,7 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
 using HypoluxAdventure.Models.Monsters;
+using HypoluxAdventure.Models.Projectiles;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -42,7 +43,7 @@ namespace HypoluxAdventure.Models.Rooms
         public int RawSpawnDistance;
         public int SpawnDistance = int.MaxValue;
 
-        private RoomLayer _roomLayer;
+        public RoomLayer RoomLayer;
         private int[,] _tiles;
 
         public Room(Game1 game, GameManager gameManager, RoomManager roomManager, int roomX, int roomY)
@@ -51,11 +52,13 @@ namespace HypoluxAdventure.Models.Rooms
             _gameManager = gameManager;
             _roomManager = roomManager;
 
+            ProjectileHolder = new ProjectileHolder(game, gameManager);
+
             X = roomX;
             Y = roomY;
             Rectangle = new RectangleF(X * ROOM_WIDTH, Y * ROOM_WIDTH, ROOM_WIDTH, ROOM_WIDTH);
 
-            _roomLayer = RoomLayer.GetRandomRoomLayer();
+            RoomLayer = RoomLayer.GetRandomRoomLayer();
         }
 
         public void AddDirection(Point dir)
@@ -152,7 +155,7 @@ namespace HypoluxAdventure.Models.Rooms
                         S_TOP
                     );
 
-            _roomLayer.FusionLayer(_tiles);
+            RoomLayer.FusionLayer(_tiles);
         }
 
         public Room GetNextRoom(int x, int y) => _roomManager.GetRoom(X + x, Y + y);
@@ -166,7 +169,7 @@ namespace HypoluxAdventure.Models.Rooms
 
         public void GenerateMonsters()
         {
-            Point[] spawnPoints = _roomLayer.SpawnMonsters(_gameManager.Difficulty);
+            Point[] spawnPoints = RoomLayer.SpawnMonsters(_gameManager.Difficulty);
             foreach(Point spawnPoint in spawnPoints)
             {
                 Vector2 spawnPos = spawnPoint.ToVector2() * TILE_SIZE + Position;
@@ -182,7 +185,7 @@ namespace HypoluxAdventure.Models.Rooms
         public IEnumerable<Monster> GetAliveMonsters() => _monsters.Where(monster => !monster.IsDead && !monster.IsSlained);
 
         // Projectiles
-        // TODO: Room projectiles
+        public ProjectileHolder ProjectileHolder { get; private set; }
 
         // Chest
         public Chest Chest { get; private set; } = null;
@@ -191,7 +194,7 @@ namespace HypoluxAdventure.Models.Rooms
         {
             Logger.Warn(PointPos);
 
-            Point chestPos = _roomLayer.SpawnChest();
+            Point chestPos = RoomLayer.SpawnChest();
             Chest = new Chest(_game, _gameManager, this, chestPos);
         }
 
@@ -200,7 +203,7 @@ namespace HypoluxAdventure.Models.Rooms
 
         public void SpawnExit()
         {
-            Point pos = _roomLayer.SpawnExit();
+            Point pos = RoomLayer.SpawnExit();
             Exit = new Exit(_game, _gameManager, this, pos);
         }
 
@@ -236,6 +239,8 @@ namespace HypoluxAdventure.Models.Rooms
                     if (monster.IsSlained) return;
                     monster.Update();
                 });
+
+                ProjectileHolder.Update();
             }
         }
 
@@ -246,6 +251,8 @@ namespace HypoluxAdventure.Models.Rooms
                 if (monster.IsSlained) return;
                 monster.Draw();
             });
+
+            ProjectileHolder.Draw();
 
             Vector2 topLeft = Position;
 

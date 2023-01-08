@@ -228,6 +228,8 @@ namespace HypoluxAdventure.Managers
             foreach (Room room in roomsToList)
             {
                 room.GenerateTiles();
+
+                if (room == startingRoom) continue;
                 room.GenerateMonsters();
             }
             foreach (Room room in chestRooms) room.SummonChest();
@@ -333,11 +335,13 @@ namespace HypoluxAdventure.Managers
                 return;
             }
 
+            _previousRoom?.ProjectileHolder.Clear();
             _previousRoom = CurrentRoom;
+
             CurrentRoom = nextRoom;
             CurrentRoom.Load();
-            gameManager.MinimapOverlay.Visit(CurrentRoom.PointPos);
 
+            gameManager.MinimapOverlay.Visit(CurrentRoom.PointPos);
             _changeRoomTimer = CHANGE_ROOM_COOLDOWN;
         }
 
