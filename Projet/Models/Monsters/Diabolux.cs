@@ -29,8 +29,8 @@ namespace HypoluxAdventure.Models.Monsters
 
         private float _laughTime = 4;
 
-        public override Vector2 HitboxSize => new Vector2(200);
-        public override int MaxHealth => 10;
+        public override Vector2 HitboxSize => new Vector2(100, 200);
+        public override int MaxHealth => 40;
 
         private bool _flipped = false;
 
@@ -38,11 +38,23 @@ namespace HypoluxAdventure.Models.Monsters
         {
             base.Update();
 
+            // Laugh
             if(_laughTime > 0)
             {
                 _laughTime -= Time.DeltaTime;
-                if (_laughTime <= 0) AnimatedSprite.Play("idleSouth");
+                gameManager.CameraManager.TargetPosition = Position; // Overwrites targetPosition
 
+                if (_laughTime <= 0)
+                {
+                    AnimatedSprite.Play("idleSouth");
+                    gameManager.CanMove = true;
+                }
+                return;
+            }
+
+            if (IsDead)
+            {
+                gameManager.CameraManager.TargetPosition = Position;
                 return;
             }
 
@@ -68,6 +80,7 @@ namespace HypoluxAdventure.Models.Monsters
             AnimatedSprite.Play("death", () =>
             {
                 gameManager.StartNextFloorTransition();
+                gameManager.CameraManager.TargetPosition = Position;
             });
         }
     }

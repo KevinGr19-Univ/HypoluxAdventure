@@ -31,12 +31,11 @@ namespace HypoluxAdventure.Models
         }
 
         private FrameInputs _inputs;
-        public bool Controllable => gameManager.State == GameState.Play;
 
         public override void Update()
         {
             base.Update();
-            _inputs = Controllable ? gameManager.FrameInputs : new FrameInputs();
+            _inputs = gameManager.FrameInputs;
 
             if (!IsDead)
             {
@@ -45,7 +44,7 @@ namespace HypoluxAdventure.Models
                 Move();
 
                 ProcessPulse();
-                if(Controllable) Sprite.Effect = IsFlipped ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+                if(gameManager.CanMove) Sprite.Effect = IsFlipped ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
                 ProjectileHolder.Update();
             }

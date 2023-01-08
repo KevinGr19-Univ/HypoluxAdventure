@@ -29,7 +29,7 @@ namespace HypoluxAdventure.Managers
         }
 
         public const int FINAL_FLOOR = -5;
-        public int Floor { get; private set; } = 1;
+        public int Floor { get; private set; } = 0;
 
         public float Difficulty => Floor / (FINAL_FLOOR + 1);
 
@@ -45,6 +45,7 @@ namespace HypoluxAdventure.Managers
         private PauseManager _pauseManager;
 
         public Player Player { get; private set; }
+        public bool CanMove = true;
         private Cursor _cursor;
 
         private void Preload()
@@ -75,7 +76,8 @@ namespace HypoluxAdventure.Managers
 
             LoadNextFloor();
             InventoryManager.AddItem(new Sword(_game, this));
-            InventoryManager.AddItem(new Potion(_game, this));
+            InventoryManager.AddItem(new Shotgun(_game, this));
+            InventoryManager.AddItem(new SuperPotion(_game, this));
         }
 
         public void UnloadContent()
@@ -92,6 +94,8 @@ namespace HypoluxAdventure.Managers
         public void StartNextFloorTransition()
         {
             State = GameState.Transition;
+            CanMove = false;
+
             CameraManager.TargetZoom = 4;
             _fadeTimer = 0;
         }
@@ -108,7 +112,11 @@ namespace HypoluxAdventure.Managers
             ItemManager.Clear();
             MinimapOverlay.Clear();
 
-            if (Floor == FINAL_FLOOR) RoomManager.GenerateBossRoom();
+            if (Floor == FINAL_FLOOR)
+            {
+                RoomManager.GenerateBossRoom();
+                CanMove = false;
+            }
             else
             {
                 RoomManager.GenerateRooms();
@@ -143,6 +151,7 @@ namespace HypoluxAdventure.Managers
             if(State != GameState.Pause)
             {
                 Player.Update();
+                CameraManager.TargetPosition = Player.Position;
 
                 if (State == GameState.Play)
                 {
@@ -154,9 +163,7 @@ namespace HypoluxAdventure.Managers
 
                 _cursor.Update();
 
-                CameraManager.TargetPosition = Player.Position;
                 CameraManager.Update();
-
                 DamageOverlay.Update();
                 HealthOverlay.Update();
             }
@@ -217,6 +224,8 @@ namespace HypoluxAdventure.Managers
 
         public FrameInputs GatherInputs()
         {
+            if (!CanMove) return new FrameInputs();
+
             InputLayout inputLayout = Inputs.InputLayout;
 
             int x = 0, y = 0;
@@ -259,6 +268,7 @@ namespace HypoluxAdventure.Managers
         public void GameOver()
         {
             State = GameState.GameOver;
+            CanMove = false;
             _gameOverTimer = GAME_OVER_TIME;
 
             CameraManager.TargetZoom = 5.5f;
