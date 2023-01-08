@@ -37,21 +37,15 @@ namespace HypoluxAdventure.Models.Monsters
 
         public bool CanSeePlayer(float range)
         {
-            const int POINTS_AMOUNT = 10;
+            const int POINTS_AMOUNT = 12;
             if (!IsPlayerInRange(range)) return false;
 
             for(int i = 1; i <= POINTS_AMOUNT; i++)
             {
-                Vector2 lerpPoint = Vector2.Lerp(Position, gameManager.Player.Position, i / POINTS_AMOUNT);
+                Vector2 lerpPoint = Vector2.Lerp(Position, gameManager.Player.Position, (float)i / POINTS_AMOUNT);
                 Point tilePos = ((lerpPoint - room.Position) / Room.TILE_SIZE).ToPoint();
 
-                Logger.Debug(tilePos);
-
-                if (room.IsWall(tilePos.X, tilePos.Y))
-                {
-                    Logger.Debug($"Is wall {i} : {tilePos}");
-                    return false;
-                }
+                if (room.IsWall(tilePos.X, tilePos.Y)) return false;
             }
 
             return true;

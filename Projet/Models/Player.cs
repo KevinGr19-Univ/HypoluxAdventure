@@ -57,7 +57,7 @@ namespace HypoluxAdventure.Models
             if (_damageTimer <= 0 || _damageHitVisible) base.Draw();
         }
 
-        private const float MAX_SPEED = 700f; // 350
+        private const float MAX_SPEED = 350f;
         private const float ACCEL_RATE = 8f;
         private const float DECEL_RATE = 7f;
 

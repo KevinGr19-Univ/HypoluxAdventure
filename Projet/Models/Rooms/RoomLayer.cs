@@ -60,6 +60,7 @@ namespace HypoluxAdventure.Models.Rooms
         public static RoomLayer GetRandomRoomLayer() => _roomLayers[new Random().Next(0, _roomLayers.Length)];
 
         private const float MIN_MONSTER_SPAWN_RATE = 0.5f;
+        private const float MAX_MONSTER_SPAWN_RATE = 0.8f;
 
         private int[,] _layer;
         private Point _topLeftLayerPos;
@@ -83,7 +84,7 @@ namespace HypoluxAdventure.Models.Rooms
 
         public Point[] SpawnMonsters(float difficulty)
         {
-            int amount = 1;//(int)(_monsterSpawns.Length * MathUtils.Lerp(MIN_MONSTER_SPAWN_RATE, 1, difficulty));
+            int amount = (int)(_monsterSpawns.Length * MathUtils.Lerp(MIN_MONSTER_SPAWN_RATE, MAX_MONSTER_SPAWN_RATE, difficulty));
             return _monsterSpawns.TakeRandom(amount);
         }
 

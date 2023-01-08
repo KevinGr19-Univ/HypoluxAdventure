@@ -62,7 +62,7 @@ namespace HypoluxAdventure
 
             LoadInputLayout();
 
-            LoadVictory();
+            LoadMenu();
         }
 
         protected override void UnloadContent()

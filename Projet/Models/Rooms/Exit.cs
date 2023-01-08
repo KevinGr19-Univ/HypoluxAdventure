@@ -59,7 +59,7 @@ namespace HypoluxAdventure.Models.Rooms
             if (!_opened)
             {
                 int aliveMonsters = _room.GetAliveMonsters().Count();
-                if (Inputs.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.U))
+                if (aliveMonsters == 0)
                 {
                     _opened = true;
                     StartAnim();

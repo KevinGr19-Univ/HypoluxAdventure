@@ -29,7 +29,6 @@ namespace HypoluxAdventure.Models.Monsters
             AnimatedSprite.Play("idle");
 
             _speed = MathUtils.Lerp(MIN_SPEED, MAX_SPEED, gameManager.Difficulty);
-            _damage = (int)MathUtils.Lerp(MIN_DAMAGE, MAX_DAMAGE, gameManager.Difficulty);
         }
 
         public override Vector2 HitboxSize => new Vector2(24);
@@ -40,19 +39,16 @@ namespace HypoluxAdventure.Models.Monsters
 
         // Increasing speed with difficulty
         private const float MIN_SPEED = 100;
-        private const float MAX_SPEED = 200;
+        private const float MAX_SPEED = 140;
         private readonly float _speed;
 
-        // Increasing damage with difficulty
-        private const int MIN_DAMAGE = 2;
-        private const int MAX_DAMAGE = 5;
-        private readonly int _damage;
+        private const int DAMAGE = 3;
 
         private bool _followingPlayer = false;
 
         public override void Update()
         { 
-            _followingPlayer = _followingPlayer ? CanSeePlayer(KEEP_RANGE) : CanSeePlayer(DETECT_RANGE);
+            _followingPlayer = _followingPlayer ? IsPlayerInRange(KEEP_RANGE) : CanSeePlayer(DETECT_RANGE);
 
             if (overlapsPlayer || !_followingPlayer) Velocity = Vector2.Zero;
             else Velocity = TowardsPlayer() * _speed;
@@ -62,7 +58,7 @@ namespace HypoluxAdventure.Models.Monsters
 
         public override void OnPlayerCollision()
         {
-            gameManager.Player.Damage(_damage);
+            gameManager.Player.Damage(DAMAGE);
         }
 
         public override void OnDeath()

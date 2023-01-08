@@ -13,7 +13,7 @@
     "open": {
       "frames": [0,1,2,3,4,5,6,7],
       "isLooping": false,
-      "frameDuration": 0.06999998
+      "frameDuration": 0.05
     }
   }
 }

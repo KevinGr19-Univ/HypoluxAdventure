@@ -33,7 +33,7 @@ namespace HypoluxAdventure.Utils
                 throw new ArgumentException("Invalid amount to take random elements");
 
             T[] values = new T[amount];
-            List<int> indexes = Enumerable.Range(0, amount).ToList();
+            List<int> indexes = Enumerable.Range(0, array.Length).ToList();
 
             for(int i = 0; i < amount; i++)
             {
