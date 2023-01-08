@@ -77,6 +77,18 @@
 /processorParam:TextureFormat=Compressed
 /build:Font/TitleCredit.spritefont
 
+#begin img/arrow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/arrow.png
+
 #begin img/bomb.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -184,18 +196,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:img/diaboluxEyes.png
-
-#begin img/fireball.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:img/fireball.png
 
 #begin img/fireball.png
 /importer:TextureImporter
@@ -408,17 +408,77 @@
 /processorParam:TextureFormat=Compressed
 /build:PauseMenuFont.spritefont
 
+#begin sound/arrowReleasedSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/arrowReleasedSound.wav
+
 #begin sound/buttonSound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sound/buttonSound.wav
 
+#begin sound/deathSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/deathSound.wav
+
+#begin sound/diaboluxDefeatedSound.m4a
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/diaboluxDefeatedSound.m4a
+
+#begin sound/diaboluxLaughSound.m4a
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/diaboluxLaughSound.m4a
+
+#begin sound/fireballSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/fireballSound.wav
+
+#begin sound/healingSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/healingSound.wav
+
+#begin sound/hitSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/hitSound.wav
+
+#begin sound/knifeSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/knifeSound.wav
+
 #begin sound/lonelyInThisWorld.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:sound/lonelyInThisWorld.mp3
+
+#begin sound/shotgunSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/shotgunSound.wav
+
+#begin sound/swordSlashSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/swordSlashSound.wav
 
 #begin sound/wanderingInTheDark.mov
 /importer:Mp3Importer
