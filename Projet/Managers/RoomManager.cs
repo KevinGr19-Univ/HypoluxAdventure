@@ -227,6 +227,7 @@ namespace HypoluxAdventure.Managers
             // Init rooms
             foreach (Room room in roomsToList) room.GenerateTiles();
             foreach (Room room in chestRooms) room.SummonChest();
+            startingRoom.SummonChest(); // DEBUG
 
             // Exit room
             int maxSpawnDist = 0;
