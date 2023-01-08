@@ -28,7 +28,7 @@ namespace HypoluxAdventure.Models.Rooms
             SpriteSheet spriteSheet = game.Content.Load<SpriteSheet>("img/chestAnimation.sf", new JsonContentLoader());
             _sprite = new AnimatedSprite(spriteSheet);
             Hitbox = new RectangleF(pos.ToVector2() * Room.TILE_SIZE + room.Position, new Vector2(Room.TILE_SIZE));
-            _sprite.Play("idle");
+            _sprite.Play("closed");
         }
 
         public override void Draw()
@@ -50,7 +50,7 @@ namespace HypoluxAdventure.Models.Rooms
             _opened = true;
 
             // PLAY ANIMATION
-            _sprite.Play("open");
+            _sprite.Play("opened");
             DropItem dropItem = LootItem().ToDropItem(false, gameManager.Player.Position);
             gameManager.ItemManager.Summon(dropItem);
         }
