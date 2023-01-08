@@ -30,6 +30,8 @@ namespace HypoluxAdventure.Screens
         private Button _azerty;
         private Button _credit;
 
+        private bool _contole = true;
+
         public SettingsScreen(Game1 game) : base(game)
         {
         }
@@ -43,7 +45,11 @@ namespace HypoluxAdventure.Screens
 
             _menuFont = Content.Load<SpriteFont>("Font/MainMenuFont");
             _textPositionCenter = new Vector2(Application.SCREEN_WIDTH * 0.117f, Application.SCREEN_HEIGHT * 0.1f);
-            _menuButton = new Button(Game, _menuFont, "MENU", new Vector2(_textPositionCenter.X+30, _textPositionCenter.Y), () => { Game.LoadMenu(); });
+            _menuButton = new Button(Game, _menuFont, "MENU", new Vector2(_textPositionCenter.X+30, _textPositionCenter.Y), () => 
+            { 
+                Game.LoadMenu();
+                _contole = false;
+            });
             ChangeButtonColor(_menuButton);
 
             _name = new TextObject(_menuFont, "CHANGER LES CONTROLES :", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.3f));
@@ -59,7 +65,7 @@ namespace HypoluxAdventure.Screens
                 IsUnactive(_azerty);
             });
 
-            _credit = new Button(Game, _menuFont, "CREDIT", new Vector2(Application.SCREEN_WIDTH - (float)_menuFont.MeasureString("CREDIT").X * 0.7f, _textPositionCenter.Y), () => { Game.LoadCredit(); });
+            _credit = new Button(Game, _menuFont, "CREDITS", new Vector2(Application.SCREEN_WIDTH - (float)_menuFont.MeasureString("CREDIT").X * 0.8f, _textPositionCenter.Y), () => { Game.LoadCredit(); });
 
             
             if (Inputs.InputLayout.Name == "AZERTY")
@@ -97,10 +103,14 @@ namespace HypoluxAdventure.Screens
 
         public override void Update(GameTime gameTime)
         {
-            _menuButton.Update();
-            _qwerty.Update();
-            _azerty.Update();
-            _credit.Update();
+            if (_contole)
+            {
+                _menuButton.Update();
+                _qwerty.Update();
+                _azerty.Update();
+                _credit.Update();
+            }
+            
         }
 
         private void ChangeButtonColor(Button button)
