@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,41 +27,44 @@ namespace HypoluxAdventure.Models.Monsters
             GraphicsUtils.SetPixelSize(Sprite, 24, 24, ref Scale);
 
             AnimatedSprite.Play("idle");
+
+            _speed = MathUtils.Lerp(MIN_SPEED, MAX_SPEED, gameManager.Difficulty);
         }
 
         public override Vector2 HitboxSize => new Vector2(24);
         public override int MaxHealth => 10;
 
-        private const float DETECT_RANGE = 200f;
-        private const float KEEP_RANGE = 300f;
-        private const float SPEED = 100;
+        private const float DETECT_RANGE = 220f;
+        private const float KEEP_RANGE = 350f;
+
+        // Increasing speed with difficulty
+        private const float MIN_SPEED = 100;
+        private const float MAX_SPEED = 140;
+        private readonly float _speed;
+
+        private const int DAMAGE = 3;
 
         private bool _followingPlayer = false;
 
         public override void Update()
-        {
-            if (Inputs.IsKeyPressed(Keys.I)) Damage(3);
-
+        { 
             _followingPlayer = _followingPlayer ? IsPlayerInRange(KEEP_RANGE) : CanSeePlayer(DETECT_RANGE);
 
             if (overlapsPlayer || !_followingPlayer) Velocity = Vector2.Zero;
-            else Velocity = TowardsPlayer() * SPEED;
+            else Velocity = TowardsPlayer() * _speed;
 
             base.Update();
         }
 
         public override void OnPlayerCollision()
         {
-            gameManager.Player.Damage(2);
+            gameManager.Player.Damage(DAMAGE);
         }
 
         public override void OnDeath()
         {
             base.OnDeath();
-            AnimatedSprite.Play("death", () => {
-                IsSlained = true;
-                Logger.Debug("Completed");
-            });
+            AnimatedSprite.Play("death", () => { IsSlained = true; });
         }
     }
 }

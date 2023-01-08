@@ -6,6 +6,7 @@ using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,19 +37,15 @@ namespace HypoluxAdventure.Models.Monsters
 
         public bool CanSeePlayer(float range)
         {
-            const int POINTS_AMOUNT = 10;
+            const int POINTS_AMOUNT = 12;
             if (!IsPlayerInRange(range)) return false;
 
             for(int i = 1; i <= POINTS_AMOUNT; i++)
             {
-                Vector2 lerpPoint = Vector2.Lerp(Position, gameManager.Player.Position, i / POINTS_AMOUNT);
+                Vector2 lerpPoint = Vector2.Lerp(Position, gameManager.Player.Position, (float)i / POINTS_AMOUNT);
                 Point tilePos = ((lerpPoint - room.Position) / Room.TILE_SIZE).ToPoint();
 
-                if (room.IsWall(tilePos.X, tilePos.Y))
-                {
-                    Logger.Debug($"Is wall {i} : {tilePos}");
-                    return false;
-                }
+                if (room.IsWall(tilePos.X, tilePos.Y)) return false;
             }
 
             return true;
@@ -75,10 +72,12 @@ namespace HypoluxAdventure.Models.Monsters
             base.Update();
             AnimatedSprite.Update(Time.DeltaTime);
 
-            if (!IsDead) Move();
-
-            overlapsPlayer = Hitbox.Intersects(gameManager.Player.Hitbox);
-            if (overlapsPlayer) OnPlayerCollision();
+            if (!IsDead)
+            {
+                Move();
+                overlapsPlayer = Hitbox.Intersects(gameManager.Player.Hitbox);
+                if (overlapsPlayer) OnPlayerCollision();
+            }
 
             if(_pulseTimer > 0) _pulseTimer -= Time.DeltaTime;
         }
