@@ -83,7 +83,7 @@ namespace HypoluxAdventure.Models.Rooms
 
         public Point[] SpawnMonsters(float difficulty)
         {
-            int amount = (int)(_monsterSpawns.Length * (MIN_MONSTER_SPAWN_RATE * (1 - difficulty)));
+            int amount = 1;//(int)(_monsterSpawns.Length * MathUtils.Lerp(MIN_MONSTER_SPAWN_RATE, 1, difficulty));
             return _monsterSpawns.TakeRandom(amount);
         }
 

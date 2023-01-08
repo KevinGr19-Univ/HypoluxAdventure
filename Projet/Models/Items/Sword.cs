@@ -1,8 +1,10 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
+using HypoluxAdventure.Models.Monsters;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
@@ -26,7 +28,8 @@ namespace HypoluxAdventure.Models.Items
         protected override float defaultOrientation => 45;
         protected override int pixelSize => 40;
 
-        private const float SWEEP_ANGLE = 75;
+        private const float SWEEP_ANGLE = 90;
+        private const float ANIM_SWEEP_ANGLE = 75;
         private const float SWEEP_TIME = 0.4f;
         private const float SWEEP_RANGE = 85;
 
@@ -45,7 +48,7 @@ namespace HypoluxAdventure.Models.Items
                 UpdateRotation = false;
                 IsLocked = true;
 
-                localRotation = MathUtils.LerpInToPower(-SWEEP_ANGLE, SWEEP_ANGLE, SWEEP_TIME, _sweepTimer, 6);
+                localRotation = MathUtils.LerpInToPower(-ANIM_SWEEP_ANGLE, ANIM_SWEEP_ANGLE, SWEEP_TIME, _sweepTimer, 6);
                 sprite.Color = Color.Red;
                 _sweepTimer -= Time.DeltaTime;
             }
@@ -68,7 +71,26 @@ namespace HypoluxAdventure.Models.Items
 
         private void DamageMonsters()
         {
+            // Closest point of hitbox
+            Vector2 DistanceFromHitbox(RectangleF hitbox, Vector2 pos)
+            {
+                float x = (float)Math.Clamp(pos.X, hitbox.Left, hitbox.Right);
+                float y = (float)Math.Clamp(pos.Y, hitbox.Top, hitbox.Bottom);
 
+                return new Vector2(x, y) - pos;
+            }
+
+            Player player = gameManager.Player;
+
+            foreach(Monster monster in gameManager.RoomManager.CurrentRoom.GetAliveMonsters())
+            {
+                Vector2 diff = DistanceFromHitbox(monster.Hitbox, player.Position);
+                float length = diff.Length();
+                if (length > SWEEP_RANGE) continue;
+
+                float angle = MathHelper.ToDegrees(MathF.Acos(diff.Dot(player.ShootDirection) / length));
+                if (angle > -SWEEP_ANGLE && angle < SWEEP_ANGLE) monster.Damage(3);
+            }
         }
 
         public override void OnUse()

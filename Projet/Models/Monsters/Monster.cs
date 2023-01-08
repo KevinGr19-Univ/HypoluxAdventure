@@ -6,6 +6,7 @@ using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,8 @@ namespace HypoluxAdventure.Models.Monsters
                 Vector2 lerpPoint = Vector2.Lerp(Position, gameManager.Player.Position, i / POINTS_AMOUNT);
                 Point tilePos = ((lerpPoint - room.Position) / Room.TILE_SIZE).ToPoint();
 
+                Logger.Debug(tilePos);
+
                 if (room.IsWall(tilePos.X, tilePos.Y))
                 {
                     Logger.Debug($"Is wall {i} : {tilePos}");
@@ -75,10 +78,12 @@ namespace HypoluxAdventure.Models.Monsters
             base.Update();
             AnimatedSprite.Update(Time.DeltaTime);
 
-            if (!IsDead) Move();
-
-            overlapsPlayer = Hitbox.Intersects(gameManager.Player.Hitbox);
-            if (overlapsPlayer) OnPlayerCollision();
+            if (!IsDead)
+            {
+                Move();
+                overlapsPlayer = Hitbox.Intersects(gameManager.Player.Hitbox);
+                if (overlapsPlayer) OnPlayerCollision();
+            }
 
             if(_pulseTimer > 0) _pulseTimer -= Time.DeltaTime;
         }
