@@ -8,6 +8,7 @@ using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -80,7 +81,11 @@ namespace HypoluxAdventure.Managers
             const int MIN_SPAWN_DIST_STOP = 3;
             const int MAX_SPAWN_DIST_STOP = 7;
 
-            const float CHANGE_DIRECTION_CHANCE = 0.6f;
+            const int MIN_SPAWN_DIST_CHEST = 3;
+            const float CHEST_CHANCE = 0.5f;
+            const float CHEST_REDUCE_COEF = 0.5f;
+
+            const float CHANGE_DIRECTION_CHANCE = 0.5f;
             const int MIN_SPAWN_DIST_BRANCH = 3;
             const float BRANCHING_CHANCE = 0.6f;
             const float BRANCHING_REDUCE_COEF = 0.5f;
@@ -101,6 +106,7 @@ namespace HypoluxAdventure.Managers
 
             // Place neighbor rooms
             List<Room> roomsToList = new List<Room>() { startingRoom };
+            List<Room> chestRooms = new List<Room>();
             Queue<Room> rooms = new Queue<Room>();
 
             void AddRoomWithDirection(Room parentRoom, Point dir)
@@ -137,6 +143,13 @@ namespace HypoluxAdventure.Managers
             // Queue loop
             while(rooms.TryDequeue(out Room room))
             {
+                // Generate chest
+                if(room.RawSpawnDistance >= MIN_SPAWN_DIST_CHEST)
+                {
+                    float chestChance = CHEST_CHANCE * MathF.Pow(CHEST_REDUCE_COEF, chestRooms.Count);
+                    if (r.NextSingle() < chestChance) chestRooms.Add(room);
+                }
+
                 // Stop generating further
                 float stopChance = MathUtils.InverseLerp(MIN_SPAWN_DIST_STOP, MAX_SPAWN_DIST_STOP, room.RawSpawnDistance);
                 stopChance = (float)Math.Clamp(stopChance, 0, 1);
@@ -213,6 +226,7 @@ namespace HypoluxAdventure.Managers
 
             // Init rooms
             foreach (Room room in roomsToList) room.GenerateTiles();
+            foreach (Room room in chestRooms) room.SummonChest();
 
             // Exit room
             int maxSpawnDist = 0;

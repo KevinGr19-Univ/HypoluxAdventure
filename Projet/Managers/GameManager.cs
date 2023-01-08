@@ -9,7 +9,7 @@ using HypoluxAdventure.Models;
 using HypoluxAdventure.Models.UI;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
-using HypoluxAdventure.Models.Item;
+using HypoluxAdventure.Models.Items;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 
@@ -171,12 +171,16 @@ namespace HypoluxAdventure.Managers
             {
                 _game.IsMouseVisible = false;
                 
-                if(State != GameState.GameOver && State != GameState.Transition)
+                if(State != GameState.Transition)
                 {
                     HealthOverlay.Draw();
-                    _cursor.Draw();
-                    InventoryManager.Draw();
-                    MinimapOverlay.Draw();
+
+                    if(State != GameState.GameOver)
+                    {
+                        _cursor.Draw();
+                        InventoryManager.Draw();
+                        MinimapOverlay.Draw();
+                    }
                 }
             }
             else

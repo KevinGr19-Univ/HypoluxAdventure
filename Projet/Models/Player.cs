@@ -18,6 +18,7 @@ namespace HypoluxAdventure.Models
     {
         public const int SIZE = 32;
 
+        public override Vector2 HitboxSize => new Vector2(SIZE);
         public override int MaxHealth => 20;
 
         public Player(Game1 game, GameManager gameManager) : base(game, gameManager)
@@ -40,7 +41,6 @@ namespace HypoluxAdventure.Models
                 CalculateShootDirection();
                 Move();
 
-                CalculateHitbox();
                 ProcessPulse();
 
                 if(Controllable) Sprite.Effect = IsFlipped ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
@@ -57,8 +57,6 @@ namespace HypoluxAdventure.Models
             if (_damageTimer <= 0 || _damageHitVisible) base.Draw();
         }
 
-        public RectangleF Hitbox { get; private set; }
-
         private const float MAX_SPEED = 800f; // 300
         private const float ACCEL_RATE = 8f;
         private const float DECEL_RATE = 7f;
@@ -74,11 +72,6 @@ namespace HypoluxAdventure.Models
             Vector2 targetVel = Vector2.Normalize(new Vector2(_inputs.X, _inputs.Y)) * MAX_SPEED;
             Vector2 velDif = targetVel - Velocity;
             Velocity += velDif * ACCEL_RATE * Time.DeltaTime;
-        }
-
-        private void CalculateHitbox()
-        {
-            Hitbox = new RectangleF((Position - new Vector2(SIZE) * 0.5f), new Vector2(SIZE));
         }
 
         public Vector2 ShootDirection { get; private set; }

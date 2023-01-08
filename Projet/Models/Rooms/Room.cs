@@ -164,13 +164,36 @@ namespace HypoluxAdventure.Models.Rooms
         private List<Monster> _monsters = new List<Monster>();
         public int MonsterCount => _monsters.Count;
 
+        public void GenerateMonsters()
+        {
+            Point[] spawnPoints = _roomLayer.SpawnMonsters(_gameManager.Difficulty);
+            foreach(Point spawnPoint in spawnPoints)
+            {
+                Vector2 spawnPos = spawnPoint.ToVector2() * TILE_SIZE + Position;
+                _monsters.Add(RandomMonster(spawnPos));
+            }
+        }
+
+        private Monster RandomMonster(Vector2 spawnPos)
+        {
+            return null;
+        }
+
         public IEnumerable<Monster> GetAliveMonsters() => _monsters.Where(monster => !monster.IsDead && !monster.IsSlained);
 
         // Projectiles
         // TODO: Room projectiles
 
         // Chest
-        // TODO: Chest? or List of chests
+        public Chest Chest { get; private set; } = null;
+
+        public void SummonChest()
+        {
+            Logger.Warn(PointPos);
+
+            Point chestPos = _roomLayer.SpawnChest();
+            Chest = new Chest(_game, _gameManager, this, chestPos);
+        }
 
         // Exit
         public Exit Exit { get; private set; }
@@ -199,6 +222,7 @@ namespace HypoluxAdventure.Models.Rooms
 
         public void Update(bool transitionOut)
         {
+            Chest?.Update();
             Exit?.Update();
 
             if (!transitionOut)
@@ -229,6 +253,7 @@ namespace HypoluxAdventure.Models.Rooms
                     _game.BackgroundCanvas.Draw(_roomManager.TileSet, destRect, sourceRect, Color.White);
                 }
 
+            Chest?.Draw();
             Exit?.Draw();
         }
 

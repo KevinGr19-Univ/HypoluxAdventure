@@ -1,5 +1,5 @@
 ﻿using HypoluxAdventure.Models;
-using HypoluxAdventure.Models.Item;
+using HypoluxAdventure.Models.Items;
 using System;
 using System.Collections.Generic;
 using System.Linq;

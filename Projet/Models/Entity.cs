@@ -10,6 +10,7 @@ using HypoluxAdventure.Managers;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using HypoluxAdventure.Utils;
+using HypoluxAdventure.Models.Rooms;
 
 namespace HypoluxAdventure.Models
 {
@@ -18,7 +19,10 @@ namespace HypoluxAdventure.Models
         public Entity(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
             Health = MaxHealth;
+            isPlayer = this is Player; // Literally
         }
+
+        public readonly bool isPlayer;
 
         public Sprite Sprite { get; protected set; }
 
@@ -27,6 +31,9 @@ namespace HypoluxAdventure.Models
 
         public float Rotation;
         public Vector2 Scale = Vector2.One;
+
+        abstract public Vector2 HitboxSize { get; }
+        public RectangleF Hitbox => new RectangleF(Position - HitboxSize * 0.5f, HitboxSize);
 
         abstract public int MaxHealth { get; }
         public bool IsDead => Health <= 0;
@@ -76,11 +83,24 @@ namespace HypoluxAdventure.Models
             }
         }
 
-        /// <summary>Default method to move entity with its velocity.</summary>
-        public void Move()
+        /// <summary>Default method to move entity with its velocity and handle collisions.</summary>
+        public virtual void Move()
         {
             Position += Velocity * Time.DeltaTime;
+            HandleCollisions();
         }
+
+        #region Collisions
+        private void HandleCollisions()
+        {
+            Chest chestCol;
+            // X Axis
+
+
+            // Y Axis
+        }
+
+        #endregion
 
         public virtual void OnDeath() { }
         public virtual void OnDamage() { }

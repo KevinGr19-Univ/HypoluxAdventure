@@ -1,6 +1,6 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Models;
-using HypoluxAdventure.Models.Item;
+using HypoluxAdventure.Models.Items;
 using HypoluxAdventure.Models.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

@@ -1,6 +1,7 @@
 ﻿using HypoluxAdventure.Managers;
 using HypoluxAdventure.Models.Rooms;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace HypoluxAdventure.Models.Monsters
 {
     internal abstract class Monster : Entity
     {
+        protected AnimatedSprite AnimatedSprite => (AnimatedSprite)base.Sprite;
         protected Room room;
 
         /// <summary>The spawn position of the monster, relative to the room.</summary>
@@ -24,6 +26,8 @@ namespace HypoluxAdventure.Models.Monsters
             this.room = room;
             spawnPosition = spawnPos;
         }
+
+        public bool NoClip = true;
 
         abstract public void OnPlayerCollision();
         abstract public void Spawn();

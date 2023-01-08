@@ -9,7 +9,7 @@ using HypoluxAdventure.Models;
 using HypoluxAdventure.Screens;
 using MonoGame.Extended;
 using HypoluxAdventure.Managers;
-using HypoluxAdventure.Models.Item;
+using HypoluxAdventure.Models.Items;
 using System.IO;
 
 namespace HypoluxAdventure
