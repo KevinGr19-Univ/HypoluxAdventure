@@ -10,10 +10,12 @@ using HypoluxAdventure.Models.UI;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using HypoluxAdventure.Models.Item;
+using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace HypoluxAdventure.Managers
 {
-    internal enum GameState { Loading, Play, Pause, Transition, GameOver }
+    internal enum GameState { Play, Pause, Transition, GameOver }
 
     internal class GameManager
     {
@@ -74,9 +76,26 @@ namespace HypoluxAdventure.Managers
             _game.IsMouseVisible = true;
         }
 
+        #region Next floor transition
+        private const float FADE_TIME = 1.5f;
+        private float _fadeTimer;
+
+        public void StartNextFloorTransition()
+        {
+            State = GameState.Transition;
+            CameraManager.TargetZoom = 4;
+            _fadeTimer = 0;
+        }
+
         public void LoadNextFloor()
         {
             Floor -= 1;
+            if(Floor < FINAL_FLOOR)
+            {
+                LoadVictoryScreen();
+                return;
+            }
+
             ItemManager.Clear();
             MinimapOverlay.Clear();
 
@@ -86,6 +105,14 @@ namespace HypoluxAdventure.Managers
 
             _game.Camera.Position = RoomManager.CurrentRoom.Rectangle.Center;
             _game.Camera.Zoom = CameraManager.TargetZoom = 1.5f;
+
+            State = GameState.Play;
+        }
+        #endregion
+
+        public void LoadVictoryScreen()
+        {
+
         }
 
         public void Update()
@@ -104,11 +131,11 @@ namespace HypoluxAdventure.Managers
             if(State != GameState.Pause)
             {
                 Player.Update();
-                RoomManager.Update();
-                MinimapOverlay.Update();
 
                 if (State == GameState.Play)
                 {
+                    MinimapOverlay.Update();
+                    RoomManager.Update();
                     ItemManager.Update();
                     InventoryManager.Update();
                 }
@@ -125,6 +152,17 @@ namespace HypoluxAdventure.Managers
             {
                 _pauseManager.Update();
             }
+
+            if (State == GameState.Transition && _fadeTimer < FADE_TIME)
+            {
+                _fadeTimer += Time.DeltaTime;
+                if (_fadeTimer >= FADE_TIME)
+                {
+                    _fadeTimer = FADE_TIME;
+                    LoadNextFloor();
+                }
+            }
+            else if (_fadeTimer > 0) _fadeTimer -= Time.DeltaTime;
         }
 
         public void Draw()
@@ -132,10 +170,10 @@ namespace HypoluxAdventure.Managers
             if(State != GameState.Pause)
             {
                 _game.IsMouseVisible = false;
-                HealthOverlay.Draw();
                 
-                if(State != GameState.GameOver)
+                if(State != GameState.GameOver && State != GameState.Transition)
                 {
+                    HealthOverlay.Draw();
                     _cursor.Draw();
                     InventoryManager.Draw();
                     MinimapOverlay.Draw();
@@ -151,6 +189,12 @@ namespace HypoluxAdventure.Managers
             RoomManager.Draw();
             ItemManager.Draw();
             DamageOverlay.Draw();
+
+            if(_fadeTimer > 0)
+            {
+                Color color = new Color(Color.Black, _fadeTimer / FADE_TIME);
+                _game.UICanvas.FillRectangle(0, 0, Application.SCREEN_WIDTH, Application.SCREEN_HEIGHT, color, 1);
+            }
         }
 
         public FrameInputs FrameInputs { get; private set; }

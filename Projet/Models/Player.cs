@@ -59,7 +59,7 @@ namespace HypoluxAdventure.Models
 
         public RectangleF Hitbox { get; private set; }
 
-        private const float MAX_SPEED = 300f;
+        private const float MAX_SPEED = 800f; // 300
         private const float ACCEL_RATE = 8f;
         private const float DECEL_RATE = 7f;
 

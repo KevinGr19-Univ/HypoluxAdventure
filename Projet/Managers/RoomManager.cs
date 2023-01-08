@@ -334,11 +334,8 @@ namespace HypoluxAdventure.Managers
 
         public override void Draw()
         {
-            //if (_changeRoomTimer > 0) _previousRoom.Draw();
-            //CurrentRoom.Draw();
-
-            for (int j = 0; j < MAP_ROOM_WIDTH; j++) for (int i = 0; i < MAP_ROOM_WIDTH; i++)
-                    GetRoom(i, j)?.Draw();
+            if (_changeRoomTimer > 0) _previousRoom.Draw();
+            CurrentRoom.Draw();
         }
     }
 }

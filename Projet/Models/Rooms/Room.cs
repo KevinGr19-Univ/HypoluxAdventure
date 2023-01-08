@@ -161,8 +161,10 @@ namespace HypoluxAdventure.Models.Rooms
         public Vector2 Position => Rectangle.TopLeft;
 
         // Monsters
-        private List<Monster> _monsters = new List<Monster>(0);
-        private int _aliveMonsters;
+        private List<Monster> _monsters = new List<Monster>();
+        public int MonsterCount => _monsters.Count;
+
+        public IEnumerable<Monster> GetAliveMonsters() => _monsters.Where(monster => !monster.IsDead && !monster.IsSlained);
 
         // Projectiles
         // TODO: Room projectiles
@@ -197,6 +199,8 @@ namespace HypoluxAdventure.Models.Rooms
 
         public void Update(bool transitionOut)
         {
+            Exit?.Update();
+
             if (!transitionOut)
             {
                 _monsters.ForEach((monster) =>
@@ -224,6 +228,8 @@ namespace HypoluxAdventure.Models.Rooms
 
                     _game.BackgroundCanvas.Draw(_roomManager.TileSet, destRect, sourceRect, Color.White);
                 }
+
+            Exit?.Draw();
         }
 
     }

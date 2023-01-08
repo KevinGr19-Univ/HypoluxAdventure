@@ -1,7 +1,9 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
+using HypoluxAdventure.Models.UI;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
@@ -23,9 +25,12 @@ namespace HypoluxAdventure.Models
         private static readonly Color BG_COLOR = new Color(Color.Black, 0.5f);
         private static readonly Color ROOM_COLOR = Color.White;
         private static readonly Color CURRENT_ROOM_COLOR = Color.Red;
+        private static readonly Color EXIT_ROOM_COLOR = Color.Green;
 
         private RectangleF _background;
         private Vector2 _roomRectTopLeft;
+
+        private TextObject _floorCounter;
 
         private List<Point> _visitedRooms = new List<Point>();
 
@@ -33,6 +38,9 @@ namespace HypoluxAdventure.Models
         {
             _background = new RectangleF(25, 25, WIDTH, WIDTH);
             _roomRectTopLeft = _background.TopLeft + new Vector2(WIDTH - ROOM_RECT_WIDTH) * 0.5f;
+
+            SpriteFont font = game.Content.Load<SpriteFont>("Font/FloorTextFont");
+            _floorCounter = new TextObject(font, "No text", _background.Center + new Vector2(0, WIDTH * 0.5f + 20));
         }
 
         public override void Update() { }
@@ -47,9 +55,14 @@ namespace HypoluxAdventure.Models
                 RectangleF rect = new RectangleF(topLeft, new Vector2(TILE_RATIO));
                 rect = rect.Scale(new Vector2(ROOM_TILE_SCALE));
 
-                Color color = gameManager.RoomManager.CurrentRoom.PointPos == roomPos ? CURRENT_ROOM_COLOR : ROOM_COLOR;
+                Color color;
+                if (gameManager.RoomManager.GetRoom(roomPos).Exit != null) color = EXIT_ROOM_COLOR;
+                else color = gameManager.RoomManager.CurrentRoom.PointPos == roomPos ? CURRENT_ROOM_COLOR : ROOM_COLOR;
+
                 game.UICanvas.FillRectangle(rect, color, 0.5f);
             }
+
+            _floorCounter.Draw(game.UICanvas);
         }
 
         public void Visit(Point point)
@@ -60,6 +73,7 @@ namespace HypoluxAdventure.Models
         public void Clear()
         {
             _visitedRooms.Clear();
+            _floorCounter.Text = $"Étage {gameManager.Floor}";
         }
     }
 }
