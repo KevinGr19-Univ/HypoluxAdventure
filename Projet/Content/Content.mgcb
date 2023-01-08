@@ -245,6 +245,18 @@
 /processorParam:TextureFormat=Color
 /build:img/Globux.png
 
+#begin img/healingPotion.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/healingPotion.png
+
 #begin img/healthBarDecoration.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -328,6 +340,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:img/mapTextureSample.png
+
+#begin img/maxHealingPotion.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:img/maxHealingPotion.png
 
 #begin img/perso.png
 /importer:TextureImporter

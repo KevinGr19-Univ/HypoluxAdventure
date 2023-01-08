@@ -63,7 +63,7 @@ namespace HypoluxAdventure.Models.Rooms
         private Item LootItem()
         {
             // TODO: Faire item random
-            return new Shotgun(game, gameManager);
+            return new HealthPotion(game, gameManager);
         }
     }
 }
