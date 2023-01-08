@@ -3,6 +3,7 @@ using HypoluxAdventure.Managers;
 using HypoluxAdventure.Models.Rooms;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
