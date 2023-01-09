@@ -22,8 +22,6 @@ namespace HypoluxAdventure.Screens
         private float _titleRotation;
         private Vector2 _titleScale;
 
-        private TextObject _name;
-
         private Button _menuButton;
         private SpriteFont _menuFont;
         private Vector2 _textPositionCenter;
@@ -34,13 +32,13 @@ namespace HypoluxAdventure.Screens
 
         private TextObject[] _text;
 
-        private Texture2D _key;
-        private SpriteSheet _shoot;
-        private SpriteSheet _use;
-        private Texture2D _changeSlot1;
-        private Texture2D _changeSlot2;
-        private Texture2D _stop;
-        private Texture2D _tab;
+        private Sprite _key;
+        private AnimatedSprite _shoot;
+        private AnimatedSprite _use;
+        private Sprite _changeSlot1;
+        private Sprite _changeSlot2;
+        private Sprite _stop;
+        private Sprite _tab;
 
         private bool _contole = true;
 
@@ -66,23 +64,23 @@ namespace HypoluxAdventure.Screens
 
             _text = new TextObject[]
             {
-                new TextObject(_menuFont, "CONTROLES :", new Vector2(Application.SCREEN_WIDTH*0.2f, Application.SCREEN_HEIGHT*0.3f)),
+                new TextObject(_menuFont, "CONTROLES :", new Vector2(Application.SCREEN_WIDTH*0.2f-90, Application.SCREEN_HEIGHT*0.3f)),
                 new TextObject(_menuFont, "CHANGER LES CONTROLES :", new Vector2(Application.SCREEN_WIDTH * 0.7f, Application.SCREEN_HEIGHT * 0.3f)),
-                new TextObject(_menuFont, "BOUGER :", new Vector2(Application.SCREEN_WIDTH*0.2f, Application.SCREEN_HEIGHT*0.4f)),
-                new TextObject(_menuFont, "TAPER/TIRER :", new Vector2(Application.SCREEN_WIDTH*0.2f, Application.SCREEN_HEIGHT*0.5f)),
-                new TextObject(_menuFont, "UTILISER :", new Vector2(Application.SCREEN_WIDTH*0.2f, Application.SCREEN_HEIGHT*0.6f)),
-                new TextObject(_menuFont, "CHANGER DE SLOT :", new Vector2(Application.SCREEN_WIDTH*0.2f, Application.SCREEN_HEIGHT*0.7f)),
-                new TextObject(_menuFont, "PAUSE :", new Vector2(Application.SCREEN_WIDTH*0.2f, Application.SCREEN_HEIGHT*0.8f)),
-                new TextObject(_menuFont, "POSER UN ITEM :", new Vector2(Application.SCREEN_WIDTH*0.2f, Application.SCREEN_HEIGHT*0.9f))
+                new TextObject(_menuFont, "BOUGER :", new Vector2(Application.SCREEN_WIDTH*0.2f-150, Application.SCREEN_HEIGHT*0.4f)),
+                new TextObject(_menuFont, "TAPER/TIRER :", new Vector2(Application.SCREEN_WIDTH*0.2f-100, Application.SCREEN_HEIGHT*0.5f)),
+                new TextObject(_menuFont, "UTILISER :", new Vector2(Application.SCREEN_WIDTH*0.2f-125, Application.SCREEN_HEIGHT*0.6f)),
+                new TextObject(_menuFont, "CHANGER DE SLOT :", new Vector2(Application.SCREEN_WIDTH*0.2f-60, Application.SCREEN_HEIGHT*0.7f)),
+                new TextObject(_menuFont, "PAUSE :", new Vector2(Application.SCREEN_WIDTH*0.2f-155, Application.SCREEN_HEIGHT*0.8f)),
+                new TextObject(_menuFont, "POSER UN ITEM :", new Vector2(Application.SCREEN_WIDTH*0.2f-75, Application.SCREEN_HEIGHT*0.9f))
             };
 
             
-            _shoot = Game.Content.Load<SpriteSheet>("img/leftClickAnimation.sf", new JsonContentLoader());
-            _use = Game.Content.Load<SpriteSheet>("img/rightClickAnimation.sf", new JsonContentLoader());
-            _changeSlot1 = Game.Content.Load<Texture2D>("img/slotsKeys");
+            _shoot = new AnimatedSprite(Content.Load<SpriteSheet>("img/leftClickAnimation.sf", new JsonContentLoader()));
+            _use = new AnimatedSprite(Content.Load<SpriteSheet>("img/rightClickAnimation.sf", new JsonContentLoader()));
+            _changeSlot1 = new Sprite(Content.Load<Texture2D>("img/slotsKeys"));
 
-            _stop = Game.Content.Load<Texture2D>("img/spaceKey");
-            _tab = Game.Content.Load<Texture2D>("img/tabKey");
+            _stop = new Sprite(Content.Load<Texture2D>("img/spaceKey"));
+            _tab = new Sprite(Content.Load<Texture2D>("img/tabKey"));
 
             _azerty = new Button(Game, _menuFont, "AZERTY", new Vector2(Application.SCREEN_WIDTH * 0.7f, Application.SCREEN_HEIGHT * 0.5f),() => {
                 Inputs.ChangeInputLayout(Inputs.AZERTY);
@@ -97,18 +95,18 @@ namespace HypoluxAdventure.Screens
 
             _credit = new Button(Game, _menuFont, "CREDITS", new Vector2(Application.SCREEN_WIDTH - (float)_menuFont.MeasureString("CREDIT").X * 0.8f, _textPositionCenter.Y), () => { Game.LoadCredit(); });
 
-            
+       
             if (Inputs.InputLayout.Name == "AZERTY")
             {
                 IsUnactive(_qwerty);
                 ChangeButtonColor(_azerty);
-                _key = Game.Content.Load<Texture2D>("img/azertyLayoutKeys");
+                _key = new Sprite(Content.Load<Texture2D>("img/azertyLayoutKeys"));
             }
             else
             {
                 IsUnactive(_azerty);
                 ChangeButtonColor(_qwerty);
-                _key = Game.Content.Load<Texture2D>("img/qwertyLayoutKeys");
+                _key = new Sprite(Content.Load<Texture2D>("img/qwertyLayoutKeys"));
             }
 
             
@@ -137,6 +135,17 @@ namespace HypoluxAdventure.Screens
                 text.Draw(Game.UICanvas);
             }
 
+            _key.Draw(Game.UICanvas, new Vector2(Application.SCREEN_WIDTH * 0.2f-20 , Application.SCREEN_HEIGHT * 0.4f-10), 0, new Vector2(2));
+            _changeSlot1.Draw(Game.UICanvas, new Vector2(Application.SCREEN_WIDTH * 0.2f+150, Application.SCREEN_HEIGHT * 0.7f), 0, new Vector2(2));
+            _stop.Draw(Game.UICanvas, new Vector2(Application.SCREEN_WIDTH * 0.2f - 50, Application.SCREEN_HEIGHT * 0.8f), 0, new Vector2(2));
+            _tab.Draw(Game.UICanvas, new Vector2(Application.SCREEN_WIDTH * 0.2f + 100, Application.SCREEN_HEIGHT * 0.9f),0, new Vector2(2));
+
+
+            _shoot.Draw(Game.UICanvas, new Vector2(Application.SCREEN_WIDTH * 0.2f+50 , Application.SCREEN_HEIGHT * 0.5f), 0, new Vector2(2));
+            _use.Draw(Game.UICanvas, new Vector2(Application.SCREEN_WIDTH * 0.2f , Application.SCREEN_HEIGHT * 0.6f), 0, new Vector2(2));
+
+            _shoot.Play("clicked");
+            _use.Play("clicked");
         }
 
         public override void Update(GameTime gameTime)
@@ -147,6 +156,16 @@ namespace HypoluxAdventure.Screens
                 _qwerty.Update();
                 _azerty.Update();
                 _credit.Update();
+                if (Inputs.InputLayout.Name == "AZERTY")
+                {
+                    _key = new Sprite(Content.Load<Texture2D>("img/azertyLayoutKeys"));
+                }
+                else
+                {
+                    _key = new Sprite(Content.Load<Texture2D>("img/qwertyLayoutKeys"));
+                }
+                _shoot.Update(gameTime);
+                _use.Update(gameTime);
             }
             
         }
