@@ -46,12 +46,12 @@ namespace HypoluxAdventure.Screens
             AddLine(_normalFont,"Une IA pas très intélligente",2);
 
             AddLine(_normalFont,"Direction artistique et graphismes conçuent par :",1);
-            AddLine(_normalFont,"Mathieu ROSTAING (Majeure partie)",1);
+            AddLine(_normalFont,"Mathieu ROSTAING",1);
             AddLine(_normalFont,"Kévin GRANDJEAN",1);
             AddLine(_normalFont,"Noa GUILLOT" ,2);
 
             AddLine(_normalFont,"Sound design composé par :",1);
-            AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING",3);
+            AddLine(_normalFont,"Mathieu ROSTAING",3);
 
             AddLine(_titleFont, "Merci d'avoir joué.", 1);
 
