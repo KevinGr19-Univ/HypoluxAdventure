@@ -23,7 +23,7 @@ namespace HypoluxAdventure.Models.Monsters
             Sprite = new AnimatedSprite(spriteSheet);
             GraphicsUtils.SetPixelSize(Sprite, 200, 200, ref Scale);
 
-            SoundPlayer.PlaySound("sound/diaboluxLaughSound");
+            SoundPlayer.PlaySound("sound/diaboluxLaughSound",0.5f,0.5f);
             AnimatedSprite.Play("laugh");
         }
 
