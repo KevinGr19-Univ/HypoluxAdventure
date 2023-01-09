@@ -7,17 +7,17 @@
   "cycles": {
     "idleSide": {
       "frames": [0,1],
-      "isLooping": false,
+      "isLooping": true,
       "frameDuration": 0.2
     },
     "idleSouth": {
-      "frames": [2,3],
-      "isLooping": false,
+      "frames": [ 2, 3 ],
+      "isLooping": true,
       "frameDuration": 0.2
     },
     "idleNorth": {
-      "frames": [4,5],
-      "isLooping": false,
+      "frames": [ 4, 5 ],
+      "isLooping": true,
       "frameDuration": 0.2
     },
     "death": {
