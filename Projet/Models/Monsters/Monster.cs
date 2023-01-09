@@ -51,10 +51,12 @@ namespace HypoluxAdventure.Models.Monsters
             return true;
         }
 
-        public Vector2 TowardsPlayer()
+        public Vector2 TowardsPlayer(float futureTime = 0)
         {
-            if (gameManager.Player.Position == Position) return Vector2.Zero;
-            return Vector2.Normalize(gameManager.Player.Position - Position);
+            Vector2 futurePos = gameManager.Player.Position + gameManager.Player.Velocity * futureTime;
+            if (futurePos == Position) return Vector2.Zero;
+
+            return Vector2.Normalize(futurePos - Position);
         }
 
         public int GetOrientation(Vector2 direction)

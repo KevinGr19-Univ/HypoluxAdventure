@@ -37,17 +37,12 @@ namespace HypoluxAdventure.Models.Monsters
         private const float MAX_DASH_COOLDOWN = 2;
         private const float MIN_DASH_COOLDOWN = 1.2f;
 
-        private const float REGISTER_DIRECTION_TIME = 0.1f;
-
         private const float DASH_SPEED = 430f;
         private const float DECEL_RATE = 2;
 
         private bool _followingPlayer = false;
         private readonly float _dashTime;
         private float _dashTimer;
-
-        private bool _registered = false;
-        private Vector2 _dashDirection;
 
         private int _spriteOrientation = 2;
 
@@ -70,20 +65,12 @@ namespace HypoluxAdventure.Models.Monsters
                 if (_followingPlayer)
                 {
                     if (!IsPlayerInRange(KEEP_RANGE)) _followingPlayer = false;
-                    else if(_dashTimer > 0)
-                    {
-                        _dashTimer -= Time.DeltaTime;
-                        if (_dashTimer < REGISTER_DIRECTION_TIME && !_registered)
-                        {
-                            _dashDirection = TowardsPlayer();
-                            _registered = true;
-                        }
-                    }
+                    else if(_dashTimer > 0) _dashTimer -= Time.DeltaTime;
+
                     else
                     {
-                        _registered = false;
                         _dashTimer = _dashTime;
-                        Velocity = _dashDirection * DASH_SPEED;
+                        Velocity = TowardsPlayer(0.2f) * DASH_SPEED;
                     }
                 }
             }

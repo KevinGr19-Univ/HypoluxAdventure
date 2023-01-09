@@ -63,6 +63,8 @@ namespace HypoluxAdventure.Models.Projectiles
             base.OnDespawn();
             SoundPlayer.PlaySound("sound/knifeSound", pitch: -0.3f);
 
+            if (!IsPlayerProjectile) return;
+
             DropItem item = new KnifeItem(game, gameManager).ToDropItem(false, _previousPos);
             gameManager.ItemManager.Summon(item);
         }
