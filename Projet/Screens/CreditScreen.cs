@@ -36,27 +36,28 @@ namespace HypoluxAdventure.Screens
             _titleFont = Content.Load<SpriteFont>("Font/TitleCredit");
             _normalFont = Content.Load<SpriteFont>("Font/CreditFont");
 
-            AddLine(_titleFont, "Crédits : ", 3);
+            AddLine(_titleFont, "Crédits :", 2);
             AddLine(_normalFont,"Jeu créé par :",1);
-            AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING",1);
-            AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
-            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,2);
+            AddLine(_normalFont,"Mathieu ROSTAING",1);
+            AddLine(_normalFont,"Kévin GRANDJEAN",1);
+            AddLine(_normalFont,"Noa GUILLOT" ,2);
+
             AddLine(_normalFont,"Level Design fait par :",1);
             AddLine(_normalFont,"Une IA pas très intélligente",2);
+
             AddLine(_normalFont,"Direction artistique et graphismes conçuent par :",1);
-            AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING (Majeure partie)",1);
-            AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
-            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,2);
+            AddLine(_normalFont,"Mathieu ROSTAING (Majeure partie)",1);
+            AddLine(_normalFont,"Kévin GRANDJEAN",1);
+            AddLine(_normalFont,"Noa GUILLOT" ,2);
+
             AddLine(_normalFont,"Sound design composé par :",1);
-            AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING",1);
-            AddLine(_normalFont,"Kévin 'FrancePVP' GRANDJEAN",1);
-            AddLine(_normalFont,"Noa 'ShakraSasukeXxxD4RK_Sn4keX223xxXNaruto' GUILLOT" ,2);
-            AddLine(_normalFont,"-... --- -... .. -. ..- ... ",1);
-            AddLine(_normalFont,"-.. .-. .- --. --- -. ..- ...",1);
+            AddLine(_normalFont,"Mathieu 'HazelSoul' ROSTAING",3);
+
+            AddLine(_titleFont, "Merci d'avoir joué.", 1);
 
             _music = Content.Load<Song>("sound/wanderingInTheDark");
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.1f;
+            MediaPlayer.Volume = 0.5f;
             MediaPlayer.Play(_music);
         }
 
