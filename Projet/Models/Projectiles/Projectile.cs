@@ -81,6 +81,7 @@ namespace HypoluxAdventure.Models.Projectiles
         {
             if (IsPlayerProjectile) gameManager.Player.ProjectileHolder.SpawnProjectile(this);
             else gameManager.RoomManager.CurrentRoom.ProjectileHolder.SpawnProjectile(this);
+            OnSpawn();
         }
 
         public void Despawn()
@@ -101,6 +102,7 @@ namespace HypoluxAdventure.Models.Projectiles
         /// <returns>Whether or not the projectile should continue to hit other enemies that frame.</returns>
         abstract public bool OnEntityCollision(Entity entity);
 
+        public virtual void OnSpawn() { }
         public virtual void OnDespawn() { }
     }
 }

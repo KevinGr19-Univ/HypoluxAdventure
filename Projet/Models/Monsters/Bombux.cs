@@ -31,7 +31,7 @@ namespace HypoluxAdventure.Models.Monsters
         public override Vector2 HitboxSize => new Vector2(45, 72);
         public override int MaxHealth => 24;
 
-        private const float RANGE = 600f;
+        private const float RANGE = 550f;
 
         private const float MAX_SHOOT_COOLDOWN = 3f;
         private const float MIN_SHOOT_COOLDOWN = 2f;

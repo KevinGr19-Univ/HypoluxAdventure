@@ -1,5 +1,6 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
+using HypoluxAdventure.Models.Projectiles;
 using HypoluxAdventure.Models.Rooms;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
@@ -30,7 +31,7 @@ namespace HypoluxAdventure.Models.Monsters
         private float _laughTime = 4;
 
         public override Vector2 HitboxSize => new Vector2(100, 200);
-        public override int MaxHealth => 40;
+        public override int MaxHealth => 150;
 
         private bool _flipped = false;
 
@@ -63,10 +64,37 @@ namespace HypoluxAdventure.Models.Monsters
             Sprite.Effect = _flipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
         }
 
+        #region Patterns
+        private bool _initialAttack = false;
+
         private void PatternUpdate()
         {
-
+            // First attack frame
+            if (!_initialAttack)
+            {
+                _initialAttack = true;
+                SummonFireballRing(16, 11.25f, 300f);
+            }
         }
+        #endregion
+
+        #region Fireball throws
+        private void SummonFireballRing(int amount, float angleOffset, float speed)
+        {
+            float offset = MathHelper.ToRadians(angleOffset);
+
+            for(int i = 0; i < amount; i++)
+            {
+                Vector2 velocity = new Vector2((float)i / amount) * MathF.PI * 2;
+                velocity = new Vector2(MathF.Cos(velocity.X + angleOffset), MathF.Sin(velocity.Y + angleOffset)) * speed;
+
+                Fireball fireball = new Fireball(game, gameManager, false, Position);
+                fireball.Velocity = velocity;
+                fireball.Spawn();
+            }
+        }
+
+        #endregion
 
         public override void OnPlayerCollision()
         {

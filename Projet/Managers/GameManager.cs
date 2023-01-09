@@ -28,7 +28,7 @@ namespace HypoluxAdventure.Managers
         }
 
         public const int FINAL_FLOOR = -3;
-        public int Floor { get; private set; } = -1;
+        public int Floor { get; private set; } = -2;
 
         public float Difficulty => (float)Floor / (FINAL_FLOOR + 1);
 
@@ -59,6 +59,7 @@ namespace HypoluxAdventure.Managers
             SoundPlayer.LoadSound(_game.Content, "sound/knifeSound");
             SoundPlayer.LoadSound(_game.Content, "sound/deathSound");
             SoundPlayer.LoadSound(_game.Content, "sound/explosionSound");
+            SoundPlayer.LoadSound(_game.Content, "sound/fireballSound");
         }
 
         public void LoadContent()
@@ -82,7 +83,9 @@ namespace HypoluxAdventure.Managers
             _cursor = new Cursor(_game, this);
 
             LoadNextFloor();
-            InventoryManager.AddItem(new Sword(_game, this));
+            InventoryManager.AddItem(new Bow(_game, this));
+            InventoryManager.AddItem(new Shotgun(_game, this));
+            InventoryManager.AddItem(new SuperPotion(_game, this));
         }
 
         public void UnloadContent()

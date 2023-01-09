@@ -24,6 +24,7 @@ namespace HypoluxAdventure.Models.Projectiles
         public Bomb(Game1 game, GameManager gameManager, bool isPlayerProj, Vector2 pos) : base(game, gameManager, isPlayerProj, pos)
         {
             Sprite = new AnimatedSprite(game.Content.Load<SpriteSheet>("img/bombAnimation.sf", new JsonContentLoader()));
+            Sprite.Depth = 0.8f;
             GraphicsUtils.SetPixelSize(Sprite, 20, 20, ref scale);
         }
 
