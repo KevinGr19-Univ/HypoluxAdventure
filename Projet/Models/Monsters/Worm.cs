@@ -35,7 +35,7 @@ namespace HypoluxAdventure.Models.Monsters
         private const float KEEP_RANGE = 550f;
 
         private const float MAX_DASH_COOLDOWN = 2;
-        private const float MIN_DASH_COOLDOWN = 1.2f;
+        private const float MIN_DASH_COOLDOWN = 1.5f;
 
         private const float DASH_SPEED = 430f;
         private const float DECEL_RATE = 2;

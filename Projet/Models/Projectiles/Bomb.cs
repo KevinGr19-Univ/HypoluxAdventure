@@ -45,7 +45,7 @@ namespace HypoluxAdventure.Models.Projectiles
 
         public override bool OnEntityCollision(Entity entity)
         {
-            entity.Damage(7);
+            entity.Damage(6);
             Explose();
             return true;
         }

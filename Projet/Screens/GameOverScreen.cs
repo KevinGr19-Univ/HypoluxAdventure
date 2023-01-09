@@ -42,7 +42,7 @@ namespace HypoluxAdventure.Screens
             _textPositionCenter = new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.8f);
             _menuButton = new Button(Game, _menuFont, "MENU", new Vector2(_textPositionCenter.X, _textPositionCenter.Y), () =>
             {
-                Game.LoadMenu();
+                Game.LoadMenu(2);
             });
             _menuButton.Border = 5;
             ChangeButtonColor(_menuButton);

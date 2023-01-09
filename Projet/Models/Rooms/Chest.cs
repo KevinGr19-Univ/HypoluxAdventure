@@ -27,7 +27,6 @@ namespace HypoluxAdventure.Models.Rooms
 
         public Chest(Game1 game, GameManager gameManager, Room room, Point pos) : base(game, gameManager)
         {
-            // LOAD SPRITE ETC...
             SpriteSheet spriteSheet = game.Content.Load<SpriteSheet>("img/chestAnimation.sf", new JsonContentLoader());
             _sprite = new AnimatedSprite(spriteSheet);
             GraphicsUtils.SetPixelSize(_sprite, Room.TILE_SIZE, Room.TILE_SIZE, ref _scale);
@@ -47,6 +46,7 @@ namespace HypoluxAdventure.Models.Rooms
         public override void Update()
         {
             _sprite.Update(Time.DeltaTime);
+            if (Inputs.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.U)) gameManager.Player.Damage(3);
         }
 
         public void Open()
@@ -62,15 +62,25 @@ namespace HypoluxAdventure.Models.Rooms
 
         private Item LootItem()
         {
-            const int MAX_WEIGHT = 100;
-            float chance = new Random().NextSingle() * MAX_WEIGHT;
+            const float MIN_HEALTH_CHANCE = 0.2f;
+            const float MAX_HEALTH_CHANCE = 1f;
 
-            if (chance < 10f) return new Sword(game, gameManager); // 10 %
-            if (chance < 20) return new Bow(game, gameManager); // 10 %
-            if (chance < 30) return new Shotgun(game, gameManager); // 10 %
-            if (chance < 40) return new KnifeItem(game, gameManager); // 10 %
-            if (chance < 55) return new Sword(game, gameManager); // 15 %
-            else return new Potion(game, gameManager); // 45 %
+            Random r = new Random();
+            float healChance = MathUtils.Lerp(MAX_HEALTH_CHANCE, MIN_HEALTH_CHANCE, (float)gameManager.Player.Health / gameManager.Player.MaxHealth);
+            float itemChance = r.NextSingle() * 100;
+
+            if(r.NextSingle() < healChance)
+            {
+                if (itemChance < 30) return new SuperPotion(game, gameManager);
+                else return new Potion(game, gameManager);
+            }
+            else
+            {
+                if (itemChance < 10) return new Sword(game, gameManager);
+                else if (itemChance < 40) return new Bow(game, gameManager);
+                else if (itemChance < 70) return new KnifeItem(game, gameManager);
+                else return new Shotgun(game, gameManager);
+            }
         }
     }
 }

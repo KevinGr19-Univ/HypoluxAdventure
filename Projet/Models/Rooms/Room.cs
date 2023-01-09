@@ -184,13 +184,11 @@ namespace HypoluxAdventure.Models.Rooms
             if (_gameManager.Floor == GameManager.FINAL_FLOOR) return new Diabolux(_game, _gameManager, this, spawnPos);
 
             float chance = new Random().NextSingle() * MAX_WEIGHT;
-            return new Bombux(_game, _gameManager, this, spawnPos);
-            
-            /*
-            if(chance < 40) return new Globux(_game, _gameManager, this, spawnPos); // 40%
-            if (chance < 70) return new Worm(_game, _gameManager, this, spawnPos); // 30%
-            return new Ghost(_game, _gameManager, this, spawnPos); // 30%
-            */
+     
+            if(chance < 35) return new Globux(_game, _gameManager, this, spawnPos); // 35%
+            if (chance < 65) return new Worm(_game, _gameManager, this, spawnPos); // 30%
+            if (chance < 90) return new Ghost(_game, _gameManager, this, spawnPos); // 25%
+            return new Bombux(_game, _gameManager, this, spawnPos); // 10%
         }
 
         public IEnumerable<Monster> GetAliveMonsters() => _monsters.Where(monster => !monster.IsDead && !monster.IsSlained);

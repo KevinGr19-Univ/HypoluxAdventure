@@ -12,7 +12,6 @@ using Microsoft.Xna.Framework;
 using HypoluxAdventure.Models.Items;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using System.Xml.Resolvers;
 
 namespace HypoluxAdventure.Managers
 {
@@ -28,10 +27,10 @@ namespace HypoluxAdventure.Managers
             _game = game;
         }
 
-        public const int FINAL_FLOOR = -5;
-        public int Floor { get; private set; } = -3;
+        public const int FINAL_FLOOR = -3;
+        public int Floor { get; private set; } = -1;
 
-        public float Difficulty => Floor / (FINAL_FLOOR + 1);
+        public float Difficulty => (float)Floor / (FINAL_FLOOR + 1);
 
         public HealthOverlay HealthOverlay;
         public DamageOverlay DamageOverlay { get; private set; }
@@ -84,8 +83,6 @@ namespace HypoluxAdventure.Managers
 
             LoadNextFloor();
             InventoryManager.AddItem(new Sword(_game, this));
-            InventoryManager.AddItem(new Shotgun(_game, this));
-            InventoryManager.AddItem(new SuperPotion(_game, this));
         }
 
         public void UnloadContent()
@@ -143,7 +140,7 @@ namespace HypoluxAdventure.Managers
 
         public void LoadVictoryScreen()
         {
-            _game.LoadVictory();
+            _game.LoadVictory(3);
         }
 
         public void Update()
@@ -151,7 +148,7 @@ namespace HypoluxAdventure.Managers
             if(_gameOverTimer > 0)
             {
                 _gameOverTimer -= Time.DeltaTime;
-                if (_gameOverTimer <= 0) _game.LoadGameOver(Floor);
+                if (_gameOverTimer <= 0) _game.LoadGameOver(4, Floor);
             }
 
             FrameInputs = GatherInputs();
@@ -268,7 +265,7 @@ namespace HypoluxAdventure.Managers
 
         public void ReturnToMenu()
         {
-            _game.LoadMenu();
+            _game.LoadMenu(2);
         }
 
         private const float GAME_OVER_TIME = 4;

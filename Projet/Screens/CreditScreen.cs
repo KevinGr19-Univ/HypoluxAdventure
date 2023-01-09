@@ -72,7 +72,7 @@ namespace HypoluxAdventure.Screens
             if(_lifetime > 0)
             {
                 _lifetime -= Time.DeltaTime;
-                if (_lifetime < 0) Game.LoadMenu();
+                if (_lifetime < 0) Game.LoadMenu(2);
             }
 
             if(_textListStart < _textListActif.Count)

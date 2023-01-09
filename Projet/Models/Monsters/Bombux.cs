@@ -29,7 +29,7 @@ namespace HypoluxAdventure.Models.Monsters
         }
 
         public override Vector2 HitboxSize => new Vector2(45, 72);
-        public override int MaxHealth => 25;
+        public override int MaxHealth => 24;
 
         private const float RANGE = 600f;
 
@@ -78,7 +78,7 @@ namespace HypoluxAdventure.Models.Monsters
                         if(_shootTimer < 0)
                         {
                             Bomb bomb = new Bomb(game, gameManager, false, Position);
-                            bomb.Velocity = TowardsPlayer(0.25f) * Bomb.SPEED;
+                            bomb.Velocity = TowardsPlayer(0.2f) * Bomb.SPEED;
                             bomb.Spawn();
 
                             _shootAnimTimer = SHOOT_ANIM_TIME;
