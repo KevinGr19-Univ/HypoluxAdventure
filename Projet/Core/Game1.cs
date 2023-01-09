@@ -64,7 +64,7 @@ namespace HypoluxAdventure
 
             LoadInputLayout();
 
-            LoadMenu();
+            LoadMenu(4);
         }
 
         protected override void UnloadContent()
@@ -180,13 +180,13 @@ namespace HypoluxAdventure
             SetScreenToLoad(screen, Color.Black, transitionTime);
         }
 
-        public void LoadWorld() => LoadScreen(new WorldScreen(this), 2);
-        public void LoadCredit() => LoadScreen(new CreditScreen(this), 1);
-        public void LoadMenu() => LoadScreen(new MenuScreen(this), 2);
-        public void LoadSettings() => LoadScreen(new SettingsScreen(this), 1);
-        public void LoadGameOver(int reachedFloor) => LoadScreen(new GameOverScreen(this, reachedFloor), 4);
+        public void LoadWorld(float time) => LoadScreen(new WorldScreen(this), time);
+        public void LoadCredit(float time) => LoadScreen(new CreditScreen(this), time);
+        public void LoadMenu(float time) => LoadScreen(new MenuScreen(this), time);
+        public void LoadSettings(float time) => LoadScreen(new SettingsScreen(this), time);
+        public void LoadGameOver(float time, int reachedFloor) => LoadScreen(new GameOverScreen(this, reachedFloor), time);
 
-        public void LoadVictory() => LoadScreen(new VictoryScreen(this), 2);
+        public void LoadVictory(float time) => LoadScreen(new VictoryScreen(this), time);
 
         #region FadeTransition
         private float _targetTime, _fadeTimer;

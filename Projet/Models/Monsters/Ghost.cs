@@ -29,11 +29,11 @@ namespace HypoluxAdventure.Models.Monsters
             _speed = MathUtils.Lerp(MIN_SPEED, MAX_SPEED, gameManager.Difficulty);
         }
 
-        public override int MaxHealth => 20;
+        public override int MaxHealth => 18;
         public override Vector2 HitboxSize => new Vector2(40, 48);
 
         private const float MIN_SPEED = 80;
-        private const float MAX_SPEED = 115;
+        private const float MAX_SPEED = 105;
         private readonly float _speed;
 
         private int _spriteOrientation = 2;

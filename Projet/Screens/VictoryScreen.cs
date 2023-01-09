@@ -27,7 +27,7 @@ namespace HypoluxAdventure.Screens
             _position = Application.ScreenDimensions * 0.5f;
             _scale = new Vector2(4);
 
-            _sprite.Play("victory", () => { Game.LoadCredit(); });
+            _sprite.Play("victory", () => { Game.LoadCredit(3); });
         }
 
         public override void Draw(GameTime gameTime)

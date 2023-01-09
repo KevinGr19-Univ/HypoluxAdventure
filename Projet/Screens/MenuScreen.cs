@@ -75,9 +75,9 @@ namespace HypoluxAdventure.Screens
             _diaboluxRotation = 0;
             _diaboluxScale = new Vector2(3f, 3f);
 
-            _play = new Button(Game, _menuFont, "JOUER", new Vector2(_textPositionCenter.X + 30, _textPositionCenter.Y), () => { Game.LoadWorld(); });
+            _play = new Button(Game, _menuFont, "JOUER", new Vector2(_textPositionCenter.X + 30, _textPositionCenter.Y), () => { Game.LoadWorld(2); });
             _quit = new Button(Game, _menuFont, "QUITTER", new Vector2(_textPositionCenter.X + 400, _textPositionCenter.Y), () => { Game.Exit(); });
-            _settings = new Button(Game, _menuFont, "PARAMETRES", new Vector2(_textPositionCenter.X - 400, _textPositionCenter.Y), () => { Game.LoadSettings(); });
+            _settings = new Button(Game, _menuFont, "PARAMETRES", new Vector2(_textPositionCenter.X - 400, _textPositionCenter.Y), () => { Game.LoadSettings(1); });
 
             _play.Depth = _quit.Depth = _settings.Depth = 0.6f;
             _play.Border = _quit.Border = _settings.Border = 5;

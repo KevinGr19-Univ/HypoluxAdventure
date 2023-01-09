@@ -39,7 +39,7 @@ namespace HypoluxAdventure.Models.Monsters
 
         // Increasing speed with difficulty
         private const float MIN_SPEED = 100;
-        private const float MAX_SPEED = 140;
+        private const float MAX_SPEED = 125;
         private readonly float _speed;
 
         private bool _followingPlayer = false;

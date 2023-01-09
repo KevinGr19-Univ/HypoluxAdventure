@@ -20,7 +20,7 @@ namespace HypoluxAdventure.Models
         public const int SIZE = 32;
 
         public override Vector2 HitboxSize => new Vector2(SIZE);
-        public override int MaxHealth => 20;
+        public override int MaxHealth => 25;
 
         public Player(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
