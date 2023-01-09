@@ -72,7 +72,7 @@ namespace HypoluxAdventure.Models.UI
 
             if (_hover && Inputs.IsClickReleased(Inputs.MouseButton.Left))
             {
-                _clickedSound.Play();
+                _clickedSound.Play(1,0,0);
                 _action.Invoke();
             } 
         }

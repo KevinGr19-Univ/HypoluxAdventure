@@ -30,6 +30,19 @@ namespace HypoluxAdventure.Screens
         private Button _azerty;
         private Button _credit;
 
+        private TextObject _move;
+        private Sprite _key;
+
+        private TextObject _shoot;
+        private Sprite _shooted;
+
+        private TextObject _use;
+        private Sprite _used;
+
+        private TextObject _changeSlot;
+        private Sprite _changeSlot1;
+        private Sprite _changeSlot2;
+
         private bool _contole = true;
 
         public SettingsScreen(Game1 game) : base(game)
@@ -52,14 +65,14 @@ namespace HypoluxAdventure.Screens
             });
             ChangeButtonColor(_menuButton);
 
-            _name = new TextObject(_menuFont, "CHANGER LES CONTROLES :", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.3f));
+            _name = new TextObject(_menuFont, "CHANGER LES CONTROLES :", new Vector2(Application.SCREEN_WIDTH * 0.7f, Application.SCREEN_HEIGHT * 0.3f));
 
-            _azerty = new Button(Game, _menuFont, "AZERTY", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.5f),() => {
+            _azerty = new Button(Game, _menuFont, "AZERTY", new Vector2(Application.SCREEN_WIDTH * 0.7f, Application.SCREEN_HEIGHT * 0.5f),() => {
                 Inputs.ChangeInputLayout(Inputs.AZERTY);
                 ChangeButtonColor(_azerty);
                 IsUnactive(_qwerty);
             });
-            _qwerty = new Button(Game, _menuFont, "QWERTY", new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.7f), () => {
+            _qwerty = new Button(Game, _menuFont, "QWERTY", new Vector2(Application.SCREEN_WIDTH * 0.7f, Application.SCREEN_HEIGHT * 0.7f), () => {
                 Inputs.ChangeInputLayout(Inputs.QWERTY);
                 ChangeButtonColor(_qwerty);
                 IsUnactive(_azerty);
@@ -85,6 +98,7 @@ namespace HypoluxAdventure.Screens
             _qwerty.Depth = _azerty.Depth = _menuButton.Depth = _credit.Depth = 0.6f;
             _qwerty.Border = _azerty.Border = _menuButton.Border = _credit.Border = 5;
 
+            _name.Scale = new Vector2(0.7f);
 
 
         }
