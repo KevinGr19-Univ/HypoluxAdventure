@@ -40,7 +40,11 @@ namespace HypoluxAdventure.Screens
             _clickedSound = Content.Load<SoundEffect>("sound/buttonSound");
             _menuFont = Content.Load<SpriteFont>("Font/MainMenuFont");
             _textPositionCenter = new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.8f);
-            _menuButton = new Button(Game, _menuFont, "MENU", new Vector2(_textPositionCenter.X, _textPositionCenter.Y), () => { _clickedSound.Play(); Game.LoadMenu(); });
+            _menuButton = new Button(Game, _menuFont, "MENU", new Vector2(_textPositionCenter.X, _textPositionCenter.Y), () =>
+            {
+                Game.LoadMenu();
+            });
+            _menuButton.Border = 5;
             ChangeButtonColor(_menuButton);
 
             SpriteSheet eyesSpriteSheet = Content.Load<SpriteSheet>("img/diaboluxEyesAnimation.sf", new JsonContentLoader());
@@ -77,8 +81,8 @@ namespace HypoluxAdventure.Screens
             button.ColorNormal = new ButtonColor
             {
                 TextColor = Color.White,
-                BackgroundColor = Color.DarkRed,
-                BorderColor = Color.DarkSalmon
+                BackgroundColor = Color.Firebrick,
+                BorderColor = Color.DarkRed
             };
 
             button.ColorHover = new ButtonColor

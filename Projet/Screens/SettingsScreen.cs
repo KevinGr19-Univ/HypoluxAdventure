@@ -40,7 +40,7 @@ namespace HypoluxAdventure.Screens
         private Sprite _stop;
         private Sprite _tab;
 
-        private bool _contole = true;
+        private bool _controle = true;
 
         public SettingsScreen(Game1 game) : base(game)
         {
@@ -58,7 +58,7 @@ namespace HypoluxAdventure.Screens
             _menuButton = new Button(Game, _menuFont, "MENU", new Vector2(_textPositionCenter.X+30, _textPositionCenter.Y), () => 
             { 
                 Game.LoadMenu();
-                _contole = false;
+                _controle = false;
             });
             ChangeButtonColor(_menuButton);
 
@@ -150,7 +150,7 @@ namespace HypoluxAdventure.Screens
 
         public override void Update(GameTime gameTime)
         {
-            if (_contole)
+            if (_controle)
             {
                 _menuButton.Update();
                 _qwerty.Update();
