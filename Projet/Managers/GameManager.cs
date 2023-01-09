@@ -29,7 +29,7 @@ namespace HypoluxAdventure.Managers
         }
 
         public const int FINAL_FLOOR = -5;
-        public int Floor { get; private set; } = 0;
+        public int Floor { get; private set; } = -1;
 
         public float Difficulty => Floor / (FINAL_FLOOR + 1);
 
@@ -121,6 +121,7 @@ namespace HypoluxAdventure.Managers
             {
                 RoomManager.GenerateRooms();
                 RoomManager.SpawnPlayer();
+                CanMove = true;
             }
             
             MinimapOverlay.Visit(RoomManager.CurrentRoom.PointPos);
