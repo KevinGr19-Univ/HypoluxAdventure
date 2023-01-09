@@ -36,14 +36,14 @@ namespace HypoluxAdventure.Models.Monsters
         private const float MAX_SPEED = 115;
         private readonly float _speed;
 
-        private int _spriteOritentation = 2;
+        private int _spriteOrientation = 2;
 
         public override void Update()
         {
             if (!IsDead)
             {
                 int orientation = GetOrientation(Velocity);
-                if (orientation != -1 && _spriteOritentation != orientation) SetAnimation(orientation);
+                if (orientation != -1 && _spriteOrientation != orientation) SetAnimation(orientation);
             }
 
             Velocity = !overlapsPlayer ? TowardsPlayer() * _speed : Vector2.Zero;
@@ -73,7 +73,7 @@ namespace HypoluxAdventure.Models.Monsters
                     break;
             }
 
-            _spriteOritentation = orientation;
+            _spriteOrientation = orientation;
         }
 
         public override void OnPlayerCollision()
