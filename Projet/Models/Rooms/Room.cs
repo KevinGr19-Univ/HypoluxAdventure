@@ -180,8 +180,13 @@ namespace HypoluxAdventure.Models.Rooms
 
         private Monster RandomMonster(Vector2 spawnPos)
         {
+            const int MAX_WEIGHT = 100;
             if (_gameManager.Floor == GameManager.FINAL_FLOOR) return new Diabolux(_game, _gameManager, this, spawnPos);
-            return new Globux(_game, _gameManager, this, spawnPos);
+
+            float chance = new Random().NextSingle() * MAX_WEIGHT;
+
+            if (chance < 65) return new Globux(_game, _gameManager, this, spawnPos);
+            return new Ghost(_game, _gameManager, this, spawnPos);
         }
 
         public IEnumerable<Monster> GetAliveMonsters() => _monsters.Where(monster => !monster.IsDead && !monster.IsSlained);

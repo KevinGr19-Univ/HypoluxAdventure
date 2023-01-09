@@ -1,6 +1,7 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
 using HypoluxAdventure.Models.Projectiles;
+using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Content;
@@ -66,6 +67,8 @@ namespace HypoluxAdventure.Models.Items
             }
             else
             {
+                SoundPlayer.PlaySound("sound/arrowReleasedSound");
+
                 Arrow arrow = new Arrow(game, gameManager, true, position);
                 arrow.Velocity = gameManager.Player.ShootDirection * Arrow.SPEED;
                 arrow.Spawn();

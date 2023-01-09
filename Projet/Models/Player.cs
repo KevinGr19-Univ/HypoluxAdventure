@@ -112,6 +112,8 @@ namespace HypoluxAdventure.Models
             ProjectileHolder.Clear();
 
             StopPulsing();
+
+            SoundPlayer.PlaySound("sound/deathSound");
             gameManager.GameOver();
 
             Sprite.Effect = SpriteEffects.None;

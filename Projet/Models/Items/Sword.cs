@@ -65,6 +65,8 @@ namespace HypoluxAdventure.Models.Items
         public override void OnShoot()
         {
             TriggerCooldown();
+            SoundPlayer.PlaySound("sound/swordSlashSound", 0.1f, -0.3f);
+
             DamageMonsters();
             _sweepTimer = SWEEP_TIME;
         }

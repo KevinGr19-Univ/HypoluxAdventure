@@ -28,7 +28,7 @@ namespace HypoluxAdventure.Models.Items
         protected override int pixelSize => 40;
 
         private const int SHOOT_ANGLE = 15;
-        private const int BULLET_COUNT = 6;
+        private const int BULLET_COUNT = 5;
 
         public override void SelectedUpdate()
         {
@@ -54,6 +54,8 @@ namespace HypoluxAdventure.Models.Items
                 bullet.Velocity = velocity;
                 bullet.Spawn();
             }
+
+            SoundPlayer.PlaySound("sound/shotgunSound", 0.7f);
         }
 
         public override void OnUse() { }

@@ -57,6 +57,18 @@ namespace HypoluxAdventure.Models.Monsters
             return Vector2.Normalize(gameManager.Player.Position - Position);
         }
 
+        public int GetOrientation(Vector2 direction)
+        {
+            if (direction == Vector2.Zero) return -1;
+            float angle = MathF.Atan2(direction.X, direction.Y);
+            float posAngle = MathF.Abs(angle);
+
+            if (posAngle < 0.25f * MathF.PI) return 2;
+            if (posAngle > 0.75f * MathF.PI) return 0;
+
+            return angle < 0 ? 1 : 3;
+        }
+
         #region Damage Red Pulse
         private const float PULSE_TIME = 0.4f;
         private float _pulseTimer;

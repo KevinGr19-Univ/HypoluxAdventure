@@ -1,6 +1,7 @@
 ﻿using HypoluxAdventure.Managers;
 using HypoluxAdventure.Models.Projectiles;
 using HypoluxAdventure.Models.Rooms;
+using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Sprites;
@@ -43,6 +44,8 @@ namespace HypoluxAdventure.Models.Items
             if(!currentRoom.IsWall(pointPos.X, pointPos.Y))
             {
                 IsUsed = true;
+                SoundPlayer.PlaySound("sound/knifeSound", pitch: 0.3f);
+
                 Knife knife = new Knife(game, gameManager, true, position);
                 knife.Velocity = gameManager.Player.ShootDirection * Knife.SPEED;
                 knife.Spawn();

@@ -31,7 +31,7 @@ namespace HypoluxAdventure.Models.Items
 
         public override void OnUse() 
         {
-            if(gameManager.Player.Heal(5) > 0) IsUsed = true;
+            if(gameManager.Player.Heal(9) > 0) IsUsed = true;
         }
 
         public override DropItem ToDropItem(bool startHover, Vector2 pos)

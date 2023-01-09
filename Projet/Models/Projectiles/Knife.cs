@@ -61,6 +61,8 @@ namespace HypoluxAdventure.Models.Projectiles
         public override void OnDespawn()
         {
             base.OnDespawn();
+            SoundPlayer.PlaySound("sound/knifeSound", pitch: -0.3f);
+
             DropItem item = new KnifeItem(game, gameManager).ToDropItem(false, _previousPos);
             gameManager.ItemManager.Summon(item);
         }

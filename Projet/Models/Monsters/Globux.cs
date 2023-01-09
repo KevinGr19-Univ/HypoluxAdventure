@@ -42,8 +42,6 @@ namespace HypoluxAdventure.Models.Monsters
         private const float MAX_SPEED = 140;
         private readonly float _speed;
 
-        private const int DAMAGE = 3;
-
         private bool _followingPlayer = false;
 
         public override void Update()
@@ -58,7 +56,7 @@ namespace HypoluxAdventure.Models.Monsters
 
         public override void OnPlayerCollision()
         {
-            gameManager.Player.Damage(DAMAGE);
+            gameManager.Player.Damage(3);
         }
 
         public override void OnDeath()

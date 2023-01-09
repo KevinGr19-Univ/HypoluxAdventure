@@ -60,6 +60,8 @@ namespace HypoluxAdventure.Models
         {
             DamageNumber number = new DamageNumber(game,gameManager, _nextNumberId++,damage, gamePos, heal);
             _damageNumbers.Add(number.Id, number);
+
+            SoundPlayer.PlaySound(heal ? "sound/healingSound" : "sound/hitSound");
         }
 
         public void DespawnNumber(int id)

@@ -21,7 +21,7 @@ namespace HypoluxAdventure.Models.Projectiles
         private const float DECEL_RATE = 2.5f;
         private const float MIN_SPEED = 100f;
 
-        private const float MIN_DAMAGE = 2;
+        private const float MIN_DAMAGE = 1;
         private const float MAX_DAMAGE = 3;
 
         public Bullet(Game1 game, GameManager gameManager, bool isPlayerProj, Vector2 pos) : base(game, gameManager, isPlayerProj, pos)
@@ -41,7 +41,7 @@ namespace HypoluxAdventure.Models.Projectiles
 
         public override bool OnEntityCollision(Entity entity)
         {
-            float speedLerp = 1 - MathF.Pow(Velocity.Length() / MAX_START_SPEED, 3);
+            float speedLerp = 1 - MathF.Pow((float)Math.Clamp(Velocity.Length() / MIN_START_SPEED, 0, 1), 3);
             int damage = (int)Math.Round(MathUtils.Lerp(MAX_DAMAGE, MIN_DAMAGE, speedLerp));
 
             entity.Damage(damage);
