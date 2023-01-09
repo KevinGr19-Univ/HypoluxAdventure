@@ -31,7 +31,7 @@ namespace HypoluxAdventure.Models.Monsters
         private float _laughTime = 4;
 
         public override Vector2 HitboxSize => new Vector2(100, 200);
-        public override int MaxHealth => 150;
+        public override int MaxHealth => 300;
 
         private bool _flipped = false;
 
@@ -65,6 +65,9 @@ namespace HypoluxAdventure.Models.Monsters
         }
 
         #region Patterns
+        private int _patternAttack = 0;
+        private float _nextPatternTime;
+
         private bool _initialAttack = false;
 
         private void PatternUpdate()
@@ -73,12 +76,86 @@ namespace HypoluxAdventure.Models.Monsters
             if (!_initialAttack)
             {
                 _initialAttack = true;
-                SummonFireballRing(16, 11.25f, 300f);
+                SummonFireballRing(32, 5.625f, 300f);
+                _nextPatternTime = 5;
             }
+
+            // Pattern choice
+            if(_nextPatternTime > 0)
+            {
+                _nextPatternTime -= Time.DeltaTime;
+                if (_nextPatternTime < 0) ChooseNewPattern();
+            }
+
+            // Pattern update
+            switch (_patternAttack)
+            {
+                case 1:
+                    FireballArcs();
+                    break;
+            }
+        }
+
+        private void ChooseNewPattern()
+        {
+            _patternAttack = 1;
+
+            switch (_patternAttack)
+            {
+                case 1:
+                    _fireballArcIndex = 0;
+                    break;
+            }
+        }
+
+        private void ResetPattern(float idleTime)
+        {
+            _patternAttack = 0;
+            _nextPatternTime = idleTime;
+        }
+
+        private float _fireballArcTimer;
+        private int _fireballArcIndex;
+
+        private void FireballArcs()
+        {
+            const int ARC_AMOUNT = 3;
+            const int FIREBALL_AMOUNT = 14;
+
+            const float MIN_SPEED = 320f;
+            const float MAX_SPEED = 220f;
+
+            const int MIN_ANGLE = 20;
+            const float MAX_ANGLE = 75;
+
+            // Summon arc
+            if (_fireballArcTimer <= 0)
+            {
+                _fireballArcTimer = 1f;
+                float spreadAngle = MathUtils.Lerp(MIN_ANGLE, MAX_ANGLE, (float)_fireballArcIndex / ARC_AMOUNT);
+                float speed = MathUtils.Lerp(MIN_SPEED, MAX_SPEED, (float)_fireballArcIndex / ARC_AMOUNT);
+
+                Vector2 centerShootDir = TowardsPlayer();
+                float centerAngle = MathF.Atan2(centerShootDir.Y, centerShootDir.X);
+
+                for (int i = 0; i < FIREBALL_AMOUNT; i++)
+                {
+                    float shootAngle = MathUtils.Lerp(-spreadAngle, spreadAngle, (float)i / FIREBALL_AMOUNT);
+                    shootAngle = MathHelper.ToRadians(shootAngle) + centerAngle;
+
+                    Fireball fireball = new Fireball(game, gameManager, false, Position);
+                    fireball.Velocity = speed * new Vector2(MathF.Cos(shootAngle), MathF.Sin(shootAngle));
+
+                    fireball.Spawn();
+                }
+
+                if (++_fireballArcIndex >= ARC_AMOUNT) ResetPattern(4);
+            }
+            else _fireballArcTimer -= Time.DeltaTime;
         }
         #endregion
 
-        #region Fireball throws
+        #region Attacks
         private void SummonFireballRing(int amount, float angleOffset, float speed)
         {
             float offset = MathHelper.ToRadians(angleOffset);
@@ -105,6 +182,9 @@ namespace HypoluxAdventure.Models.Monsters
         {
             base.OnDeath();
             SoundPlayer.PlaySound("sound/diaboluxDefeatedSound");
+
+            gameManager.RoomManager.CurrentRoom.ProjectileHolder.Clear();
+
             AnimatedSprite.Play("death", () =>
             {
                 gameManager.StartNextFloorTransition();
