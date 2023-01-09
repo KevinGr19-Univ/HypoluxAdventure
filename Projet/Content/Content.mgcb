@@ -486,6 +486,12 @@
 /processorParam:Quality=Best
 /build:sound/diaboluxLaughSound.m4a
 
+#begin sound/explosionSound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sound/explosionSound.wav
+
 #begin sound/fireballSound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
