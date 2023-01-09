@@ -62,6 +62,8 @@ namespace HypoluxAdventure.Models.Monsters
         public int GetOrientation(Vector2 direction)
         {
             if (direction == Vector2.Zero) return -1;
+            direction.Normalize();
+
             float angle = MathF.Atan2(direction.X, direction.Y);
             float posAngle = MathF.Abs(angle);
 

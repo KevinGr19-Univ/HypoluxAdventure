@@ -11,6 +11,7 @@ using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,24 +29,22 @@ namespace HypoluxAdventure.Models.Monsters
             AnimatedSprite.Play("laugh");
         }
 
-        private float _laughTime = 4;
+        private float _firstLaughTime = 4;
 
         public override Vector2 HitboxSize => new Vector2(100, 200);
         public override int MaxHealth => 300;
-
-        private bool _flipped = false;
 
         public override void Update()
         {
             base.Update();
 
             // Laugh
-            if(_laughTime > 0)
+            if(_firstLaughTime > 0)
             {
-                _laughTime -= Time.DeltaTime;
+                _firstLaughTime -= Time.DeltaTime;
                 gameManager.CameraManager.TargetPosition = Position; // Overwrites targetPosition
 
-                if (_laughTime <= 0)
+                if (_firstLaughTime <= 0)
                 {
                     AnimatedSprite.Play("idleSouth");
                     gameManager.CanMove = true;
@@ -60,11 +59,51 @@ namespace HypoluxAdventure.Models.Monsters
             }
 
             PatternUpdate();
-
-            Sprite.Effect = _flipped ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            Orientate();
         }
 
+        #region Animation
+        private bool _movingAnim = false;
+        private int _spriteAnimation = 2;
+
+        private void Orientate()
+        {
+            bool moving = Velocity.LengthSquared() > 1f;
+            int orientation = GetOrientation(moving ? Velocity : TowardsPlayer());
+
+            if (orientation == _spriteAnimation && moving == _movingAnim) return;
+
+            switch (orientation)
+            {
+                case 0:
+                    AnimatedSprite.Play(moving ? "walkNorth" : "idleNorth");
+                    break;
+
+                case 1:
+                    AnimatedSprite.Play(moving ? "walkSide" : "idleSide");
+                    Sprite.Effect = SpriteEffects.FlipHorizontally;
+                    break;
+
+                case 2:
+                    AnimatedSprite.Play(moving ? "walkSouth" : "idleSouth");
+                    break;
+
+                case 3:
+                    AnimatedSprite.Play(moving ? "walkSide" : "idleSide");
+                    Sprite.Effect = SpriteEffects.None;
+                    break;
+            }
+
+            _spriteAnimation = orientation;
+            _movingAnim = moving;
+        }
+
+        #endregion
+
         #region Patterns
+        private const float SPEED = 110f;
+        private const float FOLLOW_PLAYER_TIME_MARK = 1.1f;
+
         private int _patternAttack = 0;
         private float _nextPatternTime;
 
@@ -77,12 +116,16 @@ namespace HypoluxAdventure.Models.Monsters
             {
                 _initialAttack = true;
                 SummonFireballRing(32, 5.625f, 300f);
-                _nextPatternTime = 5;
+                _nextPatternTime = 7;
             }
+
 
             // Pattern choice
             if(_nextPatternTime > 0)
             {
+                if (_nextPatternTime > FOLLOW_PLAYER_TIME_MARK) Velocity = TowardsPlayer() * SPEED;
+                else Velocity = Vector2.Zero;
+
                 _nextPatternTime -= Time.DeltaTime;
                 if (_nextPatternTime < 0) ChooseNewPattern();
             }
@@ -120,7 +163,7 @@ namespace HypoluxAdventure.Models.Monsters
         private void FireballArcs()
         {
             const int ARC_AMOUNT = 3;
-            const int FIREBALL_AMOUNT = 14;
+            const int FIREBALL_AMOUNT = 12;
 
             const float MIN_SPEED = 320f;
             const float MAX_SPEED = 220f;
@@ -135,7 +178,7 @@ namespace HypoluxAdventure.Models.Monsters
                 float spreadAngle = MathUtils.Lerp(MIN_ANGLE, MAX_ANGLE, (float)_fireballArcIndex / ARC_AMOUNT);
                 float speed = MathUtils.Lerp(MIN_SPEED, MAX_SPEED, (float)_fireballArcIndex / ARC_AMOUNT);
 
-                Vector2 centerShootDir = TowardsPlayer();
+                Vector2 centerShootDir = TowardsPlayer(0.2f);
                 float centerAngle = MathF.Atan2(centerShootDir.Y, centerShootDir.X);
 
                 for (int i = 0; i < FIREBALL_AMOUNT; i++)
@@ -149,13 +192,11 @@ namespace HypoluxAdventure.Models.Monsters
                     fireball.Spawn();
                 }
 
-                if (++_fireballArcIndex >= ARC_AMOUNT) ResetPattern(4);
+                if (++_fireballArcIndex >= ARC_AMOUNT) ResetPattern(7);
             }
             else _fireballArcTimer -= Time.DeltaTime;
         }
-        #endregion
 
-        #region Attacks
         private void SummonFireballRing(int amount, float angleOffset, float speed)
         {
             float offset = MathHelper.ToRadians(angleOffset);
