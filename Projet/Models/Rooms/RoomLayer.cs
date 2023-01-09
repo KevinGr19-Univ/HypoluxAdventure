@@ -264,14 +264,14 @@ namespace HypoluxAdventure.Models.Rooms
                     new Point(9, 9),
                     new Point[]
                     {
-                        new Point(7, 8),
-                        new Point(19, 7),
-                        new Point(27, 13),
-                        new Point(12, 18),
-                        new Point(24, 21),
-                        new Point(7, 24),
-                        new Point(31, 25),
-                        new Point(19, 35),
+                        new Point(7,8),
+                        new Point(34,7),
+                        new Point(27,13),
+                        new Point(12,18),
+                        new Point(24,21),
+                        new Point(31,25),
+                        new Point(28,31),
+                        new Point(7,33),
                     },
                     new Point[]
                     {
