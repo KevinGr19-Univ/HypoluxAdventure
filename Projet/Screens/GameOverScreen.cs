@@ -69,6 +69,7 @@ namespace HypoluxAdventure.Screens
 
         public override void UnloadContent()
         {
+            base.UnloadContent();
             MediaPlayer.Stop();
         }
 

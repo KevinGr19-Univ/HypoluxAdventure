@@ -44,8 +44,6 @@ namespace HypoluxAdventure.Screens
         private SpriteFont _menuFont;
         private Vector2 _textPositionCenter;
 
-        private Song _music;
-
         public MenuScreen(Game1 game) : base(game) 
         {
 
@@ -86,11 +84,6 @@ namespace HypoluxAdventure.Screens
             ChangeButtonColor(_play);
             ChangeButtonColor(_quit);
             ChangeButtonColor(_settings);
-
-            _music = Content.Load<Song>("sound/whatCave");
-            MediaPlayer.Play(_music);
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.5f;
 
         }
 
