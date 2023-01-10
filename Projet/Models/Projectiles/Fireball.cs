@@ -32,7 +32,6 @@ namespace HypoluxAdventure.Models.Projectiles
         public override void OnSpawn()
         {
             base.OnSpawn();
-            SoundPlayer.PlaySound("sound/fireballSound");
             AnimatedSprite.Play("launched");
         }
 

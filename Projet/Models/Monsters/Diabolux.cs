@@ -25,14 +25,14 @@ namespace HypoluxAdventure.Models.Monsters
             Sprite = new AnimatedSprite(spriteSheet);
             GraphicsUtils.SetPixelSize(Sprite, 200, 200, ref Scale);
 
-            SoundPlayer.PlaySound("sound/diaboluxLaughSound",0.5f);
+            SoundPlayer.PlaySound("sound/diaboluxLaughSound", 0.8f);
             AnimatedSprite.Play("laugh");
         }
 
         private float _firstLaughTime = 4;
 
         public override Vector2 HitboxSize => new Vector2(100, 200);
-        public override int MaxHealth => 350;
+        public override int MaxHealth => 400;
 
         public override void Update()
         {
@@ -63,11 +63,14 @@ namespace HypoluxAdventure.Models.Monsters
         }
 
         #region Animation
+        private bool _orientate = true;
         private bool _movingAnim = false;
         private int _spriteAnimation = 2;
 
         private void Orientate()
         {
+            if (!_orientate) return;
+
             bool moving = Velocity.LengthSquared() > 1f;
             int orientation = GetOrientation(moving ? Velocity : TowardsPlayer());
 
@@ -144,12 +147,16 @@ namespace HypoluxAdventure.Models.Monsters
                 case 3:
                     FireballWalls();
                     break;
+
+                case 4:
+                    HellRain();
+                    break;
             }
         }
 
         private void ChooseNewPattern()
         {
-            _patternAttack = new Random().Next(1, 4);
+            _patternAttack = !_hellRainDone && Health <= 150 ? 4 : new Random().Next(1, 4);
 
             switch (_patternAttack)
             {
@@ -163,6 +170,11 @@ namespace HypoluxAdventure.Models.Monsters
 
                 case 3:
                     _fireballWall = false;
+                    break;
+
+                case 4:
+                    _hellRainState = 0;
+                    _hellRainTimer = 0;
                     break;
             }
         }
@@ -190,7 +202,6 @@ namespace HypoluxAdventure.Models.Monsters
             // Summon arc
             if (_fireballArcTimer <= 0)
             {
-                _fireballArcTimer = 1f;
                 float spreadAngle = MathUtils.Lerp(MIN_ANGLE, MAX_ANGLE, (float)_fireballArcIndex / ARC_AMOUNT);
                 float speed = MathUtils.Lerp(MIN_SPEED, MAX_SPEED, (float)_fireballArcIndex / ARC_AMOUNT);
 
@@ -208,7 +219,10 @@ namespace HypoluxAdventure.Models.Monsters
                     fireball.Spawn();
                 }
 
+                PlayFireballSound();
+
                 if (++_fireballArcIndex >= ARC_AMOUNT) ResetPattern(6f);
+                else _fireballArcTimer = 1f;
             }
             else _fireballArcTimer -= Time.DeltaTime;
         }
@@ -262,6 +276,65 @@ namespace HypoluxAdventure.Models.Monsters
             else _fireballWallTimer -= Time.DeltaTime;
         }
 
+        private Vector2 _hellRainTargetPos;
+        private int _hellRainState;
+
+        private float _hellRainTimer;
+        private int _hellRainCount;
+        private bool _hellRainDone = false;
+
+        private void HellRain()
+        {
+            const float HELL_RAIN_ATTACK_COOLDOWN = 1.2f;
+            const int HELL_RAIN_ATTACK_COUNT = 10;
+
+            // Move towards center
+            if(_hellRainState == 0)
+            {
+                _hellRainState = 1;
+                _hellRainCount = HELL_RAIN_ATTACK_COUNT;
+
+                _hellRainTargetPos = gameManager.RoomManager.CurrentRoom.Rectangle.Center;
+                Velocity = Vector2.Normalize(_hellRainTargetPos - Position) * SPEED * 1.5f;
+            }
+
+            // Begin attacks
+            else if(_hellRainState == 1)
+            {
+                // If close to center enough
+                if((Position - _hellRainTargetPos).LengthSquared() < 25)
+                {
+                    _hellRainState = 2;
+                    _orientate = false;
+
+                    AnimatedSprite.Play("laugh");
+                    SoundPlayer.PlaySound("sound/diaboluxLaughSound", 0.8f);
+                    Velocity = Vector2.Zero;
+                }
+            }
+
+            // Attack update
+            else
+            {
+                _hellRainTimer -= Time.DeltaTime;
+                if(_hellRainTimer <= 0)
+                {
+                    _hellRainTimer = HELL_RAIN_ATTACK_COOLDOWN;
+
+                    // End attack
+                    if (--_hellRainCount <= 0)
+                    {
+                        _orientate = true;
+                        SummonFireballRing(24, 0, 200f);
+
+                        _hellRainDone = true;
+                        ResetPattern(7.5f);
+                    }
+                    else SummonFireballWall(new Random().Next(0, 4), 16, 180f);
+                }
+            }
+        }
+
         private void SummonFireballRing(int amount, float angleOffset, float speed)
         {
             float offset = MathHelper.ToRadians(angleOffset);
@@ -275,6 +348,8 @@ namespace HypoluxAdventure.Models.Monsters
                 fireball.Velocity = velocity;
                 fireball.Spawn();
             }
+
+            PlayFireballSound();
         }
 
         private void SummonFireballWall(int orientation, int amount, float speed)
@@ -328,10 +403,17 @@ namespace HypoluxAdventure.Models.Monsters
                 fireball.Velocity = velocity;
                 fireball.Spawn();
             }
+
+            PlayFireballSound();
         }
 
         private Vector2 FireballPosFromPoint(int x, int y)
             => (new Vector2(x, y) + new Vector2(0.5f)) * Room.TILE_SIZE + gameManager.RoomManager.CurrentRoom.Position;
+
+        private void PlayFireballSound()
+        {
+            SoundPlayer.PlaySound("sound/fireballSound", 0.5f);
+        }
         #endregion
 
         public override void OnPlayerCollision()
