@@ -36,9 +36,18 @@ namespace HypoluxAdventure.Screens
         private AnimatedSprite _shoot;
         private AnimatedSprite _use;
         private Sprite _changeSlot1;
-        private Sprite _changeSlot2;
         private Sprite _stop;
         private Sprite _tab;
+
+        private readonly Vector2 _scaling = new Vector2(2);
+        private readonly Vector2 _pos1 = new Vector2(Application.SCREEN_WIDTH * 0.2f - 20, Application.SCREEN_HEIGHT * 0.4f - 10);
+        private readonly Vector2 _pos2 = new Vector2(Application.SCREEN_WIDTH * 0.2f + 150, Application.SCREEN_HEIGHT * 0.7f);
+        private readonly Vector2 _pos3 = new Vector2(Application.SCREEN_WIDTH * 0.2f - 50, Application.SCREEN_HEIGHT * 0.8f);
+        private readonly Vector2 _pos4 = new Vector2(Application.SCREEN_WIDTH * 0.2f + 100, Application.SCREEN_HEIGHT * 0.9f);
+        private readonly Vector2 _pos5 = new Vector2(Application.SCREEN_WIDTH * 0.2f + 50, Application.SCREEN_HEIGHT * 0.5f);
+        private readonly Vector2 _pos6 = new Vector2(Application.SCREEN_WIDTH * 0.2f, Application.SCREEN_HEIGHT * 0.6f);
+
+
 
         private bool _controle = true;
 
@@ -138,14 +147,14 @@ namespace HypoluxAdventure.Screens
                 text.Draw(Game.UICanvas);
             }
 
-            _key.Draw(Game.UICanvas, new Vector2(Application.SCREEN_WIDTH * 0.2f-20 , Application.SCREEN_HEIGHT * 0.4f-10), 0, new Vector2(2));
-            _changeSlot1.Draw(Game.UICanvas, new Vector2(Application.SCREEN_WIDTH * 0.2f+150, Application.SCREEN_HEIGHT * 0.7f), 0, new Vector2(2));
-            _stop.Draw(Game.UICanvas, new Vector2(Application.SCREEN_WIDTH * 0.2f - 50, Application.SCREEN_HEIGHT * 0.8f), 0, new Vector2(2));
-            _tab.Draw(Game.UICanvas, new Vector2(Application.SCREEN_WIDTH * 0.2f + 100, Application.SCREEN_HEIGHT * 0.9f),0, new Vector2(2));
+            _key.Draw(Game.UICanvas, _pos1, 0, _scaling);
+            _changeSlot1.Draw(Game.UICanvas, _pos2, 0, _scaling);
+            _stop.Draw(Game.UICanvas, _pos3, 0, _scaling);
+            _tab.Draw(Game.UICanvas, _pos4, 0, _scaling);
 
 
-            _shoot.Draw(Game.UICanvas, new Vector2(Application.SCREEN_WIDTH * 0.2f+50 , Application.SCREEN_HEIGHT * 0.5f), 0, new Vector2(2));
-            _use.Draw(Game.UICanvas, new Vector2(Application.SCREEN_WIDTH * 0.2f , Application.SCREEN_HEIGHT * 0.6f), 0, new Vector2(2));
+            _shoot.Draw(Game.UICanvas, _pos5, 0, _scaling);
+            _use.Draw(Game.UICanvas, _pos6,0, _scaling);
 
             _shoot.Play("clicked");
             _use.Play("clicked");
