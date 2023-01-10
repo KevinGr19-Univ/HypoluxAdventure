@@ -570,6 +570,12 @@
 /processorParam:Quality=Best
 /build:sound/diaboluxLaughSound.m4a
 
+#begin sound/diaboOnFire.m4a
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sound/diaboOnFire.m4a
+
 #begin sound/explosionSound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
