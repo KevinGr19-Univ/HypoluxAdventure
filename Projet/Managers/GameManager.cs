@@ -30,7 +30,7 @@ namespace HypoluxAdventure.Managers
         }
 
         public const int FINAL_FLOOR = -3;
-        public int Floor { get; private set; } = 0;
+        public int Floor { get; private set; } = -2;
 
         public float Difficulty => (float)Floor / (FINAL_FLOOR + 1);
 

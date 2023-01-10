@@ -49,6 +49,7 @@ namespace HypoluxAdventure.Screens
             AddLine(_normalFont,"Level Design",1);
             AddLine(_normalFont, "Kévin GRANDJEAN", 1);
             AddLine(_normalFont, "Mathieu ROSTAING", 1);
+            AddLine(_normalFont, "Noa GUILLOT", 1);
             AddLine(_normalFont, "IA aléatoire", 2);
 
             AddLine(_normalFont,"Direction artistique et graphismes",1);
