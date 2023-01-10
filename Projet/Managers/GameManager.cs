@@ -151,7 +151,7 @@ namespace HypoluxAdventure.Managers
             if(_gameOverTimer > 0)
             {
                 _gameOverTimer -= Time.DeltaTime;
-                if (_gameOverTimer <= 0) _game.LoadGameOver(4, Floor);
+                if (_gameOverTimer <= 0) _game.LoadGameOver(3, Floor);
             }
 
             FrameInputs = GatherInputs();
@@ -268,7 +268,7 @@ namespace HypoluxAdventure.Managers
 
         public void ReturnToMenu()
         {
-            _game.LoadMenu(2);
+            _game.LoadMenu(1);
         }
 
         private const float GAME_OVER_TIME = 4;
