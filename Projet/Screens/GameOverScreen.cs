@@ -4,6 +4,7 @@ using HypoluxAdventure.Models.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
@@ -29,7 +30,8 @@ namespace HypoluxAdventure.Screens
         private SpriteFont _menuFont;
         private Vector2 _textPositionCenter;
 
-        private SoundEffect _clickedSound;
+        private Song _music;
+
         public GameOverScreen(Game1 game, int reachedFloor) : base(game)
         {
             _reachedFloor = reachedFloor;
@@ -37,7 +39,10 @@ namespace HypoluxAdventure.Screens
 
         public override void LoadContent()
         {
-            _clickedSound = Content.Load<SoundEffect>("sound/buttonSound");
+            _music = Content.Load<Song>("sound/itIsSadToGo");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.5f;
+            MediaPlayer.Play(_music);
             _menuFont = Content.Load<SpriteFont>("Font/MainMenuFont");
             _textPositionCenter = new Vector2(Application.SCREEN_WIDTH * 0.5f, Application.SCREEN_HEIGHT * 0.8f);
             _menuButton = new Button(Game, _menuFont, "MENU", new Vector2(_textPositionCenter.X, _textPositionCenter.Y), () =>
@@ -60,6 +65,11 @@ namespace HypoluxAdventure.Screens
             _floorText = new TextObject(_menuFont, $"Étage atteint : {_reachedFloor}", floorTextPos, floorTextColor);
             _floorText.Scale = new Vector2(0.4f);
             _floorText.Depth = 1;
+        }
+
+        public override void UnloadContent()
+        {
+            MediaPlayer.Stop();
         }
 
         public override void Update(GameTime gameTime)

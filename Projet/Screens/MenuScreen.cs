@@ -87,10 +87,10 @@ namespace HypoluxAdventure.Screens
             ChangeButtonColor(_quit);
             ChangeButtonColor(_settings);
 
-            _music = Content.Load<Song>("sound/lonelyInThisWorld");
-            //MediaPlayer.Play(_music);
-            //MediaPlayer.IsRepeating = true;
-            //MediaPlayer.Volume = 0.5f;
+            _music = Content.Load<Song>("sound/whatCave");
+            MediaPlayer.Play(_music);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.5f;
 
         }
 
