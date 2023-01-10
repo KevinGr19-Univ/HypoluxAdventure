@@ -248,9 +248,10 @@ namespace HypoluxAdventure.Models.Monsters
             else _dashTimer -= Time.DeltaTime;
         }
 
-        private const float FIREBALL_WALL_TIME = 2.5f;
-        private float _fireballWallTimer;
+        private const float FIREBALL_WALL_TIME = 2.1f;
         private int[] _fireballWallDirections;
+
+        private float _fireballWallTimer;
         private bool _fireballWall = false;
 
         private void FireballWalls()
@@ -261,14 +262,14 @@ namespace HypoluxAdventure.Models.Monsters
                 if (!_fireballWall)
                 {
                     _fireballWallDirections = new int[] { 0, 1, 2, 3 }.TakeRandom(2);
-                    SummonFireballWall(_fireballWallDirections[0], 18, 170f);
+                    SummonFireballWall(_fireballWallDirections[0], 18, 180f);
 
                     _fireballWallTimer = FIREBALL_WALL_TIME;
                     _fireballWall = true;
                 }
                 else
                 {
-                    SummonFireballWall(_fireballWallDirections[1], 18, 170f);
+                    SummonFireballWall(_fireballWallDirections[1], 18, 180f);
                     ResetPattern(6.5f);
                 }
                 
@@ -330,7 +331,7 @@ namespace HypoluxAdventure.Models.Monsters
                         _hellRainDone = true;
                         ResetPattern(7.5f);
                     }
-                    else SummonFireballWall(new Random().Next(0, 4), 16, 180f);
+                    else SummonFireballWall(new Random().Next(0, 4), 17, 180f);
                 }
             }
         }
