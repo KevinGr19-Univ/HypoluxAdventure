@@ -26,7 +26,7 @@ namespace HypoluxAdventure.Screens
         private float _timer = 0;
         private const float MOVE_SPEED = 75;
 
-        private float _lifetime = 38;
+        private float _lifetime = 30;
 
         private Song _music;
         public CreditScreen(Game1 game) : base(game) { }
@@ -36,24 +36,23 @@ namespace HypoluxAdventure.Screens
             _titleFont = Content.Load<SpriteFont>("Font/TitleCredit");
             _normalFont = Content.Load<SpriteFont>("Font/CreditFont");
 
-            AddLine(_titleFont, "Crédits :", 2);
-            AddLine(_normalFont,"Jeu créé par :",1);
+            //AddLine(_titleFont,"Crédits :", 1);
+            AddLine(_titleFont,"Jeu créé par",1);
             AddLine(_normalFont, "Kévin GRANDJEAN", 1);
             AddLine(_normalFont, "Mathieu ROSTAING", 1);
-            AddLine(_normalFont,"Noa GUILLOT" ,2);
+            AddLine(_normalFont, "Noa GUILLOT" ,2);
 
-            AddLine(_normalFont,"Level Design fait par :",1);
+            AddLine(_normalFont,"Level Design",1);
             AddLine(_normalFont, "Kévin GRANDJEAN", 1);
+            AddLine(_normalFont, "Mathieu ROSTAING", 1);
+            AddLine(_normalFont, "IA aléatoire", 2);
+
+            AddLine(_normalFont,"Direction artistique et graphismes",1);
             AddLine(_normalFont, "Mathieu ROSTAING", 1);
             AddLine(_normalFont, "Noa GUILLOT", 2);
 
-            AddLine(_normalFont,"Direction artistique et graphismes conçuent par :",1);
-            AddLine(_normalFont, "Kévin GRANDJEAN", 1);
-            AddLine(_normalFont, "Mathieu ROSTAING", 1);
-            AddLine(_normalFont, "Noa GUILLOT", 2);
-
-            AddLine(_normalFont,"Sound design composé par :",1);
-            AddLine(_normalFont,"Mathieu ROSTAING",3);
+            AddLine(_normalFont,"Sound design",1);
+            AddLine(_normalFont, "Mathieu ROSTAING",3);
 
             AddLine(_titleFont, "Merci d'avoir joué.", 1);
 
