@@ -57,7 +57,7 @@ namespace HypoluxAdventure.Screens
             _textPositionCenter = new Vector2(Application.SCREEN_WIDTH * 0.117f, Application.SCREEN_HEIGHT * 0.1f);
             _menuButton = new Button(Game, _menuFont, "MENU", new Vector2(_textPositionCenter.X+30, _textPositionCenter.Y), () => 
             { 
-                Game.LoadMenu(1);
+                Game.LoadMenu(0.5f);
                 _controle = false;
             });
             ChangeButtonColor(_menuButton);
@@ -95,7 +95,7 @@ namespace HypoluxAdventure.Screens
 
             _credit = new Button(Game, _menuFont, "CREDITS", new Vector2(Application.SCREEN_WIDTH - (float)_menuFont.MeasureString("CREDIT").X * 0.8f, _textPositionCenter.Y), () =>
             {
-                Game.LoadCredit(2);
+                Game.LoadCredit(1);
             });
 
        
