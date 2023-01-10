@@ -48,7 +48,7 @@ namespace HypoluxAdventure.Models.Projectiles
             if (!_hitEntities.Contains(entity))
             {
                 _hitEntities.Add(entity);
-                entity.Damage(6);
+                entity.Damage(7);
             }
             return true;
         }

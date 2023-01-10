@@ -105,7 +105,10 @@ namespace HypoluxAdventure.Models.Monsters
 
         #region Patterns
         private const float SPEED = 110f;
+        private const float MAX_SPEED = 150f;
+
         private const float DASH_SPEED = 390f;
+        private const float DASH_SPEED_MAX = 460f;
         private const float FOLLOW_PLAYER_TIME_MARK = 0.9f;
 
         private int _patternAttack = 0;
@@ -126,7 +129,7 @@ namespace HypoluxAdventure.Models.Monsters
             // Pattern choice
             if(_nextPatternTime > 0)
             {
-                if (_nextPatternTime > FOLLOW_PLAYER_TIME_MARK) Velocity = TowardsPlayer() * SPEED;
+                if (_nextPatternTime > FOLLOW_PLAYER_TIME_MARK) Velocity = TowardsPlayer() * (_hellRainDone ? MAX_SPEED : SPEED);
                 else Velocity = Vector2.Zero;
 
                 _nextPatternTime -= Time.DeltaTime;
@@ -156,7 +159,7 @@ namespace HypoluxAdventure.Models.Monsters
 
         private void ChooseNewPattern()
         {
-            _patternAttack = !_hellRainDone && Health <= 150 ? 4 : new Random().Next(1, 4);
+            _patternAttack = !_hellRainDone && Health <= 160 ? 4 : new Random().Next(1, 4);
 
             switch (_patternAttack)
             {
@@ -183,6 +186,8 @@ namespace HypoluxAdventure.Models.Monsters
         {
             _patternAttack = 0;
             _nextPatternTime = idleTime;
+
+            if (_hellRainDone) _nextPatternTime *= 0.8f;
         }
 
         private float _fireballArcTimer;
@@ -195,6 +200,7 @@ namespace HypoluxAdventure.Models.Monsters
 
             const float MIN_SPEED = 280f;
             const float MAX_SPEED = 220f;
+            const float SPEED_BOOST = 1.2f;
 
             const int MIN_ANGLE = 20;
             const float MAX_ANGLE = 75;
@@ -204,7 +210,8 @@ namespace HypoluxAdventure.Models.Monsters
             {
                 float spreadAngle = MathUtils.Lerp(MIN_ANGLE, MAX_ANGLE, (float)_fireballArcIndex / ARC_AMOUNT);
                 float speed = MathUtils.Lerp(MIN_SPEED, MAX_SPEED, (float)_fireballArcIndex / ARC_AMOUNT);
-
+                if (_hellRainDone) speed *= SPEED_BOOST;
+                
                 Vector2 centerShootDir = TowardsPlayer(0.2f);
                 float centerAngle = MathF.Atan2(centerShootDir.Y, centerShootDir.X);
 
@@ -240,7 +247,7 @@ namespace HypoluxAdventure.Models.Monsters
                 {
                     _dashed = true;
                     _dashTimer = DASH_TIME;
-                    Velocity = TowardsPlayer(0.3f) * DASH_SPEED;
+                    Velocity = TowardsPlayer(0.3f)  * (_hellRainDone ? DASH_SPEED_MAX : DASH_SPEED);
                     SummonFireballRing(16, 0, 230);
                 }
                 else ResetPattern(4.5f);
@@ -249,6 +256,7 @@ namespace HypoluxAdventure.Models.Monsters
         }
 
         private const float FIREBALL_WALL_TIME = 2.1f;
+        private const float FIREBALL_WALL_TIME_MIN = 1.4f;
         private int[] _fireballWallDirections;
 
         private float _fireballWallTimer;
@@ -256,20 +264,25 @@ namespace HypoluxAdventure.Models.Monsters
 
         private void FireballWalls()
         {
+            const float MIN_SPEED = 180f;
+            const float MAX_SPEED = 200f;
+
+            float speed = _hellRainDone ? MAX_SPEED : MIN_SPEED;
+
             if(_fireballWallTimer <= 0)
             {
                 // Init fireball walls
                 if (!_fireballWall)
                 {
                     _fireballWallDirections = new int[] { 0, 1, 2, 3 }.TakeRandom(2);
-                    SummonFireballWall(_fireballWallDirections[0], 18, 180f);
+                    SummonFireballWall(_fireballWallDirections[0], 18, speed);
 
-                    _fireballWallTimer = FIREBALL_WALL_TIME;
+                    _fireballWallTimer = _hellRainDone ? FIREBALL_WALL_TIME_MIN : FIREBALL_WALL_TIME;
                     _fireballWall = true;
                 }
                 else
                 {
-                    SummonFireballWall(_fireballWallDirections[1], 18, 180f);
+                    SummonFireballWall(_fireballWallDirections[1], 18, speed);
                     ResetPattern(6.5f);
                 }
                 

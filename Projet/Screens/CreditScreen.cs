@@ -84,6 +84,7 @@ namespace HypoluxAdventure.Screens
 
         public override void Update(GameTime gameTime)
         {
+            _menuButton.Update();
             if(_lifetime > 0)
             {
                 _lifetime -= Time.DeltaTime;
@@ -109,7 +110,6 @@ namespace HypoluxAdventure.Screens
                 _timer = _timeList[_textListActif.Count];
                 _textListActif.Add(_textList[_textListActif.Count]);
             }
-            _menuButton.Update();
 
         }
 
