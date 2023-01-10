@@ -5,6 +5,7 @@ using HypoluxAdventure.Models.Rooms;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
@@ -48,6 +49,11 @@ namespace HypoluxAdventure.Models.Monsters
                 {
                     AnimatedSprite.Play("idleSouth");
                     gameManager.CanMove = true;
+
+                    MediaPlayer.Stop(); // DEBUG
+                    //MediaPlayer.Play(gameManager.BossMusic);
+                    //MediaPlayer.IsRepeating = true;
+                    // Volume
                 }
                 return;
             }
@@ -438,7 +444,9 @@ namespace HypoluxAdventure.Models.Monsters
         public override void OnDeath()
         {
             base.OnDeath();
+
             SoundPlayer.PlaySound("sound/diaboluxDefeatedSound");
+            MediaPlayer.Stop();
 
             gameManager.RoomManager.CurrentRoom.ProjectileHolder.Clear();
 

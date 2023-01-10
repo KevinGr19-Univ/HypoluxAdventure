@@ -44,10 +44,7 @@ namespace HypoluxAdventure.Screens
         private SpriteFont _menuFont;
         private Vector2 _textPositionCenter;
 
-        public MenuScreen(Game1 game) : base(game) 
-        {
-
-        }
+        public MenuScreen(Game1 game) : base(game) { }
 
         public override void LoadContent()
         {
