@@ -38,17 +38,19 @@ namespace HypoluxAdventure.Screens
 
             AddLine(_titleFont, "Crédits :", 2);
             AddLine(_normalFont,"Jeu créé par :",1);
-            AddLine(_normalFont,"Mathieu ROSTAING",1);
-            AddLine(_normalFont,"Kévin GRANDJEAN",1);
+            AddLine(_normalFont, "Kévin GRANDJEAN", 1);
+            AddLine(_normalFont, "Mathieu ROSTAING", 1);
             AddLine(_normalFont,"Noa GUILLOT" ,2);
 
             AddLine(_normalFont,"Level Design fait par :",1);
-            AddLine(_normalFont,"Une IA pas très intélligente",2);
+            AddLine(_normalFont, "Kévin GRANDJEAN", 1);
+            AddLine(_normalFont, "Mathieu ROSTAING", 1);
+            AddLine(_normalFont, "Noa GUILLOT", 2);
 
             AddLine(_normalFont,"Direction artistique et graphismes conçuent par :",1);
-            AddLine(_normalFont,"Mathieu ROSTAING",1);
-            AddLine(_normalFont,"Kévin GRANDJEAN",1);
-            AddLine(_normalFont,"Noa GUILLOT" ,2);
+            AddLine(_normalFont, "Kévin GRANDJEAN", 1);
+            AddLine(_normalFont, "Mathieu ROSTAING", 1);
+            AddLine(_normalFont, "Noa GUILLOT", 2);
 
             AddLine(_normalFont,"Sound design composé par :",1);
             AddLine(_normalFont,"Mathieu ROSTAING",3);
