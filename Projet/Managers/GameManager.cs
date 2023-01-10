@@ -97,7 +97,8 @@ namespace HypoluxAdventure.Managers
 
             LoadNextFloor();
             InventoryManager.AddItem(new Sword(_game, this));
-            InventoryManager.AddItem(new Potion(_game, this));
+            InventoryManager.AddItem(new Bow(_game, this));
+            InventoryManager.AddItem(new Shotgun(_game, this));
         }
 
         public void UnloadContent()

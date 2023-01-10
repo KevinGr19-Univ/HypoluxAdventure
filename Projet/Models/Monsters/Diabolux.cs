@@ -1,5 +1,6 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Managers;
+using HypoluxAdventure.Models.Items;
 using HypoluxAdventure.Models.Projectiles;
 using HypoluxAdventure.Models.Rooms;
 using HypoluxAdventure.Utils;

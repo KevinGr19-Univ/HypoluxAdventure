@@ -1,5 +1,6 @@
 ﻿using HypoluxAdventure.Core;
 using HypoluxAdventure.Models;
+using HypoluxAdventure.Models.Items;
 using HypoluxAdventure.Models.Rooms;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
@@ -281,6 +282,7 @@ namespace HypoluxAdventure.Managers
             startingRoom.GenerateMonsters();
 
             gameManager.Player.Position = new Vector2(19, 35) * Room.TILE_SIZE + CurrentRoom.Position;
+            gameManager.Player.Heal(gameManager.Player.MaxHealth);
 
             CurrentRoom.Load();
         }
