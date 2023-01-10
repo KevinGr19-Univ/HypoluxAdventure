@@ -12,6 +12,8 @@ using Microsoft.Xna.Framework;
 using HypoluxAdventure.Models.Items;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using Microsoft.Xna.Framework.Media;
+using System.Reflection.Metadata;
 
 namespace HypoluxAdventure.Managers
 {
@@ -28,7 +30,7 @@ namespace HypoluxAdventure.Managers
         }
 
         public const int FINAL_FLOOR = -3;
-        public int Floor { get; private set; } = -2;
+        public int Floor { get; private set; } = 0;
 
         public float Difficulty => (float)Floor / (FINAL_FLOOR + 1);
 
@@ -46,6 +48,8 @@ namespace HypoluxAdventure.Managers
         public Player Player { get; private set; }
         public bool CanMove = true;
         private Cursor _cursor;
+
+        private Song _music;
 
         private void Preload()
         {
@@ -86,6 +90,11 @@ namespace HypoluxAdventure.Managers
             InventoryManager.AddItem(new Bow(_game, this));
             InventoryManager.AddItem(new Shotgun(_game, this));
             InventoryManager.AddItem(new SuperPotion(_game, this));
+
+            _music = _game.Content.Load<Song>("sound/whatCave");
+            MediaPlayer.Play(_music);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.3f;
         }
 
         public void UnloadContent()

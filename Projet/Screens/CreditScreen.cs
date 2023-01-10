@@ -26,9 +26,13 @@ namespace HypoluxAdventure.Screens
         private float _timer = 0;
         private const float MOVE_SPEED = 75;
 
-        private float _lifetime = 38;
+        private float _lifetime = 30;
 
         private Song _music;
+
+        private Button _menuButton;
+        private SpriteFont _menuFont;
+        private Vector2 _textPositionCenter;
         public CreditScreen(Game1 game) : base(game) { }
 
         public override void LoadContent()
@@ -36,24 +40,23 @@ namespace HypoluxAdventure.Screens
             _titleFont = Content.Load<SpriteFont>("Font/TitleCredit");
             _normalFont = Content.Load<SpriteFont>("Font/CreditFont");
 
-            AddLine(_titleFont, "Crédits :", 2);
-            AddLine(_normalFont,"Jeu créé par :",1);
+            //AddLine(_titleFont,"Crédits :", 1);
+            AddLine(_titleFont,"Jeu créé par",1);
             AddLine(_normalFont, "Kévin GRANDJEAN", 1);
             AddLine(_normalFont, "Mathieu ROSTAING", 1);
-            AddLine(_normalFont,"Noa GUILLOT" ,2);
+            AddLine(_normalFont, "Noa GUILLOT" ,2);
 
-            AddLine(_normalFont,"Level Design fait par :",1);
+            AddLine(_normalFont,"Level Design",1);
             AddLine(_normalFont, "Kévin GRANDJEAN", 1);
+            AddLine(_normalFont, "Mathieu ROSTAING", 1);
+            AddLine(_normalFont, "IA aléatoire", 2);
+
+            AddLine(_normalFont,"Direction artistique et graphismes",1);
             AddLine(_normalFont, "Mathieu ROSTAING", 1);
             AddLine(_normalFont, "Noa GUILLOT", 2);
 
-            AddLine(_normalFont,"Direction artistique et graphismes conçuent par :",1);
-            AddLine(_normalFont, "Kévin GRANDJEAN", 1);
-            AddLine(_normalFont, "Mathieu ROSTAING", 1);
-            AddLine(_normalFont, "Noa GUILLOT", 2);
-
-            AddLine(_normalFont,"Sound design composé par :",1);
-            AddLine(_normalFont,"Mathieu ROSTAING",3);
+            AddLine(_normalFont,"Sound design",1);
+            AddLine(_normalFont, "Mathieu ROSTAING",3);
 
             AddLine(_titleFont, "Merci d'avoir joué.", 1);
 
@@ -61,12 +64,22 @@ namespace HypoluxAdventure.Screens
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = 0.5f;
             MediaPlayer.Play(_music);
+
+            _menuFont = Content.Load<SpriteFont>("Font/MainMenuFont");
+            _textPositionCenter = new Vector2(Application.SCREEN_WIDTH * 0.9f, Application.SCREEN_HEIGHT * 0.9f);
+            _menuButton = new Button(Game, _menuFont, "SKIP", new Vector2(_textPositionCenter.X, _textPositionCenter.Y), () =>
+            {
+                Game.LoadMenu(1);
+            });
+            _menuButton.Border = 5;
+            ChangeButtonColor(_menuButton);
         }
 
         public override void UnloadContent()
         {
             base.UnloadContent();
             MediaPlayer.Stop();
+
         }
 
         public override void Update(GameTime gameTime)
@@ -96,6 +109,7 @@ namespace HypoluxAdventure.Screens
                 _timer = _timeList[_textListActif.Count];
                 _textListActif.Add(_textList[_textListActif.Count]);
             }
+            _menuButton.Update();
 
         }
 
@@ -111,6 +125,7 @@ namespace HypoluxAdventure.Screens
                     line.Draw(Game.UICanvas);
                 }
             }
+            _menuButton.Draw();
         }
 
         public void AddLine(SpriteFont font, string text, float time)
@@ -118,7 +133,30 @@ namespace HypoluxAdventure.Screens
             _textList.Add(new TextObject(font, text, _startpoint));
             _timeList.Add(time);
         }
-        
+        private void ChangeButtonColor(Button button)
+        {
+            button.ColorNormal = new ButtonColor
+            {
+                TextColor = Color.White,
+                BackgroundColor = Color.DarkGoldenrod,
+                BorderColor = Color.Gold
+            };
+
+            button.ColorHover = new ButtonColor
+            {
+                TextColor = Color.White,
+                BackgroundColor = Color.Goldenrod,
+                BorderColor = Color.PaleGoldenrod
+            };
+
+            button.ColorDown = new ButtonColor
+            {
+                TextColor = Color.Black,
+                BackgroundColor = Color.LightGray,
+                BorderColor = Color.DarkGray
+            };
+        }
+
     }
 }
 

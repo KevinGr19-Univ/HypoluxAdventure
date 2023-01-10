@@ -376,7 +376,7 @@ namespace HypoluxAdventure.Models.Rooms
         }
 
         public Point SpawnChest() => _chestSpawns[new Random().Next(0, _chestSpawns.Length)];
-        public Point SpawnExit() => _exitSpawns[new Random().Next(0, _chestSpawns.Length)];
+        public Point SpawnExit() => _exitSpawns[new Random().Next(0, _exitSpawns.Length)];
 
     }
 }
