@@ -40,6 +40,9 @@ namespace HypoluxAdventure.Models.Items
             Room currentRoom = gameManager.RoomManager.CurrentRoom;
             Point pointPos = ((position - currentRoom.Position) / Room.TILE_SIZE).ToPoint();
 
+            // Can't throw if knife spawn in chest (obstacle)
+            if (currentRoom.Chest != null && currentRoom.Chest.Hitbox.Contains(position)) return;
+
             // Can't throw if knife spawn point in wall
             if(!currentRoom.IsWall(pointPos.X, pointPos.Y))
             {

@@ -37,7 +37,7 @@ namespace HypoluxAdventure.Models.Monsters
 
         public bool CanSeePlayer(float range)
         {
-            const int POINTS_AMOUNT = 12;
+            const int POINTS_AMOUNT = 20;
             if (!IsPlayerInRange(range)) return false;
 
             for(int i = 1; i <= POINTS_AMOUNT; i++)
