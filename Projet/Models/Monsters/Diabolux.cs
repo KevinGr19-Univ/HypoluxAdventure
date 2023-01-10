@@ -32,7 +32,7 @@ namespace HypoluxAdventure.Models.Monsters
         private float _firstLaughTime = 4;
 
         public override Vector2 HitboxSize => new Vector2(100, 200);
-        public override int MaxHealth => 300;
+        public override int MaxHealth => 350;
 
         public override void Update()
         {
@@ -120,7 +120,6 @@ namespace HypoluxAdventure.Models.Monsters
                 _nextPatternTime = 7;
             }
 
-
             // Pattern choice
             if(_nextPatternTime > 0)
             {
@@ -182,7 +181,7 @@ namespace HypoluxAdventure.Models.Monsters
             const int ARC_AMOUNT = 3;
             const int FIREBALL_AMOUNT = 12;
 
-            const float MIN_SPEED = 320f;
+            const float MIN_SPEED = 280f;
             const float MAX_SPEED = 220f;
 
             const int MIN_ANGLE = 20;
@@ -248,14 +247,14 @@ namespace HypoluxAdventure.Models.Monsters
                 if (!_fireballWall)
                 {
                     _fireballWallDirections = new int[] { 0, 1, 2, 3 }.TakeRandom(2);
-                    SummonFireballWall(_fireballWallDirections[0], 16, 170f);
+                    SummonFireballWall(_fireballWallDirections[0], 18, 170f);
 
                     _fireballWallTimer = FIREBALL_WALL_TIME;
                     _fireballWall = true;
                 }
                 else
                 {
-                    SummonFireballWall(_fireballWallDirections[1], 16, 170f);
+                    SummonFireballWall(_fireballWallDirections[1], 18, 170f);
                     ResetPattern(6.5f);
                 }
                 
@@ -319,7 +318,7 @@ namespace HypoluxAdventure.Models.Monsters
             fireballPossiblePos[0] = startPoint;
             fireballPossiblePos[BASE_AMOUNT-1] = endPoint;
 
-            for (int i = 1; i < BASE_AMOUNT; i++) fireballPossiblePos[i] = Vector2.Lerp(startPoint, endPoint, (float)i/BASE_AMOUNT);
+            for (int i = 1; i < BASE_AMOUNT-1; i++) fireballPossiblePos[i] = Vector2.Lerp(startPoint, endPoint, (float)i/(BASE_AMOUNT-1));
 
             // Spawn fireballs
             Vector2[] fireballPositions = fireballPossiblePos.TakeRandom(amount);
