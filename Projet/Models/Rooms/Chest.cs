@@ -65,8 +65,11 @@ namespace HypoluxAdventure.Models.Rooms
             const float MIN_HEALTH_CHANCE = 0.2f;
             const float MAX_HEALTH_CHANCE = 1f;
 
+            const float HEALTH_ITEM_THRESHOLD = 5;
+
             Random r = new Random();
-            float healChance = MathUtils.Lerp(MAX_HEALTH_CHANCE, MIN_HEALTH_CHANCE, (float)gameManager.Player.Health / gameManager.Player.MaxHealth);
+            float lerpCoef = MathUtils.InverseLerp(HEALTH_ITEM_THRESHOLD, gameManager.Player.MaxHealth, gameManager.Player.Health);
+            float healChance = MathUtils.Lerp(MAX_HEALTH_CHANCE, MIN_HEALTH_CHANCE, (float)Math.Clamp(lerpCoef, 0, 1));
             float itemChance = r.NextSingle() * 100;
 
             if(r.NextSingle() < healChance)

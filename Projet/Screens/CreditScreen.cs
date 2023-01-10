@@ -29,6 +29,7 @@ namespace HypoluxAdventure.Screens
         private float _lifetime = 30;
 
         private Song _music;
+        private bool _isQuitting = false;
 
         private Button _menuButton;
         private SpriteFont _menuFont;
@@ -71,6 +72,7 @@ namespace HypoluxAdventure.Screens
             _menuButton = new Button(Game, _menuFont, "SKIP", new Vector2(_textPositionCenter.X, _textPositionCenter.Y), () =>
             {
                 Game.LoadMenu(1);
+                _isQuitting = true;
             });
             _menuButton.Border = 5;
             ChangeButtonColor(_menuButton);
@@ -85,7 +87,7 @@ namespace HypoluxAdventure.Screens
 
         public override void Update(GameTime gameTime)
         {
-            _menuButton.Update();
+            if(!_isQuitting) _menuButton.Update();
             if(_lifetime > 0)
             {
                 _lifetime -= Time.DeltaTime;

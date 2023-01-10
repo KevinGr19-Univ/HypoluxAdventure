@@ -93,12 +93,11 @@ namespace HypoluxAdventure.Managers
             // Start music
             MediaPlayer.Play(CaveMusic);
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.3f;
+            MediaPlayer.Volume = 0.15f;
 
             LoadNextFloor();
             InventoryManager.AddItem(new Sword(_game, this));
-            InventoryManager.AddItem(new Bow(_game, this));
-            InventoryManager.AddItem(new Shotgun(_game, this));
+            InventoryManager.AddItem(new Potion(_game, this));
         }
 
         public void UnloadContent()

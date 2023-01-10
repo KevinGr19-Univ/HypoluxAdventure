@@ -53,7 +53,7 @@ namespace HypoluxAdventure.Models.Monsters
 
                     MediaPlayer.Play(gameManager.BossMusic);
                     MediaPlayer.IsRepeating = true;
-                    // Volume
+                    MediaPlayer.Volume = 0.3f;
                 }
                 return;
             }
@@ -111,7 +111,7 @@ namespace HypoluxAdventure.Models.Monsters
 
         #region Patterns
         private const float SPEED = 110f;
-        private const float MAX_SPEED = 150f;
+        private const float MAX_SPEED = 140f;
 
         private const float DASH_SPEED = 390f;
         private const float DASH_SPEED_MAX = 460f;
@@ -253,16 +253,20 @@ namespace HypoluxAdventure.Models.Monsters
                 {
                     _dashed = true;
                     _dashTimer = DASH_TIME;
-                    Velocity = TowardsPlayer(0.3f)  * (_hellRainDone ? DASH_SPEED_MAX : DASH_SPEED);
+                    Velocity = TowardsPlayer(0.3f) * (_hellRainDone ? DASH_SPEED_MAX : DASH_SPEED);
                     SummonFireballRing(16, 0, 230);
                 }
-                else ResetPattern(4.5f);
+                else
+                {
+                    ResetPattern(4.5f);
+                    SummonFireballRing(16, 0, 230);
+                }
             }
             else _dashTimer -= Time.DeltaTime;
         }
 
         private const float FIREBALL_WALL_TIME = 2.1f;
-        private const float FIREBALL_WALL_TIME_MIN = 1.4f;
+        private const float FIREBALL_WALL_TIME_MIN = 1.75f;
         private int[] _fireballWallDirections;
 
         private float _fireballWallTimer;
@@ -306,7 +310,7 @@ namespace HypoluxAdventure.Models.Monsters
         private void HellRain()
         {
             const float HELL_RAIN_ATTACK_COOLDOWN = 1.2f;
-            const int HELL_RAIN_ATTACK_COUNT = 10;
+            const int HELL_RAIN_ATTACK_COUNT = 8;
 
             // Move towards center
             if(_hellRainState == 0)
@@ -345,7 +349,7 @@ namespace HypoluxAdventure.Models.Monsters
                     if (--_hellRainCount <= 0)
                     {
                         _orientate = true;
-                        SummonFireballRing(24, 0, 200f);
+                        SummonFireballRing(18, 0, 200f);
 
                         _hellRainDone = true;
                         ResetPattern(7.5f);
