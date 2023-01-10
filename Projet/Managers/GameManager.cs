@@ -67,6 +67,7 @@ namespace HypoluxAdventure.Managers
             SoundPlayer.LoadSound(_game.Content, "sound/fireballSound");
 
             CaveMusic = _game.Content.Load<Song>("sound/whatCave");
+            BossMusic = _game.Content.Load<Song>("sound/diaboOnFire");
         }
 
         public void LoadContent()
@@ -89,16 +90,14 @@ namespace HypoluxAdventure.Managers
             _pauseManager = new PauseManager(_game, this);
             _cursor = new Cursor(_game, this);
 
-            LoadNextFloor();
-            InventoryManager.AddItem(new Bow(_game, this));
-            InventoryManager.AddItem(new Shotgun(_game, this));
-            InventoryManager.AddItem(new SuperPotion(_game, this));
-
             // Start music
             MediaPlayer.Play(CaveMusic);
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = 0.3f;
 
+            LoadNextFloor();
+            InventoryManager.AddItem(new Sword(_game, this));
+            InventoryManager.AddItem(new Potion(_game, this));
         }
 
         public void UnloadContent()
@@ -138,9 +137,8 @@ namespace HypoluxAdventure.Managers
             if (Floor == FINAL_FLOOR)
             {
                 RoomManager.GenerateBossRoom();
-                CanMove = false;
-
                 MediaPlayer.Stop();
+                CanMove = false;
             }
             else
             {
@@ -304,6 +302,8 @@ namespace HypoluxAdventure.Managers
             State = GameState.GameOver;
             CanMove = false;
             _gameOverTimer = GAME_OVER_TIME;
+
+            MediaPlayer.Stop();
 
             CameraManager.TargetZoom = 5.5f;
             HealthOverlay.PlayDeathAnimation();

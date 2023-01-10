@@ -50,9 +50,8 @@ namespace HypoluxAdventure.Models.Monsters
                     AnimatedSprite.Play("idleSouth");
                     gameManager.CanMove = true;
 
-                    MediaPlayer.Stop(); // DEBUG
-                    //MediaPlayer.Play(gameManager.BossMusic);
-                    //MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Play(gameManager.BossMusic);
+                    MediaPlayer.IsRepeating = true;
                     // Volume
                 }
                 return;
@@ -135,7 +134,7 @@ namespace HypoluxAdventure.Models.Monsters
             // Pattern choice
             if(_nextPatternTime > 0)
             {
-                if (_nextPatternTime > FOLLOW_PLAYER_TIME_MARK) Velocity = TowardsPlayer() * (_hellRainDone ? MAX_SPEED : SPEED);
+                if (_nextPatternTime > FOLLOW_PLAYER_TIME_MARK && !overlapsPlayer) Velocity = TowardsPlayer() * (_hellRainDone ? MAX_SPEED : SPEED);
                 else Velocity = Vector2.Zero;
 
                 _nextPatternTime -= Time.DeltaTime;
