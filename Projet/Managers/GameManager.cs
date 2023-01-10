@@ -30,7 +30,7 @@ namespace HypoluxAdventure.Managers
         }
 
         public const int FINAL_FLOOR = -3;
-        public int Floor { get; private set; } = -2;
+        public int Floor { get; private set; } = 1;
 
         public float Difficulty => (float)Floor / (FINAL_FLOOR + 1);
 
@@ -49,7 +49,8 @@ namespace HypoluxAdventure.Managers
         public bool CanMove = true;
         private Cursor _cursor;
 
-        private Song _music;
+        public Song CaveMusic { get; private set; }
+        public Song BossMusic { get; private set; }
 
         private void Preload()
         {
@@ -64,6 +65,8 @@ namespace HypoluxAdventure.Managers
             SoundPlayer.LoadSound(_game.Content, "sound/deathSound");
             SoundPlayer.LoadSound(_game.Content, "sound/explosionSound");
             SoundPlayer.LoadSound(_game.Content, "sound/fireballSound");
+
+            CaveMusic = _game.Content.Load<Song>("sound/whatCave");
         }
 
         public void LoadContent()
@@ -91,10 +94,11 @@ namespace HypoluxAdventure.Managers
             InventoryManager.AddItem(new Shotgun(_game, this));
             InventoryManager.AddItem(new SuperPotion(_game, this));
 
-            _music = _game.Content.Load<Song>("sound/whatCave");
-            MediaPlayer.Play(_music);
+            // Start music
+            MediaPlayer.Play(CaveMusic);
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = 0.3f;
+
         }
 
         public void UnloadContent()
@@ -102,6 +106,8 @@ namespace HypoluxAdventure.Managers
             _game.Camera.Position = Vector2.Zero;
             _game.Camera.Zoom = 1;
             _game.IsMouseVisible = true;
+
+            MediaPlayer.Stop();
         }
 
         #region Next floor transition
@@ -133,6 +139,8 @@ namespace HypoluxAdventure.Managers
             {
                 RoomManager.GenerateBossRoom();
                 CanMove = false;
+
+                MediaPlayer.Stop();
             }
             else
             {
@@ -271,8 +279,16 @@ namespace HypoluxAdventure.Managers
 
         public void SwitchPause()
         {
-            if (State == GameState.Play) State = GameState.Pause;
-            else if (State == GameState.Pause) State = GameState.Play;
+            if (State == GameState.Play)
+            {
+                State = GameState.Pause;
+                MediaPlayer.Pause();
+            }
+            else if (State == GameState.Pause)
+            {
+                State = GameState.Play;
+                MediaPlayer.Resume();
+            }
         }
 
         public void ReturnToMenu()

@@ -343,7 +343,7 @@ namespace HypoluxAdventure.Models.Rooms
 
         };
 
-        public static RoomLayer GetRandomRoomLayer() => _roomLayers[5];//new Random().Next(0, _roomLayers.Length)
+        public static RoomLayer GetRandomRoomLayer() => _roomLayers[new Random().Next(0, _roomLayers.Length)];
 
         private const float MIN_MONSTER_SPAWN_RATE = 0.5f;
         private const float MAX_MONSTER_SPAWN_RATE = 0.85f;
