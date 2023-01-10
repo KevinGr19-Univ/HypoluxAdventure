@@ -102,7 +102,8 @@ namespace HypoluxAdventure.Models.Monsters
 
         #region Patterns
         private const float SPEED = 110f;
-        private const float FOLLOW_PLAYER_TIME_MARK = 1.1f;
+        private const float DASH_SPEED = 390f;
+        private const float FOLLOW_PLAYER_TIME_MARK = 0.9f;
 
         private int _patternAttack = 0;
         private float _nextPatternTime;
@@ -136,17 +137,33 @@ namespace HypoluxAdventure.Models.Monsters
                 case 1:
                     FireballArcs();
                     break;
+
+                case 2:
+                    DashAttack();
+                    break;
+
+                case 3:
+                    FireballWalls();
+                    break;
             }
         }
 
         private void ChooseNewPattern()
         {
-            _patternAttack = 1;
+            _patternAttack = new Random().Next(1, 4);
 
             switch (_patternAttack)
             {
                 case 1:
                     _fireballArcIndex = 0;
+                    break;
+
+                case 2:
+                    _dashed = false;
+                    break;
+
+                case 3:
+                    _fireballWall = false;
                     break;
             }
         }
@@ -192,9 +209,58 @@ namespace HypoluxAdventure.Models.Monsters
                     fireball.Spawn();
                 }
 
-                if (++_fireballArcIndex >= ARC_AMOUNT) ResetPattern(7);
+                if (++_fireballArcIndex >= ARC_AMOUNT) ResetPattern(6f);
             }
             else _fireballArcTimer -= Time.DeltaTime;
+        }
+
+        private const float DASH_TIME = 1.6f;
+        private float _dashTimer;
+
+        private bool _dashed = false;
+
+        private void DashAttack()
+        {
+            if (_dashTimer <= 0)
+            {
+                if (!_dashed)
+                {
+                    _dashed = true;
+                    _dashTimer = DASH_TIME;
+                    Velocity = TowardsPlayer(0.3f) * DASH_SPEED;
+                    SummonFireballRing(16, 0, 230);
+                }
+                else ResetPattern(4.5f);
+            }
+            else _dashTimer -= Time.DeltaTime;
+        }
+
+        private const float FIREBALL_WALL_TIME = 2.5f;
+        private float _fireballWallTimer;
+        private int[] _fireballWallDirections;
+        private bool _fireballWall = false;
+
+        private void FireballWalls()
+        {
+            if(_fireballWallTimer <= 0)
+            {
+                // Init fireball walls
+                if (!_fireballWall)
+                {
+                    _fireballWallDirections = new int[] { 0, 1, 2, 3 }.TakeRandom(2);
+                    SummonFireballWall(_fireballWallDirections[0], 16, 170f);
+
+                    _fireballWallTimer = FIREBALL_WALL_TIME;
+                    _fireballWall = true;
+                }
+                else
+                {
+                    SummonFireballWall(_fireballWallDirections[1], 16, 170f);
+                    ResetPattern(6.5f);
+                }
+                
+            }
+            else _fireballWallTimer -= Time.DeltaTime;
         }
 
         private void SummonFireballRing(int amount, float angleOffset, float speed)
@@ -212,6 +278,61 @@ namespace HypoluxAdventure.Models.Monsters
             }
         }
 
+        private void SummonFireballWall(int orientation, int amount, float speed)
+        {
+            const int BASE_AMOUNT = 24;
+            Vector2 startPoint, endPoint, velocity;
+
+            switch (orientation)
+            {
+                case 0:
+                    startPoint = FireballPosFromPoint(3, 36);
+                    endPoint = FireballPosFromPoint(36, 36);
+                    velocity = new Vector2(0, -speed);
+                    break;
+
+                case 1:
+                    startPoint = FireballPosFromPoint(36, 3);
+                    endPoint = FireballPosFromPoint(36, 36);
+                    velocity = new Vector2(-speed, 0);
+                    break;
+
+                case 2:
+                    startPoint = FireballPosFromPoint(3, 3);
+                    endPoint = FireballPosFromPoint(36, 3);
+                    velocity = new Vector2(0, speed);
+                    break;
+
+                case 3:
+                    startPoint = FireballPosFromPoint(3, 3);
+                    endPoint = FireballPosFromPoint(3, 36);
+                    velocity = new Vector2(speed, 0);
+                    break;
+
+                default:
+                    throw new Exception("Invalid wall orientation");
+
+            }
+
+            // Possible fireball positions
+            Vector2[] fireballPossiblePos = new Vector2[BASE_AMOUNT];
+            fireballPossiblePos[0] = startPoint;
+            fireballPossiblePos[BASE_AMOUNT-1] = endPoint;
+
+            for (int i = 1; i < BASE_AMOUNT; i++) fireballPossiblePos[i] = Vector2.Lerp(startPoint, endPoint, (float)i/BASE_AMOUNT);
+
+            // Spawn fireballs
+            Vector2[] fireballPositions = fireballPossiblePos.TakeRandom(amount);
+            foreach(Vector2 fireballPos in fireballPositions)
+            {
+                Fireball fireball = new Fireball(game, gameManager, false, fireballPos);
+                fireball.Velocity = velocity;
+                fireball.Spawn();
+            }
+        }
+
+        private Vector2 FireballPosFromPoint(int x, int y)
+            => (new Vector2(x, y) + new Vector2(0.5f)) * Room.TILE_SIZE + gameManager.RoomManager.CurrentRoom.Position;
         #endregion
 
         public override void OnPlayerCollision()

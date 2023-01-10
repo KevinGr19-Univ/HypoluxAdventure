@@ -3,6 +3,7 @@ using HypoluxAdventure.Managers;
 using HypoluxAdventure.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
@@ -16,14 +17,16 @@ namespace HypoluxAdventure.Models.Projectiles
 {
     internal class Fireball : Projectile
     {
-        public override Vector2 HitboxSize => new Vector2(28);
+        public const int SIZE = 28;
+
+        public override Vector2 HitboxSize => new Vector2(22);
         private AnimatedSprite AnimatedSprite => (AnimatedSprite)Sprite;
 
         public Fireball(Game1 game, GameManager gameManager, bool isPlayerProj, Vector2 pos) : base(game, gameManager, isPlayerProj, pos)
         {
             Sprite = new AnimatedSprite(game.Content.Load<SpriteSheet>("img/fireballAnimation.sf", new JsonContentLoader()));
             Sprite.Depth = 0.81f;
-            GraphicsUtils.SetPixelSize(Sprite, 28, 28, ref scale);
+            GraphicsUtils.SetPixelSize(Sprite, SIZE, SIZE, ref scale);
         }
 
         public override void OnSpawn()
