@@ -310,7 +310,7 @@ namespace HypoluxAdventure.Models.Monsters
         private void HellRain()
         {
             const float HELL_RAIN_ATTACK_COOLDOWN = 1.2f;
-            const int HELL_RAIN_ATTACK_COUNT = 8;
+            const int HELL_RAIN_ATTACK_COUNT = 9;
 
             // Move towards center
             if(_hellRainState == 0)
@@ -354,7 +354,7 @@ namespace HypoluxAdventure.Models.Monsters
                         _hellRainDone = true;
                         ResetPattern(7.5f);
                     }
-                    else SummonFireballWall(new Random().Next(0, 4), 17, 180f);
+                    else SummonFireballWall(new Random().Next(0, 4), 17, 200f);
                 }
             }
         }

@@ -107,7 +107,7 @@ namespace HypoluxAdventure.Managers
 
             // Place neighbor rooms
             List<Room> roomsToList = new List<Room>() { startingRoom };
-            List<Room> chestRooms = new List<Room>();
+            List<Room> chestRooms = new List<Room>() { startingRoom };
             Queue<Room> rooms = new Queue<Room>();
 
             void AddRoomWithDirection(Room parentRoom, Point dir)
@@ -234,7 +234,6 @@ namespace HypoluxAdventure.Managers
                 room.GenerateMonsters();
             }
             foreach (Room room in chestRooms) room.SummonChest();
-            startingRoom.SummonChest(); // DEBUG
 
             // Exit room
             int maxSpawnDist = 0;
