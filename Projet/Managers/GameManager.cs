@@ -111,8 +111,7 @@ namespace HypoluxAdventure.Managers
             MediaPlayer.Volume = 0.2f;
 
             LoadNextFloor();
-            InventoryManager.AddItem(new Bow(_game, this));
-            InventoryManager.AddItem(new Shotgun(_game, this));
+            InventoryManager.AddItem(new Sword(_game, this));
             InventoryManager.AddItem(new Potion(_game, this));
         }
 
