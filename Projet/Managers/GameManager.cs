@@ -14,6 +14,9 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using Microsoft.Xna.Framework.Media;
 using System.Reflection.Metadata;
+using MonoGame.Extended.Sprites;
+using MonoGame.Extended.Serialization;
+using MonoGame.Extended.Content;
 
 namespace HypoluxAdventure.Managers
 {
@@ -54,6 +57,18 @@ namespace HypoluxAdventure.Managers
 
         private void Preload()
         {
+            _game.Content.Load<SpriteSheet>("img/bomberAnimation.sf", new JsonContentLoader());
+            _game.Content.Load<SpriteSheet>("img/GlobuxAnimation.sf", new JsonContentLoader());
+            _game.Content.Load<SpriteSheet>("img/wormAnimation.sf", new JsonContentLoader());
+            _game.Content.Load<SpriteSheet>("img/ghostAnimation.sf", new JsonContentLoader());
+            _game.Content.Load<SpriteSheet>("img/diaboluxAnimation.sf", new JsonContentLoader());
+
+            _game.Content.Load<SpriteSheet>("img/bombAnimation.sf", new JsonContentLoader());
+            _game.Content.Load<SpriteSheet>("img/fireballAnimation.sf", new JsonContentLoader());
+
+            _game.Content.Load<SpriteSheet>("img/chestAnimation.sf", new JsonContentLoader());
+            _game.Content.Load<SpriteSheet>("img/holeAnimation.sf", new JsonContentLoader());
+
             SoundPlayer.LoadSound(_game.Content, "sound/diaboluxLaughSound");
             SoundPlayer.LoadSound(_game.Content, "sound/diaboluxDefeatedSound");
             SoundPlayer.LoadSound(_game.Content, "sound/hitSound");
@@ -93,10 +108,10 @@ namespace HypoluxAdventure.Managers
             // Start music
             MediaPlayer.Play(CaveMusic);
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.15f;
+            MediaPlayer.Volume = 0.2f;
 
             LoadNextFloor();
-            InventoryManager.AddItem(new KnifeItem(_game, this));
+            InventoryManager.AddItem(new Sword(_game, this));
             InventoryManager.AddItem(new Potion(_game, this));
         }
 
