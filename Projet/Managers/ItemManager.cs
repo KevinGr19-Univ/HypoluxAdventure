@@ -10,10 +10,8 @@ namespace HypoluxAdventure.Managers
 {
     internal class ItemManager : GameObject
     {
-        // Lists
         private List<DropItem> _items;
         private List<DropItem> _itemsToRemove;
-
 
         public ItemManager(Game1 game, GameManager gameManager) : base(game, gameManager)
         {
@@ -26,7 +24,6 @@ namespace HypoluxAdventure.Managers
         {
             foreach (DropItem item in _items) item.Update();
 
-            // Effacer les objets
             foreach (DropItem item in _itemsToRemove) _items.Remove(item);
             _itemsToRemove.Clear();
         }
@@ -39,19 +36,16 @@ namespace HypoluxAdventure.Managers
             }
         }
 
-        // Summon(DropItem)
         public void Summon(DropItem droppedItem)
         {
             _items.Add(droppedItem);
         }
 
-        // Dispawn(DropItem)
         public void Despawn(DropItem droppedItemToDespawn)
         {
             _itemsToRemove.Add(droppedItemToDespawn);
         }
 
-        // Clear
         public void Clear()
         {
             _items.Clear();

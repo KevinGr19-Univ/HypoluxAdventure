@@ -20,7 +20,7 @@ namespace HypoluxAdventure.Models.Items
             Label = "FUSIL À POMPE";
         }
 
-        public override float Cooldown => 5f;
+        public override float Cooldown => 5.2f;
 
         public override float SlotScale => 3.8f;
         protected override float distFromPlayer => 50;

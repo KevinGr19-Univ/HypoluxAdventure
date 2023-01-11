@@ -208,7 +208,7 @@ namespace HypoluxAdventure.Models.Rooms
         }
 
         // Exit
-        public Exit Exit { get; private set; }
+        public Exit Exit { get; private set; } = null;
 
         public void SpawnExit()
         {
