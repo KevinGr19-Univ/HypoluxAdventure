@@ -229,6 +229,7 @@ namespace HypoluxAdventure.Managers
             foreach (Room room in roomsToList)
             {
                 room.GenerateTiles();
+                if (game.MinimapCheat) gameManager.MinimapOverlay.Visit(room.PointPos);
 
                 if (room == startingRoom) continue;
                 room.GenerateMonsters();

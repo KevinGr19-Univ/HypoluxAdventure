@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HypoluxAdventure.Models.Entity" Collapsed="true">
+    <Position X="11" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQACAKAAIMECoCgAAIAEIAAAAAEAAARAAxACAAUAAA=</HashCode>
+      <FileName>Models\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.GameObject" Collapsed="true">
+    <Position X="7.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAAAAAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Player" Collapsed="true">
+    <Position X="9.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ICQoBADAAAAACgCAACCAAIhGEAABEAIAAAgSAAQQCgA=</HashCode>
+      <FileName>Models\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Monsters.Monster" Collapsed="true">
+    <Position X="12.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACCAAAIAAwAQGAEAAAAYAAAQAYAAIAAACAAAAAA=</HashCode>
+      <FileName>Models\Monsters\Monster.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Monsters.Globux" Collapsed="true">
+    <Position X="12.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAAAAAAAACBAAAQAAAIAAAAAAAIAABAgQAAAAAgA=</HashCode>
+      <FileName>Models\Monsters\Globux.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Monsters.Ghost" Collapsed="true">
+    <Position X="11" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEAAAAAChAAAAAAAIAAAAAAAIAABAgQAAAgAAA=</HashCode>
+      <FileName>Models\Monsters\Ghost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Monsters.Diabolux" Collapsed="true">
+    <Position X="11" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oAQgJCEAAAAACQEQAApMgoQAUAOKQMgASAoQAISBCAE=</HashCode>
+      <FileName>Models\Monsters\Diabolux.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Monsters.Bombux" Collapsed="true">
+    <Position X="12.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEEAAAACAAAgAggAIBABACAAIAAAIgAAAAgAAA=</HashCode>
+      <FileName>Models\Monsters\Bombux.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Monsters.Worm" Collapsed="true">
+    <Position X="12.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAAkAAAAACgAAAQAAAIAAAAAAEKgAQAgAAAAwAgA=</HashCode>
+      <FileName>Models\Monsters\Worm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Projectiles.Projectile" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAEAgAAAAGAMAASAAAAEAAQAAgABgAEABA=</HashCode>
+      <FileName>Models\Projectiles\Projectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Projectiles.Arrow" Collapsed="true">
+    <Position X="3" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAAAAAAAAAgAQAAAAAAAQAAEAAAAAAAgAAAAAABA=</HashCode>
+      <FileName>Models\Projectiles\Arrow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Projectiles.Bomb" Collapsed="true">
+    <Position X="3" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAgQAAEAAAAAJAgAAAAQABA=</HashCode>
+      <FileName>Models\Projectiles\Bomb.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Projectiles.Bullet" Collapsed="true">
+    <Position X="4.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAABAQAAAAAAAQAAAAAAAAABgAAAAQCBA=</HashCode>
+      <FileName>Models\Projectiles\Bullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Projectiles.Fireball" Collapsed="true">
+    <Position X="3" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAUAAAAAAAAIAgABAAAAhA=</HashCode>
+      <FileName>Models\Projectiles\Fireball.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Projectiles.Knife" Collapsed="true">
+    <Position X="4.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAgAAAAAAQAAEAAAAAAAgAAgAAADA=</HashCode>
+      <FileName>Models\Projectiles\Knife.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Projectiles.ProjectileHolder" Collapsed="true">
+    <Position X="7.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAgAAAAAAAQAAAABEAAQ=</HashCode>
+      <FileName>Models\Projectiles\ProjectileHolder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

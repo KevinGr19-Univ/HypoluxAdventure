@@ -193,7 +193,7 @@ namespace HypoluxAdventure.Models.Monsters
             _patternAttack = 0;
             _nextPatternTime = idleTime;
 
-            if (_hellRainDone) _nextPatternTime *= 0.8f;
+            if (_hellRainDone) _nextPatternTime *= 0.75f;
         }
 
         private float _fireballArcTimer;

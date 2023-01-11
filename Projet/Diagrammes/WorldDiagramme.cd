@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HypoluxAdventure.Screens.WorldScreen" Collapsed="true">
+    <Position X="7.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAACAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Screens\WorldScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Managers.GameManager" Collapsed="true">
+    <Position X="7.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAtCAAMAAAIwwQIAIEAAAgIQACBCIAAgAELQAACAQ=</HashCode>
+      <FileName>Managers\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Managers.CameraManager" Collapsed="true">
+    <Position X="10.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAICAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\CameraManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Managers.PauseManager" Collapsed="true">
+    <Position X="9.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAAAAAAwgACAAAAAAAAAAAIAAgABAAAAAAgAA=</HashCode>
+      <FileName>Managers\PauseManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Managers.RoomManager" Collapsed="true">
+    <Position X="8.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAABAAAAEkCGGAAAAAIgAAAAAgCICkAQAEAAAQA=</HashCode>
+      <FileName>Managers\RoomManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Managers.InventoryManager" Collapsed="true">
+    <Position X="8.25" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQABAKAAEAAAgAgAAAQAAAAgAAACAABAAAAgAAABAA=</HashCode>
+      <FileName>Managers\InventoryManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Managers.ItemManager" Collapsed="true">
+    <Position X="10" Y="5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAQAAAAgAAAAAAEAAAABAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Managers\ItemManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.DamageOverlay" Collapsed="true">
+    <Position X="4.25" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQAAAAAgAgCACAAAABAAAAAAAAIAAAAACAACACA=</HashCode>
+      <FileName>Models\UI\DamageOverlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.UI.HealthOverlay" Collapsed="true">
+    <Position X="2.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQAAAAAAABAAgAAIAAABAAAAAAAAAEAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\UI\HealthOverlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.MinimapOverlay" Collapsed="true">
+    <Position X="6.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAAAAAAQAIgQgAAAAEAAAIAQgAAiIAAAAAQBAAAA=</HashCode>
+      <FileName>Models\UI\MinimapOverlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Player" Collapsed="true">
+    <Position X="12.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ICQoBADAAAAACgCAACCAAIhGEAABEAIAAAgSAAQQCgA=</HashCode>
+      <FileName>Models\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.GameObject" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAAAAAAAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Cursor" Collapsed="true">
+    <Position X="12.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAQAAAAgAAAACA=</HashCode>
+      <FileName>Models\UI\Cursor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.DamageNumber" Collapsed="true">
+    <Position X="4.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAABAAAAAAgAAAAgCAAAAEAAAAIAoAABAgAAAAAA=</HashCode>
+      <FileName>Models\DamageNumber.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.UI.HealthBar" Collapsed="true">
+    <Position X="2.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAQQAAAAAAgAoCAIBAAIAAAAAAAAACAAAAIAAQAA=</HashCode>
+      <FileName>Models\UI\HealthBar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="HypoluxAdventure.Models.FrameInputs" Collapsed="true">
+    <Position X="12.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgCAACABAABAAAAAAAAAAAAAAEAAAAACAAAAAAYAQ=</HashCode>
+      <FileName>Models\FrameInputs.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="HypoluxAdventure.Managers.GameState" Collapsed="true">
+    <Position X="5.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAggAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Managers\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

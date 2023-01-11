@@ -110,10 +110,23 @@ namespace HypoluxAdventure.Managers
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Volume = 0.2f;
 
+            // DEBUG
+            if (_game.SkipFloor) Floor = -2;
+
             LoadNextFloor();
-            InventoryManager.AddItem(new Bow(_game, this));
-            InventoryManager.AddItem(new Shotgun(_game, this));
-            InventoryManager.AddItem(new Potion(_game, this));
+
+            if (_game.SkipFloor) // DEBUG
+            {
+                InventoryManager.AddItem(new Bow(_game, this));
+                InventoryManager.AddItem(new Shotgun(_game, this));
+                InventoryManager.AddItem(new Potion(_game, this));
+            }
+            else
+            {
+                InventoryManager.AddItem(new Sword(_game, this));
+                InventoryManager.AddItem(new Potion(_game, this));
+            }
+            
         }
 
         public void UnloadContent()

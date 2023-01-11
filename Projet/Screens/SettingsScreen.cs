@@ -2,6 +2,7 @@
 using HypoluxAdventure.Models.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Content;
 using MonoGame.Extended.Serialization;
 using MonoGame.Extended.Sprites;
@@ -179,7 +180,10 @@ namespace HypoluxAdventure.Screens
                 _shoot.Update(gameTime);
                 _use.Update(gameTime);
             }
-            
+
+            // DEBUG
+            if (Inputs.IsKeyPressed(Keys.B)) Game.SkipFloor = !Game.SkipFloor;
+            if (Inputs.IsKeyPressed(Keys.M)) Game.MinimapCheat = !Game.MinimapCheat;
         }
 
         private void ChangeButtonColor(Button button)

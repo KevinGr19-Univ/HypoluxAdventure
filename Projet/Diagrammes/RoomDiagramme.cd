@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HypoluxAdventure.Managers.RoomManager" Collapsed="true">
+    <Position X="6.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAABAAAAEkCGGAAAAAIgAAAAAgCICkAQAEAAAQA=</HashCode>
+      <FileName>Managers\RoomManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Rooms.Room" Collapsed="true">
+    <Position X="7.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQwAwACACIhEQgAkAAgAAAgABACkhQkCJYAAAAAEYQQ=</HashCode>
+      <FileName>Models\Rooms\Room.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Rooms.RoomLayer" Collapsed="true">
+    <Position X="8" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAgAEAAAQAAQABAAAAAIEAAAAEAgAQABgAAAAAAA=</HashCode>
+      <FileName>Models\Rooms\RoomLayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Rooms.Chest" Collapsed="true">
+    <Position X="6.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAEIgAAAAAAAAAAAAAAAABAAIEAAAAAACA=</HashCode>
+      <FileName>Models\Rooms\Chest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Rooms.Exit" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAQAAAAAAgAAAAAAAAAAAAAAAgAAAIEAhAAIUCA=</HashCode>
+      <FileName>Models\Rooms\Exit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -31,6 +31,9 @@ namespace HypoluxAdventure
 
         private ScreenManager _screenManager;
 
+        public bool SkipFloor = false; // DEBUG
+        public bool MinimapCheat = false; // DEBUG
+
         public Game1()
         {
             Graphics = new GraphicsDeviceManager(this);

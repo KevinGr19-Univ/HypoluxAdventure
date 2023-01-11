@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HypoluxAdventure.Managers.InventoryManager" Collapsed="true">
+    <Position X="3.75" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQABAKAAEAAAgAgAAAQAAAAgAAACAABAAAAgAAABAA=</HashCode>
+      <FileName>Managers\InventoryManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Managers.ItemManager" Collapsed="true">
+    <Position X="9.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAQAAAAgAAAAAAEAAAABAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Managers\ItemManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Items.DropItem" Collapsed="true">
+    <Position X="9.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIAAAAAQAEAgAgAAAAAAAQADAAAAAACAAAAgAAACA=</HashCode>
+      <FileName>Models\Items\DropItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Items.Item" Collapsed="true">
+    <Position X="4.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQBiAAAUJAAkgAAAgCQIFEMAhEAAgAgAAIQAAAAgCg=</HashCode>
+      <FileName>Models\Items\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Items.ItemSlot" Collapsed="true">
+    <Position X="5.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAEAAAEgAgCAAAAAAEAAAAAAAAAAAAoAAAAGA=</HashCode>
+      <FileName>Models\Items\ItemSlot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Items.Bow" Collapsed="true">
+    <Position X="3.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABgABAQBAAIAAAAAAAAAAMAgAAAACgIAIQAAAAkAg=</HashCode>
+      <FileName>Models\Items\Bow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Items.KnifeItem" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAQBAAAAAAAAAAAAAMAgAAAAAAAQAAAAAAgAg=</HashCode>
+      <FileName>Models\Items\KnifeItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Items.Potion" Collapsed="true">
+    <Position X="5.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABgAAAQBAAAAAAAAAAAAAMAgAAAAAAAAAAAAAAgAg=</HashCode>
+      <FileName>Models\Items\Potion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Items.Shotgun" Collapsed="true">
+    <Position X="5.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAFgAAAQBAAAAACAAAAAAAMAgAAAAAgAAAAAAAAgAg=</HashCode>
+      <FileName>Models\Items\Shotgun.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Items.Sword" Collapsed="true">
+    <Position X="3.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABgAAAQBAAAAAAAAAAAABMAgCAACAgAABQAAAAgAg=</HashCode>
+      <FileName>Models\Items\Sword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Items.SuperPotion" Collapsed="true">
+    <Position X="3.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABgAAAQBAAAAAAAAAAAAAMAgAAAAAAAAAAAAAAgAg=</HashCode>
+      <FileName>Models\Items\SuperPotion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

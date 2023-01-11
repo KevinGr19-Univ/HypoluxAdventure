@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HypoluxAdventure.Game1" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAQCEAACEAAAE4AQAAIAEAgAjAAAACAgCAACCAAAAAU=</HashCode>
+      <FileName>Core\Game1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Core.Logger" Collapsed="true">
+    <Position X="7.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAIAAAAAAAAAAAAgAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Logger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Core.Inputs" Collapsed="true">
+    <Position X="12" Y="2.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="HypoluxAdventure.Core.Inputs.MouseButton" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Core\Inputs.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAACAQAACAAAAAAAAAACAAABSQACAAgKEAcggiCEA=</HashCode>
+      <FileName>Core\Inputs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Core.Application" Collapsed="true">
+    <Position X="12" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAkAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Application.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Core.Time" Collapsed="true">
+    <Position X="12" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAAAAAAiIBABAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Core\Time.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Screens.AbstractScreen" Collapsed="true">
+    <Position X="6.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Screens\AbstractScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Screens.MenuScreen" Collapsed="true">
+    <Position X="4" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ASQAAUAAEJAAAgEEgAAAAAABQAAAIAgAAAAAAEECABQ=</HashCode>
+      <FileName>Screens\MenuScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Screens.SettingsScreen" Collapsed="true">
+    <Position X="5.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQPA0CACAAQEwAAAECABAAKEgAAIAgYAAAAAEkAAgQ=</HashCode>
+      <FileName>Screens\SettingsScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Screens.VictoryScreen" Collapsed="true">
+    <Position X="9.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAEAgAAAACA=</HashCode>
+      <FileName>Screens\VictoryScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Screens.CreditScreen" Collapsed="true">
+    <Position X="9.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgwCEEAAAAAgAgAAAACAAAUAQAAAIAwAAEAAAwAAACQ=</HashCode>
+      <FileName>Screens\CreditScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Screens.WorldScreen" Collapsed="true">
+    <Position X="4" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAACAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Screens\WorldScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Utils.Extensions" Collapsed="true">
+    <Position X="3.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAIAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\Extensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Utils.GraphicsUtils" Collapsed="true">
+    <Position X="5.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAABAAA=</HashCode>
+      <FileName>Utils\GraphicsUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Utils.MathUtils" Collapsed="true">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAEAAAAAAAIoAAAAAAAAAA=</HashCode>
+      <FileName>Utils\MathUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Utils.SoundPlayer" Collapsed="true">
+    <Position X="5.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgIAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Utils\SoundPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.Camera" Collapsed="true">
+    <Position X="7.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAACCAAAAAAIAgEAAIAAAAAAIAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Models\UI\Camera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.UI.TextObject" Collapsed="true">
+    <Position X="11.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAgAgAAIAAAAAAACAAAAgAAAAiAAAAAA=</HashCode>
+      <FileName>Models\UI\TextObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Models.UI.Button" Collapsed="true">
+    <Position X="11.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAAAAAQABCAwAgAEIAAACQAAAAAAApAAIAiAAAAAA=</HashCode>
+      <FileName>Models\UI\Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HypoluxAdventure.Screens.GameOverScreen" Collapsed="true">
+    <Position X="7.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCEEAAAAAAAoAAAAAAAAAAAEAAIAgIAEAAAAAAAUQ=</HashCode>
+      <FileName>Screens\GameOverScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="HypoluxAdventure.Models.InputLayout" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABgAAAAAAAAAAAAwAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\InputLayout.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="HypoluxAdventure.Models.UI.ButtonColor" Collapsed="true">
+    <Position X="11.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAACCAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\UI\Button.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
